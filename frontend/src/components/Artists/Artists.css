@@ -1,0 +1,546 @@
+
+/* ==========================================
+   AUREN — MEET OUR ARTISTS
+   BLACK / WHITE / SILVER
+========================================== */
+
+.auren-artists {
+  position: relative;
+  width: 100%;
+  padding: 125px 6% 110px;
+  background: #101113;
+  color: #f5f5f3;
+}
+
+.auren-artists-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* SECTION HEADER */
+
+.auren-artists-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.auren-artists-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 25px;
+  color: #b7bbc4;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+}
+
+.auren-artists-eyebrow span {
+  width: 35px;
+  height: 1px;
+  background: #b7bbc4;
+}
+
+.auren-artists-title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(50px, 5.8vw, 90px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+}
+
+.auren-artists-title em {
+  color: #c3c6ce;
+  font-weight: 400;
+}
+
+.auren-artists-description {
+  max-width: 335px;
+  margin: 0 0 7px;
+  color: #a9acb4;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* ==========================================
+   ARTIST GRID
+========================================== */
+
+.auren-artists-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.auren-artist-card {
+  min-width: 0;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 17px;
+  background: #1a1b1e;
+
+  transition:
+    transform 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 350ms ease,
+    box-shadow 450ms ease;
+}
+
+.auren-artist-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.32);
+}
+
+/* ARTIST PHOTO */
+
+.auren-artist-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #292b30;
+}
+
+.auren-artist-image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55),
+    transparent 50%
+  );
+}
+
+.auren-artist-image-wrapper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  filter: grayscale(100%) brightness(0.86);
+
+  transition:
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 650ms ease;
+}
+
+.auren-artist-card:hover img {
+  transform: scale(1.07);
+  filter: grayscale(30%) brightness(0.98);
+}
+
+/* IMAGE LABELS */
+
+.auren-artist-number {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Georgia, serif;
+  font-size: 23px;
+}
+
+.auren-artist-specialty-tag {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  z-index: 1;
+
+  padding: 10px 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.27);
+  border-radius: 100px;
+
+  background: rgba(18, 19, 22, 0.5);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  color: #f8f8f8;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+/* ==========================================
+   ARTIST INFORMATION
+========================================== */
+
+.auren-artist-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 25px 20px 27px;
+}
+
+.auren-artist-info h3 {
+  margin: 0 0 8px;
+  color: #f5f5f3;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.auren-artist-role {
+  margin: 0;
+  color: #c5c8d0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.auren-artist-specialty {
+  margin: 9px 0 0;
+  color: #9297a1;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+/* BOOK BUTTON */
+
+.auren-artist-book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 21px;
+
+  transition:
+    background 300ms ease,
+    color 300ms ease,
+    transform 300ms ease;
+}
+
+.auren-artist-book:hover {
+  background: #f5f5f3;
+  color: #121315;
+  transform: rotate(45deg);
+}
+
+/* ==========================================
+   SECTION FOOTER
+========================================== */
+
+.auren-artists-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+
+  margin-top: 40px;
+  padding-top: 25px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.auren-artists-footer > span {
+  color: #9296a0;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+.auren-artists-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+
+  color: #f4f4f4;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+
+  transition: gap 300ms ease;
+}
+
+.auren-artists-footer a:hover {
+  gap: 22px;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1100px) {
+  .auren-artists-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .auren-artists-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 650px) {
+  .auren-artists {
+    padding: 90px 22px 95px;
+  }
+
+  .auren-artists-title {
+    font-size: clamp(44px, 10vw, 65px);
+  }
+
+  .auren-artists-grid {
+    gap: 13px;
+  }
+
+  .auren-artist-card {
+    border-radius: 13px;
+  }
+
+  .auren-artist-number {
+    top: 12px;
+    left: 12px;
+    font-size: 17px;
+  }
+
+  .auren-artist-specialty-tag {
+    left: 10px;
+    bottom: 10px;
+    padding: 7px 10px;
+    font-size: 7px;
+  }
+
+  .auren-artist-info {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 17px 13px 20px;
+  }
+
+  .auren-artist-info h3 {
+    font-size: 20px;
+  }
+
+  .auren-artist-role {
+    font-size: 10px;
+  }
+
+  .auren-artist-specialty {
+    font-size: 10px;
+  }
+
+  .auren-artist-book {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .auren-artists-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 390px) {
+  .auren-artists-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+.auren-artists a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auren-artist-card,
+  .auren-artist-image-wrapper img,
+  .auren-artist-book,
+  .auren-artists-footer a {
+    transition: none !important;
+  }
+}
+
+
+
+/* ==========================================
+   AUREN — ARTIST IMAGE LOADING
+========================================== */
+
+/* Animated skeleton placeholder */
+
+.auren-artist-skeleton {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background: linear-gradient(
+    110deg,
+    #23252a 8%,
+    #3a3d44 25%,
+    #23252a 42%
+  );
+
+  background-size: 230% 100%;
+  animation: aurenArtistShimmer 1.7s linear infinite;
+}
+
+/* Image reveal */
+
+.auren-artist-image-wrapper img {
+  opacity: 0;
+  transform: scale(1.035);
+
+  transition:
+    opacity 700ms ease,
+    transform 850ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 650ms ease;
+}
+
+.auren-artist-image-wrapper img.is-loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.auren-artist-card:hover
+.auren-artist-image-wrapper img.is-loaded {
+  transform: scale(1.07);
+}
+
+/* Missing image fallback */
+
+.auren-artist-image-error {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  background: #25272c;
+  color: #bfc3cb;
+
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Shimmer keyframes */
+
+@keyframes aurenArtistShimmer {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .auren-artist-skeleton {
+    animation: none !important;
+    background: #303238;
+  }
+
+  .auren-artist-image-wrapper img {
+    transition: none !important;
+  }
+}
+
+
+
+
+/* ============================================
+   AUREN — ARTISTS PERFORMANCE OPTIMIZATION
+   EXISTING DESIGN PRESERVED
+============================================ */
+
+/* Keep off-screen artist cards lightweight */
+.auren-artist-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 480px;
+}
+
+/* Prevent unnecessary image repaints */
+.auren-artist-image-wrapper {
+  isolation: isolate;
+  contain: paint;
+}
+
+/* Smooth image rendering without permanent GPU layers */
+.auren-artist-image-wrapper img {
+  backface-visibility: hidden;
+}
+
+/* Reduce expensive hover animations */
+@media (hover: hover) and (pointer: fine) {
+  .auren-artist-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .auren-artist-card:hover
+  .auren-artist-image-wrapper img.is-loaded {
+    transform: scale(1.035);
+  }
+}
+
+/* Avoid hover work on touchscreens */
+@media (hover: none) {
+  .auren-artist-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .auren-artist-card:hover
+  .auren-artist-image-wrapper img.is-loaded {
+    transform: scale(1);
+  }
+}
+
+/* Lightweight skeleton shimmer */
+.auren-artist-skeleton {
+  background:
+    linear-gradient(
+      110deg,
+      #24262b 8%,
+      #34363d 24%,
+      #24262b 42%
+    );
+  background-size: 200% 100%;
+  animation-duration: 2.2s;
+}
+
+/* Accessibility and low-motion devices */
+@media (prefers-reduced-motion: reduce) {
+  .auren-artist-skeleton {
+    animation: none !important;
+  }
+
+  .auren-artist-card,
+  .auren-artist-image-wrapper img {
+    transition: none !important;
+  }
+}

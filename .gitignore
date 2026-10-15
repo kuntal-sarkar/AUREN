@@ -1,0 +1,44 @@
+﻿# Dependencies
+node_modules/
+.venv/
+venv/
+
+# Production builds
+dist/
+build/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Booking database
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.sqlite3-shm
+*.sqlite3-wal
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Cloudflare
+.wrangler/
+
+# Original artist image backups
+frontend/public/images/artists/_original_backup/

@@ -1,0 +1,65 @@
+/* AUREN / TRACK APPOINTMENT — EDITORIAL LIQUID GLASS */
+.auren-track-page{min-height:100vh;background:radial-gradient(ellipse at 85% 5%,rgba(147,151,167,.10),transparent 45%),#0d0e11;color:#f4f4f5;font-family:"DM Sans",sans-serif}
+.auren-track-page *{box-sizing:border-box}
+.auren-track-header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 6%;border-bottom:1px solid rgba(255,255,255,.09)}
+.auren-track-logo{font:400 32px Georgia,serif;letter-spacing:-.07em;color:#f5f5f5;text-decoration:none}.auren-track-logo span{color:#a6a9b2}
+.auren-track-back{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:13px 18px;font-size:10px;letter-spacing:.12em;color:#d6d8de;text-decoration:none;background:rgba(255,255,255,.04)}
+.auren-track-main{width:min(88%,1320px);margin:auto;padding:78px 0 64px}
+.auren-track-intro{max-width:850px;margin-bottom:46px;animation:aurenTrackRise .6s cubic-bezier(.16,1,.3,1) both}
+.auren-track-eyebrow,.auren-track-mini{display:inline-flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.18em;color:#afb2bc;font-weight:600}
+.auren-track-spark{width:7px;height:7px;border-radius:50%;background:#e5e6ea;box-shadow:0 0 16px rgba(255,255,255,.45)}
+.auren-track-intro h1{font:400 clamp(3.5rem,7vw,7rem)/1.06 Georgia,serif;letter-spacing:-.065em;margin:21px 0 18px}
+.auren-track-intro em,.auren-track-card h2 em,.auren-track-empty h3 em{color:#a6a9b3;font-weight:400}
+.auren-track-intro p{font-size:14px;line-height:1.85;color:#a6a9b3;max-width:590px}
+.auren-track-grid{display:grid;grid-template-columns:minmax(0,1.07fr) minmax(310px,.93fr);gap:22px;align-items:stretch}
+.auren-track-card,.auren-track-info{min-width:0;border:1px solid rgba(255,255,255,.15);border-radius:26px;padding:clamp(26px,3.5vw,45px);animation:aurenTrackRise .65s cubic-bezier(.16,1,.3,1) both}
+.auren-track-card{background:linear-gradient(150deg,rgba(40,42,50,.9),rgba(19,20,25,.95));box-shadow:0 26px 75px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.08);animation-delay:.07s}
+.auren-track-card-heading>span{font-size:10px;letter-spacing:.16em;color:#aeb1ba}
+.auren-track-card h2{font:400 clamp(2.5rem,4vw,4rem)/1.13 Georgia,serif;letter-spacing:-.06em;margin:19px 0 14px}
+.auren-track-card-heading>p{font-size:12px;line-height:1.85;color:#9ea2ac;max-width:440px;margin:0 0 35px}
+.auren-track-form{display:flex;flex-direction:column;gap:22px}
+.auren-track-form label{display:flex;flex-direction:column;gap:11px;color:#c7c9d0;font-size:10px;letter-spacing:.13em;font-weight:600}
+.auren-track-input-wrap{display:flex;align-items:center;gap:13px;min-width:0;padding:0 16px;border:1px solid rgba(255,255,255,.15);border-radius:14px;background:rgba(10,11,15,.64);transition:border-color .2s ease,background .2s ease,box-shadow .2s ease}
+.auren-track-input-wrap:focus-within{border-color:rgba(243,244,248,.75);background:#15161a;box-shadow:0 0 0 3px rgba(255,255,255,.05)}
+.auren-track-input-wrap>svg{width:21px;height:21px;flex-shrink:0;color:#a7abb6}
+.auren-track-form input{width:100%;min-width:0;padding:18px 0;border:0;outline:none;background:transparent;color:#f7f7fa;font:400 14px "DM Sans",sans-serif;letter-spacing:normal}
+.auren-track-form input::placeholder{color:#767b86}
+.auren-track-action{min-height:54px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;border:1px solid #e7e8ec;border-radius:999px;background:#e7e8ec;color:#15161a;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.11em;cursor:pointer;margin-top:5px;transition:background .2s ease,transform .2s ease}
+.auren-track-action:hover:not(:disabled){background:#fff;transform:translateY(-2px)}
+.auren-track-action:disabled{opacity:.65;cursor:wait}.auren-track-action>span:not(.auren-track-spinner){font-size:20px}
+.auren-track-spinner{display:block;width:17px;height:17px;border:2px solid rgba(17,18,22,.25);border-top-color:#15161a;border-radius:50%;animation:aurenTrackSpin .8s linear infinite}
+.auren-track-error{color:#f4cbcb;background:rgba(180,48,48,.13);border:1px solid rgba(255,138,138,.25);border-radius:12px;padding:14px;font-size:12px;line-height:1.7;margin:0}
+.auren-track-security-note{display:flex;align-items:flex-start;gap:10px;color:#9296a1;font-size:11px;line-height:1.75;padding-top:1px}.auren-track-security-note svg{width:16px;height:16px;flex-shrink:0;margin-top:2px;color:#abb0bc}
+.auren-track-info{background:rgba(42,44,52,.55);backdrop-filter:blur(25px) saturate(145%);-webkit-backdrop-filter:blur(25px) saturate(145%);box-shadow:0 22px 65px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.12);animation-delay:.15s}
+.auren-track-empty{display:flex;min-height:100%;flex-direction:column;align-items:flex-start;justify-content:center}
+.auren-track-orbit{position:relative;width:78px;height:78px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:grid;place-items:center;font:39px Georgia,serif;color:#dedfe5;margin-bottom:32px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%)}
+.auren-track-orbit i{position:absolute;right:3px;top:11px;width:8px;height:8px;border-radius:50%;background:#e5e7ed;box-shadow:0 0 12px rgba(255,255,255,.45)}
+.auren-track-empty h3{font:400 clamp(2.1rem,3.3vw,3.3rem)/1.13 Georgia,serif;letter-spacing:-.055em;margin:15px 0}
+.auren-track-empty>p{font-size:13px;line-height:1.85;color:#a9abb4;max-width:350px}
+.auren-track-empty-divider{height:1px;background:rgba(255,255,255,.14);width:100%;margin:19px 0 16px}
+.auren-track-empty-feature{display:flex;gap:18px;align-items:center;width:100%;padding:10px 0;color:#dee0e5;font-size:12px}.auren-track-empty-feature>span{color:#9296a2;font-size:10px;letter-spacing:.15em}
+.auren-track-help{font-size:11px!important;line-height:1.8;color:#8d929e!important;margin-top:23px}
+.auren-track-result-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px}
+.auren-track-status{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(231,233,239,.33);border-radius:999px;background:rgba(255,255,255,.06);font-size:11px;font-weight:600;color:#e7e9ef;text-transform:capitalize;line-height:1.3}
+.auren-track-status i{width:7px;height:7px;border-radius:50%;background:#c9ccd4}
+.auren-track-status.is-confirmed i,.auren-track-status.is-completed i{background:#a6dbc0}.auren-track-status.is-pending i{background:#ead4a5}.auren-track-status.is-cancelled i,.auren-track-status.is-canceled i{background:#e6a7a7}
+.auren-track-result-overline{font-size:9px;letter-spacing:.16em;color:#999da8;margin:32px 0 9px}
+.auren-track-info h3{font:400 clamp(1.9rem,3vw,2.8rem) Georgia,serif;letter-spacing:-.045em;overflow-wrap:anywhere;margin:0 0 9px}
+.auren-track-result-description{font-size:12px;line-height:1.8;color:#acb0ba;margin:0 0 22px}
+.auren-track-checkpoint{display:flex;gap:13px;align-items:center;border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:15px;background:rgba(255,255,255,.04);margin-bottom:20px}
+.auren-track-checkpoint-icon{display:grid;place-items:center;width:34px;height:34px;flex-shrink:0;border-radius:50%;background:rgba(224,228,236,.14);border:1px solid rgba(255,255,255,.2);font-size:14px;color:#f5f5f5}
+.auren-track-checkpoint>div:last-child{display:flex;flex-direction:column;gap:5px}.auren-track-checkpoint strong{font-size:12px;font-weight:600;color:#eceef1}.auren-track-checkpoint span{font-size:10px;color:#a0a4b0;line-height:1.6}
+.auren-track-detail-list{margin:0}.auren-track-detail-list>div{display:flex;justify-content:space-between;gap:18px;padding:15px 0;border-top:1px solid rgba(255,255,255,.12)}
+.auren-track-detail-list dt{font-size:10px;letter-spacing:.12em;color:#989ca8;line-height:1.6;flex-shrink:0}.auren-track-detail-list dd{font-size:12px;color:#e7e9ec;text-align:right;margin:0;max-width:65%;line-height:1.7;overflow-wrap:anywhere}
+.auren-track-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid rgba(255,255,255,.12);margin-top:50px;padding-top:24px;color:#90939e;font-size:10px;letter-spacing:.13em}
+.auren-track-bottom a,.auren-track-bottom button{display:inline-flex;align-items:center;gap:9px;border:0;background:transparent;color:#eceef2;font:600 10px "DM Sans",sans-serif;letter-spacing:.12em;text-decoration:none;cursor:pointer}.auren-track-bottom button span,.auren-track-bottom a span{font-size:18px}
+.auren-track-page :is(a,button,input):focus-visible{outline:2px solid #e6e7eb;outline-offset:4px}
+/* Embedded in shared Booking/Track page: hide separate page chrome and remove background. */
+.auren-track-page.auren-track-embedded{min-height:0;background:transparent}
+.auren-track-embedded .auren-track-main{width:100%;max-width:none;padding:10px 0 42px}
+.auren-track-embedded .auren-track-intro{margin-bottom:38px}
+@keyframes aurenTrackRise{from{opacity:0;transform:translateY(17px)}to{opacity:1;transform:translateY(0)}}
+@keyframes aurenTrackSpin{to{transform:rotate(360deg)}}
+@media(max-width:900px){.auren-track-grid{grid-template-columns:1fr}.auren-track-empty{min-height:300px}}
+@media(max-width:600px){.auren-track-header{padding:22px 20px}.auren-track-back{font-size:9px;padding:10px 12px}.auren-track-main{width:calc(100% - 40px);padding:58px 0}.auren-track-intro{margin-bottom:32px}.auren-track-intro h1{font-size:clamp(3rem,12vw,4.8rem)}.auren-track-card,.auren-track-info{border-radius:20px;padding:25px 20px}.auren-track-result-top{align-items:flex-start}.auren-track-bottom{flex-direction:column;align-items:flex-start}.auren-track-embedded .auren-track-main{padding-top:8px}}
+@media(prefers-reduced-motion:reduce){.auren-track-page :is(.auren-track-intro,.auren-track-card,.auren-track-info,.auren-track-spinner){animation:none!important}.auren-track-page *{transition:none!important}}

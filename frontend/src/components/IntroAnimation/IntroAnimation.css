@@ -1,0 +1,230 @@
+
+/* =====================================
+   AUREN — CINEMATIC INTRO ANIMATION
+===================================== */
+
+.auren-intro {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 100px 24px;
+  text-align: center;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 42%,
+      #303238 0%,
+      #1b1c20 42%,
+      #111214 80%
+    );
+}
+
+.auren-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.035) 50%,
+    transparent 70%
+  );
+
+  opacity: 0;
+  animation: introLightSweep 2.5s ease-out 0.3s both;
+}
+
+.auren-intro-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* Small label */
+
+.auren-intro-label {
+  margin: 0 0 24px;
+  color: #b8b9bd;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.45em;
+
+  opacity: 0;
+  transform: translateY(15px);
+  animation: introFadeUp 1s ease 0.5s forwards;
+}
+
+/* Main brand typography */
+
+.auren-intro-title {
+  margin: 0;
+  padding-left: 0.22em;
+
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(65px, 13vw, 170px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.22em;
+  color: #f5f5f3;
+
+  opacity: 0;
+  transform: translateY(60px);
+  filter: blur(16px);
+
+  animation: introBrandReveal 1.9s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    0.3s forwards;
+}
+
+/* Tagline */
+
+.auren-intro-tagline {
+  margin: 28px 0 0;
+  color: #d4d4d6;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+
+  opacity: 0;
+  transform: translateY(20px);
+
+  animation: introFadeUp 1s ease 1.55s forwards;
+}
+
+/* Glass button */
+
+.auren-intro-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  margin-top: 44px;
+  padding: 17px 34px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 100px;
+
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+
+  opacity: 0;
+  transform: translateY(20px);
+
+  animation: introFadeUp 1s ease 1.9s forwards;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.auren-intro-button:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+.auren-intro-button span {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.auren-intro-button:hover span {
+  transform: translate(3px, -3px);
+}
+
+/* Keyframes */
+
+@keyframes introBrandReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+    filter: blur(16px);
+    letter-spacing: 0.45em;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    letter-spacing: 0.22em;
+  }
+}
+
+@keyframes introFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes introLightSweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-30%);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+    transform: translateX(30%);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .auren-intro-title {
+    font-size: clamp(52px, 14vw, 85px);
+    padding-left: 0.12em;
+  }
+
+  .auren-intro-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+  }
+
+  @keyframes introBrandReveal {
+    from {
+      opacity: 0;
+      transform: translateY(45px);
+      filter: blur(12px);
+      letter-spacing: 0.3em;
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+      letter-spacing: 0.12em;
+    }
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .auren-intro::before,
+  .auren-intro-label,
+  .auren-intro-title,
+  .auren-intro-tagline,
+  .auren-intro-button {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}

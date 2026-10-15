@@ -1,0 +1,47 @@
+AUREN — Track Your Appointment (upgrade on top of working booking)
+==================================================================
+
+BACK UP CURRENT FILES BEFORE REPLACING. Keep working Navbar.jsx, Contact and Footer styles intact.
+
+1) STOP Flask server with Ctrl+C in its backend terminal, then replace:
+   D:\salon-booking\backend\app.py             <- backend/app.py
+   Important: KEEP existing bookings.sqlite3 database. Do not delete it.
+   Restart Flask: python app.py (in activated venv).
+   Tracking API: POST http://127.0.0.1:5001/api/booking/track
+   Takes JSON { "reference": "AUR-...", "phone": "..." }.
+   Requires both exact booking reference and the phone used on reservation.
+   Only returns status, date, time, artist, services, duration, total;
+   no customer contact details or private notes.
+
+2) Frontend:
+   src/pages/Tracking/Tracking.jsx              <- src/pages/Tracking/Tracking.jsx (NEW)
+   src/pages/Tracking/Tracking.css              <- src/pages/Tracking/Tracking.css (NEW)
+   src/pages/Booking/Booking.jsx                <- Booking.jsx (REPLACE)
+   src/pages/Booking/BookingTrackingAdditions.css <- BookingTrackingAdditions.css (NEW)
+   Leave Booking.css and BookingRefresh.css unchanged.
+
+3) In src/App.jsx:
+   a) Add import Tracking from "./pages/Tracking/Tracking";
+   b) Under the /booking route add <Route path="/track" element={<Tracking />} />
+   c) In ScrollManager's top-of-page condition, include `pathname === "/track"`.
+   Existing navbar + scroll handler unchanged.
+
+4) For HOME entry point in src/components/Footer/Footer.jsx:
+   Inside SUPPORT column add:
+     <Link to="/track">Track Your Appointment</Link>
+   For instance add directly AFTER <h3>SUPPORT</h3> or after Contact Us.
+   No Footer.css changes required: existing styling applies automatically.
+
+5) Run frontend Vite `npm run dev`. Open http://localhost:5173/track.
+   Successful booking -> copy unique reference AUR-XXXXXXXXXXXX.
+   Lookup with matching phone -> confirmed status and appointment details.
+   Wrong phone / unknown reference -> generic no-match message.
+
+NOTES
+- Existing bookings stored in the SAME bookings.sqlite3 file continue to work.
+- Current backend creates reservations with status 'confirmed'; no admin statuses
+  beyond this are implemented yet. Tracking displays real DB status.
+- Local demo only. Phone+booking ID lookup and in-process throttling are not
+  strong production authentication. Before real public launch add OTP validation,
+  shared rate limiting, HTTPS, access/audit safeguards, and full admin status tools.
+- Repeated `python app.py` does not migrate customer tables; existing schema works.

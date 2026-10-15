@@ -1,0 +1,3 @@
+.auren-booking-quicklinks,.auren-booking-confirm-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.auren-booking-confirm-actions{margin-top:24px}
+@media(max-width:600px){.auren-booking-quicklinks{flex-direction:column;align-items:flex-end;gap:7px}.auren-booking-quicklinks .auren-booking-return{font-size:8px;padding:8px 10px}}

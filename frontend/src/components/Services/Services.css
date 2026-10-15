@@ -1,0 +1,403 @@
+
+/* ==========================================
+   AUREN — PREMIUM SERVICES
+   BLACK / WHITE / SILVER
+========================================== */
+
+.auren-services {
+  position: relative;
+  width: 100%;
+  padding: 125px 6% 140px;
+  background: #101113;
+  color: #f5f5f3;
+  scroll-margin-top: 110px;
+}
+
+.auren-services-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* SECTION HEADER */
+
+.auren-services-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 45px;
+  margin-bottom: 54px;
+}
+
+.auren-services-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 25px;
+  color: #b7bbc4;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+}
+
+.auren-services-eyebrow span {
+  width: 35px;
+  height: 1px;
+  background: #b7bbc4;
+}
+
+.auren-services-heading {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 5.5vw, 86px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+}
+
+.auren-services-heading em {
+  color: #bfc3cb;
+  font-weight: 400;
+}
+
+.auren-services-intro {
+  max-width: 325px;
+  margin: 0 0 8px;
+  color: #a9acb4;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* ==========================================
+   LIQUID GLASS FILTER TRACK
+========================================== */
+
+.auren-services-filters {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 42px;
+  padding: 6px;
+
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  background: rgba(46, 48, 54, 0.48);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 12px 35px rgba(0, 0, 0, 0.24);
+}
+
+/* ONE MOVING GLASS PILL */
+
+.auren-service-indicator {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  border-radius: 100px;
+  pointer-events: none;
+
+  background: rgba(255, 255, 255, 0.19);
+  border: 1px solid rgba(255, 255, 255, 0.27);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 4px 18px rgba(0, 0, 0, 0.16);
+
+  transition:
+    left 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    top 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 650ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* FILTER BUTTONS */
+
+.auren-service-filter {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+
+  padding: 13px 23px;
+  border: none;
+  border-radius: 100px;
+
+  background: transparent;
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition: color 300ms ease;
+}
+
+.auren-service-filter:hover {
+  color: #fff;
+}
+
+/* No separate active background */
+
+.auren-service-filter-active,
+.auren-service-filter-active:hover {
+  background: transparent;
+  color: #fff;
+}
+
+/* ==========================================
+   SERVICES GRID
+========================================== */
+
+.auren-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+/* CARD */
+
+.auren-service-card {
+  min-width: 0;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background: #191a1d;
+
+  animation: aurenServiceCardEnter 500ms ease both;
+
+  transition:
+    transform 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 350ms ease,
+    box-shadow 450ms ease;
+}
+
+.auren-service-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
+}
+
+/* IMAGES */
+
+.auren-service-image-wrapper {
+  position: relative;
+  height: 285px;
+  overflow: hidden;
+  background: #27292c;
+}
+
+.auren-service-image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55),
+    transparent 55%
+  );
+}
+
+.auren-service-image-wrapper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  filter: saturate(0.5) brightness(0.83);
+
+  transition:
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 650ms ease;
+}
+
+.auren-service-card:hover img {
+  transform: scale(1.07);
+  filter: saturate(0.85) brightness(0.95);
+}
+
+/* IMAGE DETAILS */
+
+.auren-service-number {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  z-index: 1;
+
+  color: rgba(255, 255, 255, 0.85);
+  font-family: Georgia, serif;
+  font-size: 22px;
+}
+
+.auren-service-category {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1;
+
+  padding: 9px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.23);
+  border-radius: 100px;
+
+  background: rgba(15, 16, 18, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: #fff;
+  font-size: 10px;
+}
+
+/* CARD INFO */
+
+.auren-service-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 24px 29px;
+}
+
+.auren-service-info h3 {
+  margin: 0 0 11px;
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.auren-service-info p {
+  margin: 0;
+  max-width: 310px;
+  color: #9fa3ac;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* BOOK ARROW */
+
+.auren-service-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 43px;
+  height: 43px;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+
+  color: #fff;
+  font-size: 20px;
+
+  transition:
+    background 300ms ease,
+    color 300ms ease,
+    transform 300ms ease;
+}
+
+.auren-service-arrow:hover {
+  background: #f2f2f3;
+  color: #111214;
+  transform: rotate(45deg);
+}
+
+/* CARD FILTER ENTRANCE */
+
+@keyframes aurenServiceCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1050px) {
+  .auren-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .auren-services-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 25px;
+  }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 650px) {
+  .auren-services {
+    padding: 85px 22px 100px;
+  }
+
+  .auren-services-heading {
+    font-size: clamp(43px, 10vw, 65px);
+  }
+
+  .auren-services-filters {
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    border-radius: 24px;
+  }
+
+  .auren-services-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .auren-service-filter {
+    padding: 13px 19px;
+    font-size: 11px;
+  }
+
+  .auren-services-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .auren-service-image-wrapper {
+    height: 270px;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+.auren-services button:focus-visible,
+.auren-services a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auren-service-indicator,
+  .auren-service-filter,
+  .auren-service-card,
+  .auren-service-image-wrapper img,
+  .auren-service-arrow {
+    animation: none !important;
+    transition: none !important;
+  }
+}

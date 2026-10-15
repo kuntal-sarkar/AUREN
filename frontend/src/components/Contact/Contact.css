@@ -1,0 +1,953 @@
+
+/* ============================================
+   AUREN — CONTACT & VISIT US
+   Premium Charcoal / Silver Editorial
+============================================ */
+
+.auren-contact {
+  position: relative;
+  width: 100%;
+  padding: 130px 6% 75px;
+  background: #0d0e11;
+  color: #f5f5f5;
+  scroll-margin-top: 100px;
+}
+
+.auren-contact *,
+.auren-contact *::before,
+.auren-contact *::after {
+  box-sizing: border-box;
+}
+
+.auren-contact-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Section heading */
+
+.auren-contact-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(250px, 0.7fr);
+  align-items: end;
+  gap: 60px;
+  margin-bottom: 68px;
+}
+
+.auren-contact-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 26px;
+  color: #aeb0b6;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+}
+
+.auren-contact-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: #e4e5e8;
+}
+
+.auren-contact-title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.2rem, 6.4vw, 6.7rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.065em;
+}
+
+.auren-contact-title em {
+  color: #a4a7b0;
+  font-weight: 400;
+}
+
+.auren-contact-description {
+  max-width: 340px;
+  margin: 0 0 8px auto;
+  color: #a3a5ad;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* Main layout */
+
+.auren-contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.auren-contact-details,
+.auren-contact-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.auren-contact-info-card,
+.auren-contact-hours-card,
+.auren-contact-connect {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #1b1d22, #131418);
+}
+
+.auren-contact-info-card {
+  padding: clamp(28px, 3vw, 43px);
+}
+
+.auren-contact-hours-card {
+  flex: 1;
+  padding: clamp(28px, 3vw, 43px);
+}
+
+.auren-contact-index {
+  display: block;
+  color: #a1a4ac;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.17em;
+}
+
+.auren-contact-info-card h3,
+.auren-contact-hours-card h3,
+.auren-contact-connect h3 {
+  margin: 25px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.9rem, 2.7vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+}
+
+.auren-contact-address {
+  margin: 22px 0 28px;
+  color: #afb1b9;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.auren-contact-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.auren-contact-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px 23px;
+  border: 1px solid #e7e8eb;
+  border-radius: 100px;
+  background: #e7e8eb;
+  color: #15161a;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+
+.auren-contact-primary-btn:hover {
+  background: transparent;
+  color: #f5f5f5;
+}
+
+.auren-contact-unavailable {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  color: #979aa3;
+  font-size: 10px;
+  letter-spacing: 0.11em;
+}
+
+/* Opening hours */
+
+.auren-contact-hours-list {
+  margin-top: 30px;
+}
+
+.auren-contact-hour-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.085);
+  color: #c7c9d0;
+  font-size: 12px;
+}
+
+.auren-contact-hour-row span:last-child {
+  color: #a6a9b1;
+  text-align: right;
+}
+
+.auren-contact-hours-note {
+  margin: 22px 0 0;
+  color: #777b85;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+/* Google Maps / Location display */
+
+.auren-contact-map {
+  position: relative;
+  min-height: 475px;
+  flex: 1;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 20px;
+  background: #1a1b20;
+}
+
+.auren-contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 475px;
+  border: 0;
+  filter: grayscale(1) contrast(1.04);
+}
+
+.auren-contact-map-placeholder {
+  position: relative;
+  display: flex;
+  min-height: 475px;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 25px;
+  overflow: hidden;
+  text-align: center;
+  background:
+    radial-gradient(
+      ellipse at 50% 47%,
+      rgba(150, 154, 166, 0.105),
+      transparent 57%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 62px,
+      rgba(255, 255, 255, 0.025) 63px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 62px,
+      rgba(255, 255, 255, 0.025) 63px
+    ),
+    #181a1f;
+}
+
+.auren-contact-map-cross {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 50%;
+  color: #d9dbe1;
+  font-size: 35px;
+}
+
+.auren-contact-map-label {
+  margin-bottom: 22px;
+  color: #b4b7c0;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+}
+
+.auren-contact-map-placeholder strong {
+  color: #e9e9ed;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.1rem, 3.6vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+}
+
+.auren-contact-map-placeholder p {
+  max-width: 290px;
+  margin: 23px auto 0;
+  color: #999ca6;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.auren-contact-map-coordinate {
+  margin-top: 46px;
+  color: #727680;
+  font-size: 9px;
+  letter-spacing: 0.17em;
+}
+
+/* Get in touch */
+
+.auren-contact-connect {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 30px clamp(28px, 3vw, 43px);
+}
+
+.auren-contact-connect h3 {
+  margin-top: 18px;
+  font-size: clamp(1.8rem, 2.4vw, 2.5rem);
+}
+
+.auren-contact-connect-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.auren-contact-connect-buttons a,
+.auren-contact-connect-buttons > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 100px;
+  color: #e5e6e9;
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.auren-contact-connect-buttons a {
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+
+.auren-contact-connect-buttons a:hover {
+  background: #e7e8eb;
+  color: #15161a;
+}
+
+.auren-contact-connect-buttons > span {
+  color: #8d9099;
+}
+
+/* Bottom caption */
+
+.auren-contact-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 48px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: #898c95;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+/* Responsive */
+
+@media (max-width: 1050px) {
+  .auren-contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .auren-contact-connect {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .auren-contact-connect-buttons {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 800px) {
+  .auren-contact {
+    padding: 105px 5% 65px;
+  }
+
+  .auren-contact-header {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 45px;
+  }
+
+  .auren-contact-description {
+    max-width: 480px;
+    margin: 0;
+  }
+
+  .auren-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auren-contact-map,
+  .auren-contact-map-placeholder,
+  .auren-contact-map iframe {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 600px) {
+  .auren-contact {
+    padding: 85px 20px 55px;
+    scroll-margin-top: 80px;
+  }
+
+  .auren-contact-title {
+    font-size: clamp(2.9rem, 11vw, 4.5rem);
+  }
+
+  .auren-contact-header {
+    margin-bottom: 35px;
+  }
+
+  .auren-contact-grid,
+  .auren-contact-details,
+  .auren-contact-right {
+    gap: 16px;
+  }
+
+  .auren-contact-info-card,
+  .auren-contact-hours-card,
+  .auren-contact-connect,
+  .auren-contact-map {
+    border-radius: 16px;
+  }
+
+  .auren-contact-info-card,
+  .auren-contact-hours-card {
+    padding: 27px 23px;
+  }
+
+  .auren-contact-hour-row {
+    font-size: 11px;
+  }
+
+  .auren-contact-map,
+  .auren-contact-map-placeholder,
+  .auren-contact-map iframe {
+    min-height: 345px;
+  }
+
+  .auren-contact-map-placeholder strong {
+    font-size: 2.5rem;
+  }
+
+  .auren-contact-connect {
+    padding: 27px 23px;
+  }
+
+  .auren-contact-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auren-contact-primary-btn,
+  .auren-contact-connect-buttons a {
+    transition: none;
+  }
+}
+
+
+
+
+/* ============================================
+   AUREN — CONTACT UPGRADE
+   Social Links + Independent Enquiry Form
+   Existing design preserved
+============================================ */
+
+/* Social links */
+
+.auren-contact-social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.auren-contact-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 58px;
+  padding: 17px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  color: #e7e8ec;
+  text-decoration: none;
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
+}
+
+.auren-contact-social-link:hover {
+  background: rgba(255, 255, 255, 0.085);
+  border-color: rgba(255, 255, 255, 0.38);
+  transform: translateY(-2px);
+}
+
+.auren-contact-social-link:focus-visible {
+  outline: 2px solid #e5e6ea;
+  outline-offset: 4px;
+}
+
+.auren-contact-social-name {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+.auren-contact-social-link > span:last-child {
+  font-size: 22px;
+  font-weight: 300;
+}
+
+/* Map caption */
+
+.auren-contact-map-caption {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  background: rgba(20, 22, 27, 0.94);
+  color: #e4e5e9;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+.auren-contact-map-caption span:last-child {
+  color: #aaaeb8;
+  text-align: right;
+}
+
+/* Demo location label */
+
+.auren-contact-address small {
+  display: inline-block;
+  margin-top: 7px;
+  color: #858a96;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+/* ============================================
+   ENQUIRY SECTION
+============================================ */
+
+.auren-contact-enquiry {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 0.8fr)
+    minmax(0, 1.2fr);
+  align-items: start;
+  gap: clamp(35px, 6vw, 90px);
+  margin-top: 110px;
+  padding-top: 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.auren-contact-enquiry-heading h3 {
+  margin: 0;
+  color: #f5f5f5;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 5.4vw, 5.8rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.06em;
+}
+
+.auren-contact-enquiry-heading h3 em {
+  color: #a4a7b0;
+  font-weight: 400;
+}
+
+.auren-contact-enquiry-heading > p:last-child {
+  max-width: 360px;
+  margin: 26px 0 0;
+  color: #9da1ab;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* Form container */
+
+.auren-contact-enquiry-form {
+  min-width: 0;
+  padding: clamp(25px, 3.5vw, 45px);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 22px;
+  background: linear-gradient(
+    145deg,
+    #1d1f24,
+    #15161a
+  );
+}
+
+.auren-contact-form-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 27px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a8abb4;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+/* Field layout */
+
+.auren-contact-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 18px;
+}
+
+.auren-contact-enquiry-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  color: #b8bbc3;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+}
+
+/* Inputs */
+
+.auren-contact-enquiry-form input,
+.auren-contact-enquiry-form select,
+.auren-contact-enquiry-form textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 11px;
+  outline: none;
+  background: #111216;
+  color: #f2f2f4;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: normal;
+  transition:
+    border-color 200ms ease,
+    background 200ms ease;
+}
+
+.auren-contact-enquiry-form input::placeholder,
+.auren-contact-enquiry-form textarea::placeholder {
+  color: #777b85;
+}
+
+.auren-contact-enquiry-form input:hover,
+.auren-contact-enquiry-form select:hover,
+.auren-contact-enquiry-form textarea:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.auren-contact-enquiry-form input:focus,
+.auren-contact-enquiry-form select:focus,
+.auren-contact-enquiry-form textarea:focus {
+  border-color: #c7c9d0;
+  background: #16181d;
+}
+
+/* Native dropdown styling — glass-like shell */
+
+.auren-contact-enquiry-form select {
+  cursor: pointer;
+  color-scheme: dark;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 43px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23ADB0B9' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+/* Message */
+
+.auren-contact-message-field {
+  margin-top: 26px;
+}
+
+.auren-contact-enquiry-form textarea {
+  min-height: 155px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+/* Submit footer */
+
+.auren-contact-form-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.auren-contact-form-bottom p {
+  max-width: 220px;
+  margin: 0;
+  color: #898d97;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.auren-contact-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 49px;
+  padding: 16px 23px;
+  border: 1px solid #e8e9ed;
+  border-radius: 100px;
+  background: #e8e9ed;
+  color: #16171b;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+
+.auren-contact-submit span {
+  font-size: 18px;
+}
+
+.auren-contact-submit:hover:not(:disabled) {
+  background: transparent;
+  color: #f5f5f5;
+}
+
+.auren-contact-submit:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+
+.auren-contact-submit:focus-visible {
+  outline: 2px solid #f5f5f5;
+  outline-offset: 4px;
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+
+@media (max-width: 1000px) {
+  .auren-contact-enquiry {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    margin-top: 90px;
+    padding-top: 65px;
+  }
+
+  .auren-contact-enquiry-heading > p:last-child {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .auren-contact-social-link {
+    min-height: 54px;
+    padding: 15px 17px;
+  }
+
+  .auren-contact-map-caption {
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 12px 14px;
+    font-size: 9px;
+  }
+
+  .auren-contact-map-caption span:last-child {
+    text-align: left;
+  }
+
+  .auren-contact-enquiry {
+    margin-top: 75px;
+    padding-top: 55px;
+  }
+
+  .auren-contact-enquiry-form {
+    padding: 27px 20px;
+    border-radius: 16px;
+  }
+
+  .auren-contact-form-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .auren-contact-form-bottom {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .auren-contact-form-bottom p {
+    max-width: none;
+  }
+
+  .auren-contact-submit {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auren-contact-social-link,
+  .auren-contact-enquiry-form input,
+  .auren-contact-enquiry-form textarea,
+  .auren-contact-submit {
+    transition: none;
+  }
+}
+
+
+
+/* ============================================
+   AUREN — NATURAL GOOGLE MAP COLORS
+============================================ */
+
+.auren-contact-map iframe {
+  filter: none !important;
+}
+
+/* Social media brand icons */
+
+.auren-contact-social-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.auren-contact-brand-icon {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Maintain clean hover effects */
+
+.auren-contact-social-link:hover
+.auren-contact-brand-icon {
+  transform: scale(1.07);
+}
+
+.auren-contact-brand-icon {
+  transition: transform 200ms ease;
+}
+
+
+/* AUREN — Enquiry dropdown only. Append to existing Contact.css. */
+.auren-enquiry-select-field { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.auren-enquiry-select-label { color: #b8bbc3; font-size: 10px; font-weight: 500; letter-spacing: .13em; }
+.auren-enquiry-dropdown { position: relative; min-width: 0; z-index: 5; }
+.auren-enquiry-dropdown.is-open { z-index: 50; }
+.auren-enquiry-trigger {
+  width: 100%; min-height: 51px; padding: 15px 18px; display: flex;
+  align-items: center; justify-content: space-between; gap: 15px;
+  border: 1px solid rgba(255,255,255,.14); border-radius: 11px;
+  background: #111216; color: #777b85; font-family: inherit; font-size: 13px; font-weight: 400;
+  text-align: left; cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+.auren-enquiry-trigger.has-value { color: #f2f2f4; }
+.auren-enquiry-trigger:hover, .auren-enquiry-dropdown.is-open .auren-enquiry-trigger {
+  background: #191b20; border-color: rgba(229,231,237,.55);
+}
+.auren-enquiry-trigger:focus-visible { outline: 2px solid #e5e6ea; outline-offset: 3px; }
+.auren-enquiry-trigger svg { flex-shrink: 0; color: #afb1ba; transition: transform .24s ease; }
+.auren-enquiry-dropdown.is-open .auren-enquiry-trigger svg { transform: rotate(180deg); }
+.auren-enquiry-options {
+  position: absolute; top: calc(100% + 9px); left: 0; right: 0;
+  z-index: 60; max-height: 310px; overflow-y: auto; padding: 8px;
+  border: 1px solid rgba(255,255,255,.18); border-radius: 17px;
+  background: rgba(35,37,43,.96);
+  box-shadow: 0 18px 55px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  animation: aurenEnquiryAppear .22s cubic-bezier(.16,1,.3,1) both;
+  scrollbar-width: thin; scrollbar-color: #656870 transparent;
+}
+.auren-enquiry-options-heading { padding: 13px 13px 12px; color: #9396a0; font-size: 9px; font-weight: 600; letter-spacing: .14em; }
+.auren-enquiry-option {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 13px 14px; border: 0; border-radius: 10px;
+  background: transparent; color: #dadce2; font-family: inherit;
+  font-size: 13px; text-align: left; cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+.auren-enquiry-option + .auren-enquiry-option { margin-top: 2px; }
+.auren-enquiry-option:hover, .auren-enquiry-option:focus-visible {
+  outline: none; background: rgba(255,255,255,.1); color: #fff;
+}
+.auren-enquiry-option.is-selected { background: rgba(235,236,240,.12); color: #fff; }
+@keyframes aurenEnquiryAppear {
+  from { opacity: 0; transform: translateY(-8px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 600px) { .auren-enquiry-options { max-height: 270px; border-radius: 14px; } }
+@media (prefers-reduced-motion: reduce) {
+  .auren-enquiry-options { animation: none; }
+  .auren-enquiry-trigger svg { transition: none; }
+}

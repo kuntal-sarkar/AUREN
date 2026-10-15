@@ -1,0 +1,16 @@
+.auren-legal{background:#101114;color:#f2f2f3;min-height:70vh;padding:80px 6% 110px}
+.auren-legal *{box-sizing:border-box}
+.auren-legal-container{max-width:1100px;margin:auto}
+.auren-legal-back{color:#bec1c8;text-decoration:none;font-size:11px;letter-spacing:.12em}
+.auren-legal-back:hover{color:white}
+.auren-legal-eyebrow{font-size:10px;letter-spacing:.23em;color:#9da0a8;margin:80px 0 25px}
+.auren-legal h1{font:400 clamp(3.5rem,7.5vw,7rem)/1 Georgia,serif;letter-spacing:-.065em;margin:0}
+.auren-legal h1 span{color:#a5a8b1}
+.auren-legal-lead{font-size:16px;line-height:1.8;color:#b1b4bd;max-width:660px;margin:28px 0}
+.auren-legal-draft{border-left:2px solid #9ca0ac;padding:12px 18px;background:#1c1e23;color:#c5c7ce;font-size:12px;line-height:1.8;max-width:800px}
+.auren-legal-sections{margin:60px 0 55px;border-top:1px solid #34363c}
+.auren-legal-sections section{display:grid;grid-template-columns:65px 1fr;gap:15px;border-bottom:1px solid #34363c;padding:34px 0}
+.auren-legal-sections section>span{font-size:11px;color:#868a94;margin-top:7px}
+.auren-legal-sections h2{font:400 clamp(1.4rem,2.7vw,2.2rem) Georgia,serif;letter-spacing:-.035em;margin:0 0 13px}
+.auren-legal-sections p{font-size:14px;line-height:1.95;color:#b1b4bd;max-width:770px;margin:0}
+@media(max-width:600px){.auren-legal{padding:65px 20px 85px}.auren-legal-eyebrow{margin-top:60px}.auren-legal-sections section{grid-template-columns:35px 1fr}}

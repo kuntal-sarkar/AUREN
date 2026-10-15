@@ -1,0 +1,481 @@
+
+/* ============================================
+   AUREN — CINEMATIC BLENDED HERO
+   BLACK / WHITE / SILVER
+============================================ */
+
+.auren-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 100svh;
+  overflow: hidden;
+
+  background: #0b0c0e;
+}
+
+/* ============================================
+   FULL-SCREEN BACKGROUND IMAGE
+============================================ */
+
+.auren-hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+}
+
+.auren-hero-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /* Your portrait salon photo:
+     keep the styling chairs visible */
+  object-position: 65% 50%;
+
+  transform: scale(1.08);
+
+  animation: aurenBackgroundReveal 8s
+    cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================
+   DARK GRADIENT — SEAMLESS IMAGE BLEND
+============================================ */
+
+.auren-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0b0c0e 0%,
+      rgba(11, 12, 14, 0.98) 12%,
+      rgba(11, 12, 14, 0.93) 27%,
+      rgba(11, 12, 14, 0.78) 39%,
+      rgba(11, 12, 14, 0.42) 58%,
+      rgba(11, 12, 14, 0.08) 84%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      transparent 28%,
+      transparent 70%,
+      rgba(0, 0, 0, 0.28) 100%
+    );
+}
+
+/* ============================================
+   CONTENT
+============================================ */
+
+.auren-hero-content {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 760px);
+
+  padding:
+    clamp(150px, 18vh, 210px)
+    0
+    70px
+    clamp(40px, 7.5vw, 125px);
+}
+
+/* Eyebrow label */
+
+.auren-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  color: #c9cbd0;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+
+  opacity: 0;
+
+  animation: aurenContentReveal
+    900ms ease 250ms forwards;
+}
+
+.auren-hero-line {
+  width: 40px;
+  height: 1px;
+  flex-shrink: 0;
+  background: #c9cbd0;
+}
+
+/* ============================================
+   CINEMATIC TYPOGRAPHY
+============================================ */
+
+.auren-hero-title {
+  margin: 35px 0 25px;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(65px, 6.6vw, 112px);
+  font-weight: 400;
+
+  line-height: 1.02;
+  letter-spacing: -0.065em;
+
+  color: #f5f5f4;
+
+  opacity: 0;
+
+  animation: aurenTitleEntrance
+    1.5s cubic-bezier(0.16, 1, 0.3, 1)
+    400ms forwards;
+}
+
+.auren-hero-title em {
+  font-weight: 400;
+  color: #c5c8ce;
+}
+
+/* Description */
+
+.auren-hero-description {
+  max-width: 490px;
+  margin: 0;
+
+  color: #cbccd0;
+  font-size: 14px;
+  line-height: 1.9;
+
+  opacity: 0;
+
+  animation: aurenContentReveal
+    1s ease 900ms forwards;
+}
+
+/* ============================================
+   ACTION BUTTONS
+============================================ */
+
+.auren-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+
+  margin-top: 36px;
+
+  opacity: 0;
+
+  animation: aurenContentReveal
+    1s ease 1.2s forwards;
+}
+
+.auren-hero-primary,
+.auren-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  min-height: 55px;
+  padding: 0 25px;
+
+  border-radius: 100px;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+
+  transition:
+    background 350ms ease,
+    transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 350ms ease;
+}
+
+.auren-hero-primary {
+  color: #101113;
+  background: #eceef0;
+  border: 1px solid #eceef0;
+}
+
+.auren-hero-primary:hover {
+  background: #fff;
+  transform: translateY(-3px);
+}
+
+.auren-hero-secondary {
+  color: #f5f5f4;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.auren-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: #fff;
+  transform: translateY(-3px);
+}
+
+/* ============================================
+   BOTTOM DETAILS
+============================================ */
+
+.auren-hero-bottom {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+
+  margin-top: 85px;
+  padding-top: 28px;
+
+  max-width: 550px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+
+  opacity: 0;
+
+  animation: aurenContentReveal
+    1s ease 1.4s forwards;
+}
+
+.auren-hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auren-hero-stat-title {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: #f4f4f4;
+}
+
+.auren-hero-stat-label {
+  font-size: 9px;
+  color: #aaaeb7;
+  letter-spacing: 0.13em;
+}
+
+.auren-hero-stat-divider {
+  width: 1px;
+  height: 47px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.auren-hero-edge-label {
+  position: absolute;
+  right: 40px;
+  bottom: 35px;
+
+  z-index: 1;
+
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+}
+
+/* ============================================
+   ANIMATIONS
+============================================ */
+
+@keyframes aurenBackgroundReveal {
+  from {
+    opacity: 0.45;
+    transform: scale(1.08);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes aurenContentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aurenTitleEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(55px);
+    filter: blur(13px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* ============================================
+   TABLET
+============================================ */
+
+@media (max-width: 1100px) {
+  .auren-hero-content {
+    width: min(100%, 680px);
+    padding-left: 6%;
+    padding-right: 25px;
+  }
+
+  .auren-hero-title {
+    font-size: clamp(56px, 7vw, 85px);
+  }
+
+  .auren-hero-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(11, 12, 14, 0.98) 0%,
+      rgba(11, 12, 14, 0.88) 32%,
+      rgba(11, 12, 14, 0.45) 70%,
+      rgba(11, 12, 14, 0.15) 100%
+    );
+  }
+}
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media (max-width: 700px) {
+  .auren-hero {
+    min-height: 100svh;
+    align-items: flex-end;
+  }
+
+  .auren-hero-image {
+    object-position: 55% center;
+  }
+
+  .auren-hero-overlay {
+    background:
+      linear-gradient(
+        0deg,
+        rgba(8, 9, 11, 0.98) 0%,
+        rgba(8, 9, 11, 0.9) 34%,
+        rgba(8, 9, 11, 0.55) 67%,
+        rgba(8, 9, 11, 0.2) 100%
+      );
+  }
+
+  .auren-hero-content {
+    width: 100%;
+    padding: 150px 24px 55px;
+  }
+
+  .auren-hero-title {
+    font-size: clamp(50px, 11vw, 75px);
+    margin-top: 24px;
+  }
+
+  .auren-hero-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+
+  .auren-hero-description {
+    font-size: 13px;
+  }
+
+  .auren-hero-actions {
+    gap: 12px;
+  }
+
+  .auren-hero-primary,
+  .auren-hero-secondary {
+    min-height: 48px;
+    padding: 0 17px;
+    font-size: 9px;
+  }
+
+  .auren-hero-bottom {
+    margin-top: 50px;
+    gap: 25px;
+  }
+
+  .auren-hero-stat-title {
+    font-size: 22px;
+  }
+
+  .auren-hero-stat-label {
+    font-size: 8px;
+  }
+
+  .auren-hero-edge-label {
+    display: none;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+============================================ */
+
+.auren-hero a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auren-hero-image,
+  .auren-hero-eyebrow,
+  .auren-hero-title,
+  .auren-hero-description,
+  .auren-hero-actions,
+  .auren-hero-bottom {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+
+/* AUREN — HERO REFINEMENT */
+
+@media (min-width: 701px) {
+  .auren-hero-content {
+    width: min(100%, 690px);
+    padding-top: 145px;
+    padding-bottom: 45px;
+  }
+
+  .auren-hero-title {
+    font-size: clamp(58px, 5.5vw, 88px);
+    line-height: 1.04;
+    margin: 25px 0 22px;
+  }
+
+  .auren-hero-description {
+    max-width: 440px;
+  }
+
+  .auren-hero-actions {
+    margin-top: 30px;
+  }
+
+  .auren-hero-bottom {
+    margin-top: 45px;
+  }
+}

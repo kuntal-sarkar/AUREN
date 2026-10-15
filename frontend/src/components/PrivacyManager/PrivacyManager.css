@@ -1,0 +1,370 @@
+
+/* ==========================================
+   AUREN — PRIVACY MANAGER
+   Liquid Glass / Black / Silver
+========================================== */
+
+/* Base */
+
+.auren-cookie-banner,
+.auren-cookie-dialog {
+  box-sizing: border-box;
+  color: #f4f4f5;
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  box-shadow:
+    0 20px 65px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.13);
+}
+
+.auren-cookie-banner *,
+.auren-cookie-dialog * {
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   FLOATING COOKIE BANNER
+========================================== */
+
+.auren-cookie-banner {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  z-index: 90000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+
+  width: calc(100% - 36px);
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 23px 28px;
+
+  border-radius: 24px;
+  background: rgba(25, 27, 32, 0.64);
+
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  backdrop-filter: blur(22px) saturate(145%);
+
+  animation: aurenCookieFloatIn 450ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.auren-cookie-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  width: 84%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.33),
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+/* Text */
+
+.auren-cookie-eyebrow {
+  display: block;
+  color: #b4b7c0;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+}
+
+.auren-cookie-banner h2,
+.auren-cookie-dialog h2 {
+  margin: 9px 0;
+  color: #fafafa;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.auren-cookie-banner p,
+.auren-cookie-dialog p {
+  max-width: 610px;
+  margin: 0;
+  color: rgba(235, 236, 242, 0.77);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.auren-cookie-actions,
+.auren-cookie-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.auren-cookie-actions {
+  flex-shrink: 0;
+}
+
+.auren-cookie-banner button,
+.auren-cookie-dialog button {
+  min-height: 43px;
+  padding: 12px 17px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+
+  background: rgba(255, 255, 255, 0.075);
+  color: #f3f4f6;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.auren-cookie-banner button:hover,
+.auren-cookie-dialog button:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Primary buttons */
+
+.auren-cookie-actions button:first-child,
+.auren-cookie-modal-actions button:last-child {
+  background: rgba(240, 241, 245, 0.94);
+  border-color: rgba(255, 255, 255, 0.65);
+  color: #15161a;
+}
+
+.auren-cookie-actions button:first-child:hover,
+.auren-cookie-modal-actions button:last-child:hover {
+  background: #fff;
+  color: #111216;
+}
+
+/* Keyboard focus */
+
+.auren-cookie-banner button:focus-visible,
+.auren-cookie-dialog button:focus-visible,
+.auren-cookie-dialog input:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   PREFERENCES MODAL BACKDROP
+========================================== */
+
+.auren-cookie-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 91000;
+
+  display: grid;
+  place-items: center;
+  padding: 15px;
+
+  background: rgba(0, 0, 0, 0.72);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* ==========================================
+   PREFERENCES DIALOG
+========================================== */
+
+.auren-cookie-dialog {
+  position: relative;
+
+  width: min(100%, 570px);
+  max-height: calc(100dvh - 30px);
+  overflow-y: auto;
+
+  padding: 34px;
+  border-radius: 25px;
+
+  background: rgba(28, 30, 36, 0.88);
+
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  backdrop-filter: blur(28px) saturate(140%);
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.auren-cookie-close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+
+  min-height: 0 !important;
+  padding: 4px 12px !important;
+
+  font-size: 24px !important;
+  line-height: 1;
+}
+
+.auren-cookie-dialog > p {
+  margin-bottom: 24px;
+}
+
+/* ==========================================
+   COOKIE CATEGORY TOGGLES
+========================================== */
+
+.auren-cookie-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.auren-cookie-toggle span {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.auren-cookie-toggle strong {
+  color: #f0f1f3;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.auren-cookie-toggle small {
+  color: #a6aab4;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.auren-cookie-toggle input {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+
+  accent-color: #d9dce2;
+  cursor: pointer;
+}
+
+.auren-cookie-toggle input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Modal footer */
+
+.auren-cookie-modal-actions {
+  justify-content: flex-end;
+  margin-top: 22px;
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes aurenCookieFloatIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 760px) {
+  .auren-cookie-banner {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+
+    width: calc(100% - 20px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 19px;
+
+    padding: 21px;
+    border-radius: 20px;
+
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  .auren-cookie-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .auren-cookie-actions button:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .auren-cookie-dialog {
+    padding: 28px 20px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .auren-cookie-banner {
+    padding: 18px;
+  }
+
+  .auren-cookie-banner h2 {
+    font-size: 1.65rem;
+  }
+
+  .auren-cookie-actions button {
+    padding: 12px 10px;
+    font-size: 10px;
+  }
+
+  .auren-cookie-dialog {
+    padding: 26px 17px;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .auren-cookie-banner {
+    animation: none;
+  }
+
+  .auren-cookie-banner button,
+  .auren-cookie-dialog button {
+    transition: none;
+  }
+}
