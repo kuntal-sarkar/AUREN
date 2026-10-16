@@ -42,3 +42,5 @@ Thumbs.db
 
 # Original artist image backups
 frontend/public/images/artists/_original_backup/
+backend/app_sqlite_backup.py
+backend/bookings_backup.sqlite3

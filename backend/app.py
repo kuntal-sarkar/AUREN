@@ -29,7 +29,15 @@ ARTISTS = {
 }
 OPEN_MIN, CLOSE_MIN, SLOT_STEP = 10*60, 19*60, 15
 app = Flask(__name__)
-CORS(app, resources={r"/api/booking/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}})
+CORS(app, resources={
+    r"/api/booking/*": {
+        "origins": [
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "https://auren-50q.pages.dev",
+        ]
+    }
+})
 
 
 def connection():
@@ -256,6 +264,11 @@ def track_reservation():
     )
 
 
+initialize()
+
 if __name__ == "__main__":
-    initialize()
-    app.run(host="127.0.0.1", port=5001, debug=False)
+    app.run(
+        host="127.0.0.1",
+        port=int(os.environ.get("PORT", 5001)),
+        debug=False,
+    )
