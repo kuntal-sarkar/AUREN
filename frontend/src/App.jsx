@@ -15,11 +15,16 @@ import IntroAnimation from "./components/IntroAnimation/IntroAnimation";
 import Home from "./pages/Home/Home";
 import LegalPage from "./pages/Legal/LegalPage";
 import Booking from "./pages/Booking/Booking";
-import PrivacyManager from "./components/PrivacyManager/PrivacyManager";
 import Tracking from "./pages/Tracking/Tracking";
+import AdminLogin from "./pages/Admin/AdminLogin";
+import PrivacyManager from "./components/PrivacyManager/PrivacyManager";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AdminWalkins from "./pages/Admin/AdminWalkins";
+
 
 import "./App.css";
 
+// Handles page scrolling when routes change.
 function ScrollManager() {
   const { pathname, hash } = useLocation();
   const firstRender = useRef(true);
@@ -29,10 +34,13 @@ function ScrollManager() {
       window.history.scrollRestoration = "manual";
     }
 
-    // Legal and Booking pages always start at the top.
+    // Booking and legal pages should always start at the top.
     if (
       pathname.startsWith("/legal/") ||
-      pathname === "/booking"
+      pathname === "/booking" ||
+      pathname === "/track" ||
+      pathname === "/tracking" ||
+      pathname.startsWith("/admin")
     ) {
       window.scrollTo({
         top: 0,
@@ -65,8 +73,8 @@ function ScrollManager() {
             id === "home"
               ? 0
               : target.getBoundingClientRect().top +
-              window.scrollY -
-              offset;
+                window.scrollY -
+                offset;
 
           window.scrollTo({
             top: Math.max(0, position),
@@ -94,41 +102,80 @@ function ScrollManager() {
   return null;
 }
 
+// Customer privacy controls are not shown on admin pages.
+function CustomerPrivacyManager() {
+  const { pathname } = useLocation();
+
+  if (
+    pathname === "/admin" ||
+    pathname.startsWith("/admin/")
+  ) {
+    return null;
+  }
+
+  return <PrivacyManager />;
+}
+
 function App() {
   return (
     <BrowserRouter>
       <ScrollManager />
 
       <Routes>
+        {/* Intro animation */}
         <Route
           path="/"
           element={<IntroAnimation />}
         />
 
+        {/* Main customer website */}
         <Route
           path="/home"
           element={<Home />}
         />
 
+        {/* Appointment booking */}
         <Route
           path="/booking"
           element={<Booking />}
         />
 
+        {/* Legal pages */}
         <Route
           path="/legal/:slug"
           element={<LegalPage />}
         />
 
+        {/* Booking tracking panel */}
         <Route
           path="/track"
           element={<Booking initialMode="track" />}
         />
 
+        {/* Standalone tracking page */}
+        <Route
+          path="/tracking"
+          element={<Tracking />}
+        />
 
+        {/* Admin login */}
+        <Route
+          path="/admin/login"
+          element={<AdminLogin />}
+        />
+        {/* Admin dashboard */}
+        <Route
+          path="/admin"
+          element={<AdminDashboard />}
+        />
+        {/* Admin walk-ins */}
+        <Route
+          path="/admin/walkins"
+          element={<AdminWalkins />}
+        />
       </Routes>
 
-      <PrivacyManager />
+      <CustomerPrivacyManager />
     </BrowserRouter>
   );
 }

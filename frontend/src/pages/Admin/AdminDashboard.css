@@ -1,0 +1,486 @@
+/* AUREN Reception — minimal charcoal & silver dashboard.
+   Scoped to the admin dashboard; customer website styles are untouched. */
+.auren-desk{--d-bg:#101214;--d-card:#191d20;--d-panel:#1b2024;--d-hair:#343b41;--d-muted:#a0a8ae;--d-text:#eef0f0;--d-silver:#cbd0d2;min-height:100dvh;background:var(--d-bg);color:var(--d-text);font-family:'Manrope','DM Sans',sans-serif;padding:30px clamp(16px,4vw,60px) 80px;overflow-x:hidden;color-scheme:dark}
+.auren-desk,.auren-desk *,.auren-desk *::before,.auren-desk *::after{box-sizing:border-box}
+.auren-desk button,.auren-desk input{font:inherit}
+.auren-desk button{cursor:pointer;transition:background .17s,border-color .17s,color .17s}
+.auren-desk button:disabled{cursor:not-allowed;opacity:.5}
+.auren-desk :is(button,input,a):focus-visible{outline:2px solid #d7dce0;outline-offset:3px}
+.desk-workspace{max-width:1480px;margin:auto;min-width:0}
+.desk-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:6px 0 22px;border-bottom:1px solid #2b3136;margin-bottom:20px}
+.desk-heading-group{display:flex;align-items:center;gap:32px;min-width:0}
+.desk-brand-simple{display:flex;flex-direction:column;gap:5px;border-right:1px solid #3c454b;padding-right:30px;flex-shrink:0}
+.desk-brand-simple strong{font-size:21px;letter-spacing:.24em;font-weight:700;line-height:1}
+.desk-brand-simple span{font-size:8px;letter-spacing:.13em;color:#a3adb6;white-space:nowrap}
+.desk-heading-copy .desk-eyebrow,.desk-eyebrow{font-size:10px;font-weight:600;letter-spacing:.17em;color:#a4aeb8}
+.desk-header h1{font-size:clamp(25px,2.7vw,34px);font-weight:600;letter-spacing:-.04em;margin:5px 0}
+.desk-header p{font-size:12px;color:var(--d-muted);margin:0}
+.desk-header-actions{display:flex;align-items:center;gap:9px}
+.desk-iconbtn,.desk-smallbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;border-radius:7px;background:#23282c;border:1px solid #434b51;color:#e1e6e8;padding:9px 13px;font-size:12px;text-decoration:none}
+.desk-iconbtn{position:relative;width:40px;padding:8px;font-size:18px}
+.desk-iconbtn:hover,.desk-smallbtn:hover{background:#30373c;border-color:#77828b}
+.desk-iconbtn.is-active{background:#454f56}
+.desk-count{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;border-radius:18px;background:#b16969;color:white;font-size:10px;display:grid;place-items:center;padding:0 4px}
+.desk-bell-wrap{position:relative}
+.desk-bell{position:absolute;right:0;top:49px;z-index:45;width:min(340px,calc(100vw - 32px));max-height:330px;overflow:auto;background:#23282d;border:1px solid #48525b;border-radius:9px;box-shadow:0 16px 45px #0007;padding:8px}
+.desk-bell-top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px 12px;border-bottom:1px solid #444e55;font-size:13px}
+.desk-bell-top button{font-size:11px;color:#cbd3d8;background:none;border:0}
+.desk-notice{display:flex;flex-direction:column;gap:4px;color:#e7ecef;text-align:left;background:transparent;border:0;border-bottom:1px solid #3d4449;padding:13px 10px;width:100%;font-size:12px}
+.desk-notice:hover{background:#30383e}
+.desk-notice small{color:#aab4bb}
+/* Single navigation bar only; no duplicated sidebar. */
+.desk-nav{display:flex;gap:4px;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:thin;margin:0 0 23px;padding:5px;border:1px solid #323940;background:#1b2024;border-radius:10px}
+.desk-nav button{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;font-size:12px;font-weight:600;color:#b4bdc5;padding:11px 18px;border:1px solid transparent;background:transparent;border-radius:7px;min-width:0}
+.desk-nav button:hover{background:#2b3339;color:#fff}
+.desk-nav button.selected{color:#121619;background:#cbd0d2;border-color:#dfe2e3}
+.desk-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:0 0 22px}
+.desk-stats>div{padding:21px 20px;background:#1a1e21;border:1px solid #343b40;border-radius:10px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.desk-stats span{font-size:11px;color:#b1bbc1;line-height:1.5}
+.desk-stats strong{font-size:clamp(21px,2.2vw,29px);font-weight:600;letter-spacing:-.035em;overflow-wrap:anywhere}
+.desk-panel{background:#191d20;border:1px solid #333a40;border-radius:11px;padding:clamp(18px,2.4vw,29px);min-width:0}
+.desk-panel-heading{display:flex;justify-content:space-between;align-items:start;gap:15px;flex-wrap:wrap;margin-bottom:22px}
+.desk-panel h2{font-size:23px;font-weight:600;letter-spacing:-.035em;margin:8px 0 0}
+.desk-panel h3,.desk-inner h3{font-size:15px;font-weight:600;margin:0 0 15px}
+.desk-muted,.desk-empty{font-size:12px;color:var(--d-muted);line-height:1.65}
+.desk-empty{padding:12px 2px}
+.desk-small{font-size:11px;color:#b0bac1}
+.desk-error{margin:10px 0 18px;border:1px solid #8a5555;color:#f0b9b9;background:#3c2425;border-radius:7px;padding:12px 16px;font-size:12px}
+.desk-subnav{display:inline-flex;gap:4px;padding:4px;border:1px solid #41484f;background:#23292e;border-radius:8px;margin-bottom:19px}
+.desk-subnav button{border:0;background:transparent;color:#a9b4bc;padding:10px 16px;font-size:12px;border-radius:6px}
+.desk-subnav button.selected{background:#444e56;color:white}
+.desk-search{display:flex;align-items:center;gap:10px;background:#1e2327;border:1px solid #3d454b;border-radius:7px;padding:0 13px;max-width:550px;margin:0 0 19px;color:#adb8c0}
+.desk-search input{background:transparent;border:0!important;color:#eef0f2;width:100%;padding:13px 0;outline:0!important;font-size:12px}
+.desk-search input::placeholder,.auren-desk input::placeholder{color:#848f98}
+.desk-records{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr));gap:13px}
+.desk-record,.desk-inner{background:#21262a;border:1px solid #3a4248;border-radius:9px;padding:20px;min-width:0}
+.desk-record-head{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.desk-record-head h3{font-size:17px;margin:5px 0}
+.desk-record-head p{font-size:12px;color:#a9b3bc;margin:4px 0 13px;line-height:1.6}
+.desk-detail{color:#b9c2c8;font-size:12px;overflow-wrap:anywhere}
+.desk-pill{font-size:10px;font-weight:600;white-space:normal;text-align:center;line-height:1.5;padding:6px 9px;color:#cad4dd;background:#36414a;border:1px solid #52616a;border-radius:6px;max-width:165px}
+.desk-pill-arrived{color:#bbdccb;background:#273b32;border-color:#476858}
+.desk-pill-absent,.desk-pill-cancelled{color:#e3b1b1;background:#432e31;border-color:#70464a}
+.desk-pill-completed{color:#cbdfcc;background:#2a3c31;border-color:#4d6b52}
+.desk-pill-billed{color:#e4d4b6;background:#453a2c;border-color:#70604a}
+.desk-lines{display:flex;flex-direction:column;gap:7px;padding:11px 0;margin:10px 0;border-top:1px solid #374047;border-bottom:1px solid #374047}
+.desk-lines>div{display:flex;justify-content:space-between;gap:15px;font-size:12px;color:#c9d0d5}
+.desk-lines .desk-line-total{font-weight:700;color:#fff;padding-top:8px;margin-top:3px;border-top:1px dashed #485159}
+.desk-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;align-items:center}
+.desk-smallbtn{min-height:34px;padding:8px 12px}
+.desk-accent,.desk-primary{background:#c8cdcf!important;color:#16191b!important;border:1px solid #d7dddf!important;font-weight:700}
+.desk-accent:hover,.desk-primary:hover{background:#e1e4e5!important}
+.desk-lock{color:#a2b9a7;font-size:11px}
+.desk-walkgrid,.desk-loggrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;align-items:start}
+.desk-walkgrid input:not([type=checkbox]),.desk-billform input:not([type=radio]){display:block;width:100%;background:#171c20;border:1px solid #465058;border-radius:7px;color:#f2f4f5;padding:13px 14px;margin:7px 0 16px;outline:none;font-size:13px}
+.desk-walkgrid label,.desk-billform label{font-size:12px;color:#c0c9d0}
+.desk-checks{display:grid;gap:8px;margin:10px 0}
+.desk-checks label{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border:1px solid #3e4850;border-radius:6px;background:#242b30}
+.desk-checks label span{display:flex;gap:9px;align-items:center}
+.desk-checks input{accent-color:#b8c4cd}
+.desk-primary{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:7px;min-height:40px;padding:11px 16px;cursor:pointer;font-size:12px}
+.desk-success{padding:12px;border-radius:7px;border:1px solid #47654f;background:#25372c;color:#c8e6cc;font-size:12px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px}
+.desk-walkitem{padding:14px 0;border-bottom:1px solid #3a4248}
+.desk-walkitem small{display:block;color:#aeb8c0;line-height:1.8}
+.desk-logitem{display:flex;flex-direction:column;gap:7px;padding:12px 0;border-bottom:1px solid #3b444b;font-size:12px}
+.desk-logitem>span{font-size:11px;color:#aeb9c0;overflow-wrap:anywhere}
+.desk-logitem>strong{font-size:13px;font-weight:600;overflow-wrap:anywhere}
+.desk-billform{max-width:680px;position:relative;margin-bottom:16px}
+.desk-suggestions{z-index:15;background:#262d32;border:1px solid #525d65;border-radius:7px;margin:-10px 0 15px;max-height:225px;overflow-y:auto;box-shadow:0 10px 30px #0007}
+.desk-suggestions button{display:flex;flex-direction:column;gap:5px;width:100%;padding:12px;text-align:left;background:transparent;color:white;border:0;border-bottom:1px solid #414b52;font-size:12px}
+.desk-suggestions button:hover{background:#364049}
+.desk-suggestions button span{font-size:11px;color:#aab5c0}
+.desk-methods{display:flex;gap:9px;margin:16px 0}
+.desk-methods label{padding:10px 18px;border:1px solid #4a555e;border-radius:6px;background:#242b30;display:flex;gap:9px;align-items:center}
+.desk-methods input{accent-color:#c5ced4}
+.desk-billing-help{margin:15px 0 23px}
+.desk-settings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.desk-settings-card{min-height:220px;display:flex;flex-direction:column;align-items:start;gap:10px}
+.desk-settings-card h3{margin:0}
+.desk-setting-icon,.desk-settings-symbol{font-size:21px;color:#cad2d7}
+.desk-settings-symbol{font-size:26px}
+.desk-setting-detail{display:flex;justify-content:space-between;width:100%;gap:10px;border-bottom:1px solid #434a50;padding:9px 0;color:#aab6bc;font-size:12px}
+.desk-setting-detail strong{color:#e6ecee}
+.desk-settings-action,.desk-logout-action{margin-top:auto}
+.desk-settings-action:disabled{opacity:.48}
+.desk-setting-hint{font-size:11px;color:#a4aeb6;line-height:1.6}
+.desk-toast{position:fixed;bottom:20px;right:20px;z-index:70;display:flex;gap:10px;align-items:center;background:#2a3136;color:#eaf0f2;border:1px solid #536069;box-shadow:0 14px 32px #0009;border-radius:8px;padding:13px 16px;font-size:12px;max-width:min(400px,calc(100vw - 40px))}
+.desk-toast button{color:white;background:transparent;border:0;padding:5px}
+/* Revenue chart: genuine invoice data from existing backend, no chart dependency. */
+.desk-revenue-chart{margin:15px 0 17px}
+.desk-chart-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.desk-chart-heading h3{margin:0 0 18px}
+.desk-bars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:clamp(5px,2vw,24px);height:240px;align-items:end;padding:15px 8px 0}
+.desk-bar-group{display:flex;flex-direction:column;align-items:center;height:100%;min-width:0;gap:7px}
+.desk-bar-value{font-size:10px;color:#cbd3d8;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.desk-bar-track{width:min(100%,58px);flex:1;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid #59636b;background:linear-gradient(0deg,rgba(255,255,255,.04),transparent);min-height:0}
+.desk-bar-fill{background:linear-gradient(180deg,#cbd2d5,#79878f);border-radius:4px 4px 0 0;min-height:0}
+.desk-bar-label{font-size:11px;color:#aeb8bf;white-space:nowrap}
+/* Compact invoice dialog. The receipt is intentionally plain for thermal printers. */
+.desk-modal-backdrop{position:fixed;inset:0;z-index:100;background:#07090bd9;display:flex;justify-content:center;align-items:center;padding:18px;overflow-y:auto}
+.desk-receipt-dialog{background:#242a2f;border:1px solid #525c64;border-radius:10px;width:min(410px,100%);max-height:calc(100dvh - 36px);overflow-y:auto;box-shadow:0 25px 70px #000c;padding:19px;color:#f2f3f4}
+.desk-receipt-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
+.desk-receipt-toolbar strong{font-size:15px}
+.desk-receipt-toolbar p{font-size:11px;color:#afbbc3;margin:5px 0}
+.desk-receipt{width:100%;max-width:302px;margin:auto;background:#fff;color:#111;padding:16px 10px;font-family:Arial,Helvetica,sans-serif;font-size:11px;border-radius:1px;overflow-wrap:anywhere}
+.desk-receipt-brand{text-align:center}
+.desk-receipt-brand h2{font-size:22px;letter-spacing:3px;font-weight:700;margin:0 0 4px}
+.desk-receipt-brand p{font-size:9px;letter-spacing:1px;margin:0 0 5px}
+.desk-receipt-brand span{font-size:10px;font-weight:600}
+.desk-receipt-rule{border-top:1px dashed #111;margin:12px 0}
+.desk-receipt-metadata{margin:0}
+.desk-receipt-metadata>div{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+.desk-receipt-metadata dt{color:#333;flex-shrink:0}
+.desk-receipt-metadata dd{margin:0;text-align:right;overflow-wrap:anywhere}
+.desk-receipt-items{display:grid;gap:8px}
+.desk-receipt-items>div{display:flex;justify-content:space-between;gap:8px}
+.desk-receipt-items-head{font-weight:700;border-bottom:1px solid #aaa;padding-bottom:6px}
+.desk-receipt-items strong{white-space:nowrap}
+.desk-receipt-total{display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:15px}
+.desk-receipt-foot{text-align:center;font-size:10px;line-height:1.5;margin:8px 0 0}
+.desk-receipt-actions{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap}
+.desk-receipt-note{color:#adb7bf;font-size:11px;line-height:1.6;margin:13px 0 0}
+@media(max-width:1050px){.desk-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.desk-heading-group{gap:17px}.desk-brand-simple{padding-right:17px}}
+@media(max-width:700px){.auren-desk{padding:17px 12px 60px}.desk-header{align-items:start}.desk-heading-group{flex-direction:column;align-items:start;gap:14px}.desk-brand-simple{border:0;padding-right:0}.desk-brand-simple strong{font-size:17px}.desk-brand-simple span{font-size:7px}.desk-header h1{font-size:24px}.desk-header-actions{gap:5px}.desk-refresh-button{font-size:0;min-width:38px;padding:7px}.desk-refresh-button svg{font-size:16px}.desk-nav{width:100%}.desk-nav button{padding:10px 13px}.desk-panel{padding:16px}.desk-records,.desk-walkgrid,.desk-loggrid{grid-template-columns:1fr}.desk-panel-heading h2{font-size:21px}.desk-stats>div{padding:15px}.desk-stats strong{font-size:21px}.desk-receipt-dialog{padding:14px}}
+@media(max-width:380px){.desk-nav button{padding:9px 11px;font-size:11px}.desk-header-actions{align-self:start}.desk-stats{gap:8px}.desk-stats strong{font-size:18px}}
+/* Browser's native Print dialog; select your installed 80mm roll printer.
+   The printable content is 72mm wide (4mm safe margin on each side). */
+@media print{
+  @page{size:80mm auto;margin:0}
+  html,body,#root{background:#fff!important;color:#000!important;margin:0!important;padding:0!important;width:80mm!important;min-width:0!important}
+  body *{visibility:hidden!important}
+  .desk-receipt,.desk-receipt *{visibility:visible!important}
+  .desk-modal-backdrop,.desk-receipt-dialog{display:block!important;position:static!important;overflow:visible!important;max-height:none!important;width:80mm!important;max-width:80mm!important;min-width:0!important;margin:0!important;padding:0!important;background:#fff!important;box-shadow:none!important;border:0!important;transform:none!important}
+  .desk-receipt{display:block!important;position:absolute!important;top:0!important;left:4mm!important;width:72mm!important;max-width:72mm!important;min-width:72mm!important;padding:3mm 0!important;border-radius:0!important;color:#000!important;background:white!important;font-size:10px!important;box-shadow:none!important;overflow:visible!important;break-inside:avoid}
+  .desk-receipt-toolbar,.desk-receipt-actions,.desk-receipt-note,.desk-toast{display:none!important}
+}
+
+/* Reception v3 — restrained sidebar + sticky top bar. Business logic unchanged. */
+.auren-desk{padding:0 0 72px 252px;overflow-x:clip;background:#101214}
+.desk-workspace{max-width:none;width:100%;margin:0;padding:0 clamp(20px,2.6vw,44px) 40px}
+.desk-sidebar{position:fixed;left:0;top:0;bottom:0;width:252px;z-index:85;background:#15191c;border-right:1px solid #2d3439;display:flex;flex-direction:column;padding:26px 15px 19px}
+.desk-sidebar-brand{display:flex;align-items:center;gap:12px;padding:5px 10px 30px;border-bottom:1px solid #2c3439;margin-bottom:27px}
+.desk-brand-logo{height:38px;width:38px;object-fit:contain;border-radius:9px;background:#22272a}
+.desk-sidebar-brand div{min-width:0;display:flex;flex-direction:column;gap:5px}
+.desk-sidebar-brand strong{font-size:20px;letter-spacing:.19em;font-weight:700;line-height:1}
+.desk-sidebar-brand small{font-size:9px;letter-spacing:.1em;color:#a0aab3;white-space:nowrap}
+.desk-sidebar-caption{font-size:10px;letter-spacing:.15em;color:#89949e;padding:0 14px;margin-bottom:12px}
+.desk-sidebar .desk-nav{display:flex;flex-direction:column;gap:5px;border:0;background:transparent;padding:0;margin:0;width:100%;max-width:none;overflow:visible}
+.desk-sidebar .desk-nav button{width:100%;justify-content:flex-start;border-radius:8px;padding:13px 14px;color:#aeb7bd;font-weight:500;font-size:13px;gap:13px;min-height:45px}
+.desk-sidebar .desk-nav button svg,.desk-sidebar-setting svg{height:17px;width:17px;flex:none}
+.desk-sidebar .desk-nav button.selected,.desk-sidebar-setting.selected{color:#f0f2f2;background:#30373b;border-color:#454e54}
+.desk-sidebar .desk-nav button:hover,.desk-sidebar-setting:hover{background:#242b2f;color:#f1f3f4}
+.desk-sidebar-bottom{margin-top:auto;border-top:1px solid #30373c;padding-top:17px}
+.desk-sidebar-setting{width:100%;display:flex;gap:13px;align-items:center;text-align:left;background:transparent;color:#afb9c2;border:1px solid transparent;border-radius:8px;padding:12px 14px;font-size:13px}
+.desk-sidebar-profile{display:flex;align-items:center;gap:11px;margin-top:18px;padding:17px 8px 0;border-top:1px solid #2b3237;min-width:0}
+.desk-profile-avatar{width:35px;height:35px;display:grid;place-items:center;background:#30373d;border:1px solid #434b50;border-radius:9px;font-size:16px}
+.desk-sidebar-profile div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.desk-sidebar-profile strong{font-size:12px;color:#e8ebec;text-overflow:ellipsis;overflow:hidden}
+.desk-sidebar-profile small{font-size:10px;color:#929da5}
+.desk-header{position:sticky;top:0;z-index:45;background:rgba(16,18,20,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:18px 0 18px;margin:0 0 26px;border-bottom:1px solid #30363b;min-height:103px}
+.desk-header .desk-heading-group{gap:12px}
+.desk-header h1{font-size:23px;margin:3px 0 2px;letter-spacing:-.025em}
+.desk-header p{font-size:11px}
+.desk-header .desk-eyebrow{font-size:9px;letter-spacing:.12em}
+.desk-welcome{display:flex;flex-direction:column;text-align:right;gap:4px;margin-right:12px}
+.desk-welcome small{font-size:9px;letter-spacing:.12em;color:#97a2ac}
+.desk-welcome strong{font-size:13px;font-weight:600;color:#e7ecef;max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.desk-sidebar-close,.desk-mobile-menu,.desk-sidebar-scrim{display:none}
+.desk-revenue-chart{padding:25px!important;background:#1b2024!important}
+.desk-bars{height:260px;gap:clamp(8px,1.6vw,25px);padding:18px 10px 0}
+.desk-bar-track{width:min(100%,65px);border-bottom:1px solid #53616a;background:repeating-linear-gradient(to top,rgba(186,198,207,.055) 0px,rgba(186,198,207,.055) 1px,transparent 1px,transparent 46px)}
+.desk-bar-fill{background:linear-gradient(180deg,#cbd2d5,#87949c);border-radius:4px 4px 0 0}
+.desk-bar-value{font-size:11px;color:#cad2d7}
+.desk-sidebar .desk-nav button:focus-visible,.desk-sidebar-setting:focus-visible{outline:2px solid #d1d8dd;outline-offset:2px}
+@media(max-width:1050px){.auren-desk{padding-left:218px}.desk-sidebar{width:218px;padding-left:10px;padding-right:10px}.desk-workspace{padding-left:22px;padding-right:22px}}
+@media(max-width:760px){
+  .auren-desk{padding-left:0;padding-top:0}.desk-sidebar{width:min(280px,84vw);transform:translateX(-105%);transition:transform .24s ease;box-shadow:16px 0 40px transparent}.desk-sidebar.is-open{transform:translateX(0);box-shadow:16px 0 40px #0009}
+  .desk-sidebar-scrim{display:block;position:fixed;inset:0;background:#050709b3;z-index:80;border:0}
+  .desk-sidebar-close{display:grid;place-items:center;margin-left:auto;border:0;background:transparent;color:#c9d2d9;font-size:18px;padding:5px}
+  .desk-workspace{padding:0 16px 45px}.desk-header{padding:15px 0;min-height:79px;gap:12px;align-items:center}
+  .desk-mobile-menu{display:grid;place-items:center;flex:none}.desk-header h1{font-size:21px}.desk-header p{font-size:10px}
+  .desk-header-actions{gap:6px}.desk-welcome{margin-right:3px}.desk-welcome small{display:none}.desk-welcome strong{font-size:11px;max-width:85px}
+  .desk-refresh-button{width:39px;padding:8px;min-width:39px}.desk-refresh-button span{display:none}
+  .desk-bars{gap:6px}.desk-bar-value{font-size:9px}.desk-bar-label{font-size:10px}
+}
+@media print{.desk-sidebar,.desk-sidebar-scrim,.desk-header{display:none!important}.auren-desk{padding:0!important}.desk-workspace{padding:0!important}}
+
+/* v4 — subtle warmth + premium clarity; no loud gradients or glass overload */
+.auren-desk{--d-bg:#111416;--d-card:#1b2022;--d-panel:#1d2325;--d-hair:#374043;--d-muted:#a9b2ae;--d-text:#f0f0ed;--d-silver:#d2d5cc;background:#111416}
+.desk-sidebar{background:#181d1e;border-color:#323a39}
+.desk-sidebar .desk-nav button.selected,.desk-sidebar-setting.selected{background:#343c3a;border-color:#53605b;color:#f4f2e9}
+.desk-header{background:rgba(17,20,22,.97);border-color:#343c3a}
+.desk-panel{background:#1b2022;border-color:#37413f;box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.desk-stats>div{background:#1c2223;border-color:#37413f}
+.desk-stats>div:nth-child(4){border-color:#5c6154;background:#242923}
+.desk-stats>div:nth-child(4) strong{color:#e0d5bc}
+.desk-smallbtn:hover,.desk-iconbtn:hover{border-color:#8c938b}
+.desk-record,.desk-inner{background:#222829;border-color:#3d4744}
+.desk-primary,.desk-accent{background:#d6d7ce!important;border-color:#e0e1d8!important;color:#181d1c!important}
+.desk-primary:hover,.desk-accent:hover{background:#eeeee6!important}
+.desk-revenue-chart{background:#212728!important}
+.desk-bar-fill{background:linear-gradient(180deg,#d9d0b8,#83938e)}
+
+/* A selected payment option should be unmistakable, without a loud accent. */
+.desk-payment-panel{border:1px solid #58625e;background:#242c2b;border-radius:10px;padding:15px 16px 12px;margin:18px 0 17px;max-width:680px}
+.desk-payment-panel legend{font-size:13px;font-weight:700;color:#f2f1e9;padding:0 8px;letter-spacing:.01em}
+.desk-payment-required{color:#d9c6a4;font-weight:500;font-size:11px}
+.desk-payment-hint{color:#b6bdb8;font-size:11px;margin:3px 0 13px}
+.desk-payment-panel .desk-methods{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.desk-payment-panel .desk-methods label{display:flex;justify-content:center;align-items:center;gap:9px;min-height:48px;padding:9px 12px;background:#192020;border:1px solid #505a55;border-radius:8px;color:#c9d0ca;font-size:13px;cursor:pointer;transition:background .18s,border-color .18s,box-shadow .18s}
+.desk-payment-panel .desk-methods label:hover{background:#2d3532;border-color:#879387}
+.desk-payment-panel .desk-methods label.is-selected{background:#39443d;border-color:#b0baa9;box-shadow:0 0 0 1px #b0baa966;color:#f7f6ec}
+.desk-payment-panel .desk-methods input{accent-color:#dcded0}
+
+/* Today's activity: two-column grouped activity feed with clear hierarchy. */
+.desk-today-log .desk-panel-heading{margin-bottom:20px}
+.desk-log-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 21px}
+.desk-log-summary>div{display:flex;flex-direction:column;gap:8px;padding:15px 17px;border:1px solid #3b4743;background:#222928;border-radius:9px}
+.desk-log-summary span{font-size:11px;color:#b1bdb6}
+.desk-log-summary strong{font-size:24px;font-weight:650;color:#f2f0e8}
+.desk-log-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:15px}
+.desk-log-section{background:#222829;border:1px solid #414a46;border-radius:11px;overflow:hidden;min-width:0}
+.desk-log-heading{padding:17px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #3e4844;background:#252d2c;color:#cbd1c7}
+.desk-log-heading h3{font-size:14px;margin:0;color:#eeeae1;flex:1}
+.desk-log-heading>span{font-size:11px;min-width:23px;height:23px;display:grid;place-items:center;border-radius:6px;background:#3c4742;color:#e1e8df}
+.desk-log-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 17px;border-bottom:1px solid #353e3a;min-width:0}
+.desk-log-row:last-child{border-bottom:0}
+.desk-log-row>div:first-child{display:flex;flex-direction:column;gap:5px;min-width:0}
+.desk-log-row strong{font-size:12px;color:#f0f0e9;font-weight:600;overflow-wrap:anywhere}
+.desk-log-row span,.desk-log-row small,.desk-log-row time{font-size:11px;color:#afb9b2;overflow-wrap:anywhere}
+.desk-log-row-end{display:flex;align-items:flex-end;flex-direction:column;gap:7px;text-align:right;flex-shrink:0}
+.desk-log-row-end .desk-pill{font-size:10px;max-width:160px}
+.desk-log-row-end .desk-log-amount{font-size:13px;color:#e7d8b8}
+.desk-log-row-end .desk-log-note{color:#acbfb1}
+.desk-log-section .desk-empty{padding:15px 17px}
+@media(max-width:1100px){.desk-log-columns{grid-template-columns:1fr}}
+@media(max-width:650px){.desk-log-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.desk-payment-panel .desk-methods{gap:6px}.desk-payment-panel .desk-methods label{font-size:12px;padding:9px 6px}.desk-log-row{align-items:flex-start;flex-wrap:wrap}.desk-log-row-end{align-items:flex-start;text-align:left}}
+@media print{.desk-payment-panel,.desk-log-summary,.desk-log-columns{display:none!important}}
+
+/* ================================================================
+   AUREN v5 / STUDIO SLATE
+   An eye-comfortable premium palette: midnight sidebar, slate cards,
+   soft pearl typography and restrained mineral-blue accents.
+   Appearance-only: no React/Flask functionality changed.
+   ================================================================ */
+@media screen {
+  .auren-desk {
+    --d-bg: #192127;
+    --d-card: #242e34;
+    --d-panel: #273137;
+    --d-hair: #405058;
+    --d-muted: #b0bec5;
+    --d-text: #f0f1ed;
+    --d-silver: #d8e1e2;
+    background: #192127;
+    color: var(--d-text);
+    font-synthesis: none;
+  }
+  .auren-desk::selection, .auren-desk *::selection { background: #7899a6; color: #fff; }
+  .desk-sidebar {
+    background: #121b21;
+    border-right-color: #314148;
+    box-shadow: 9px 0 38px rgba(7, 12, 16, .10);
+  }
+  .desk-sidebar-brand { border-color: #34434a; }
+  .desk-sidebar-brand strong { color: #f1f0ea; }
+  .desk-sidebar-caption, .desk-sidebar-brand small, .desk-sidebar-profile small { color: #a4b4bc; }
+  .desk-sidebar-profile { border-color: #34434a; }
+  .desk-profile-avatar { background: #2d3b44; border-color: #50616a; color: #e4eef0; }
+  .desk-sidebar .desk-nav button, .desk-sidebar-setting {
+    color: #bac8cf; border-color: transparent;
+    transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  .desk-sidebar .desk-nav button:hover, .desk-sidebar-setting:hover {
+    color: #f5f5f1; background: #26363f; transform: translateX(2px);
+  }
+  .desk-sidebar .desk-nav button.selected, .desk-sidebar-setting.selected {
+    background: #344650; color: #f6f6f2;
+    border-color: #56717d;
+    box-shadow: inset 3px 0 0 #98bdca;
+  }
+  .desk-sidebar-bottom { border-color: #34434a; }
+  .desk-header {
+    background: rgba(25,33,39,.95);
+    border-color: #38464d;
+    box-shadow: 0 7px 22px rgba(10,17,21,.11);
+  }
+  .desk-header h1, .desk-panel h2, .desk-panel h3 { color: #f1f2ee; }
+  .desk-eyebrow, .desk-header .desk-eyebrow { color: #a8c1ca; }
+  .desk-welcome strong { color: #e9efed; }
+  .desk-welcome small { color: #b4c3ca; }
+  .desk-iconbtn, .desk-smallbtn {
+    background: #303c43; color: #e5edee; border-color: #4b5a62;
+    border-radius: 9px;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+  .desk-iconbtn:hover, .desk-smallbtn:hover {
+    background: #3e4d56; border-color: #87a7b6;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(7,12,16,.14);
+  }
+  .desk-iconbtn:active, .desk-smallbtn:active, .desk-primary:active {
+    transform: translateY(0) scale(.985);
+  }
+  .desk-iconbtn.is-active { background: #4b626f; }
+  .desk-count { background: #b47768; }
+  .desk-stats>div {
+    background: #263138; border-color: #43525a; border-radius: 13px;
+    box-shadow: 0 5px 17px rgba(8,13,16,.075);
+    transition: border-color .22s ease, background .22s ease, transform .22s ease, box-shadow .22s ease;
+  }
+  .desk-stats>div:hover {
+    background: #2c3941; border-color: #65808c;
+    transform: translateY(-2px);
+    box-shadow: 0 11px 22px rgba(8,13,16,.12);
+  }
+  .desk-stats>div:nth-child(4) {
+    background: #2b3939; border-color: #60736d;
+  }
+  .desk-stats>div:nth-child(4):hover { background: #314440; border-color: #839a8d; }
+  .desk-stats>div:nth-child(4) strong { color: #e1ddc5; }
+  .desk-stats span { color: #b5c6cd; }
+  .desk-stats strong { color: #f1f2ee; }
+  .desk-panel {
+    background: #232e35;
+    border: 1px solid #41515a;
+    border-radius: 14px;
+    box-shadow: 0 9px 28px rgba(6,13,17,.085);
+  }
+  .desk-record, .desk-inner, .desk-log-section {
+    background: #2b373e; border-color: #465761; border-radius: 12px;
+  }
+  .desk-record {
+    transition: background .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .desk-record:hover {
+    background: #303e46; border-color: #648390; transform: translateY(-1px);
+  }
+  .desk-detail, .desk-muted, .desk-empty, .desk-small, .desk-record-head p { color: #b7c6cc; }
+  .desk-lines { border-color: #4c5c63; }
+  .desk-lines>div { color: #e0e7e6; }
+  .desk-lines .desk-line-total { border-color: #62747d; }
+  .desk-pill { background: #3d5260; border-color: #5d7885; color: #e0edf1; }
+  .desk-pill-arrived, .desk-pill-completed { background: #2c4a43; border-color: #4e826e; color: #d3eadd; }
+  .desk-pill-absent, .desk-pill-cancelled { background: #523b41; border-color: #89626b; color: #f1ced4; }
+  .desk-pill-billed { background: #51493d; border-color: #88765c; color: #f0dfbd; }
+  .desk-subnav, .desk-nav { background: #2d3a42; border-color: #4c5c64; }
+  .desk-subnav button.selected { background: #506572; color: #fff; }
+  .desk-search, .desk-walkgrid input:not([type=checkbox]), .desk-billform input:not([type=radio]) {
+    background: #1c262d; border-color: #52636b; color: #f2f3ef;
+    transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .desk-search:focus-within,
+  .desk-walkgrid input:not([type=checkbox]):focus,
+  .desk-billform input:not([type=radio]):focus {
+    background: #233039; border-color: #97bdc9;
+    box-shadow: 0 0 0 3px rgba(151,189,201,.12);
+  }
+  .auren-desk :is(button, input, a):focus-visible {
+    outline: 2px solid #a3cbd7; outline-offset: 3px;
+  }
+  .desk-checks label, .desk-methods label {
+    background: #303e46; border-color: #53636b; color: #e3ebec;
+  }
+  .desk-checks label:hover { background: #374850; border-color: #829ca8; }
+  .desk-checks input, .desk-methods input { accent-color: #9abdc9; }
+  .desk-primary, .desk-accent {
+    background: #ccdce0 !important;
+    color: #1a282f !important; border-color: #dfebec !important;
+    border-radius: 9px;
+    transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+  .desk-primary:hover, .desk-accent:hover {
+    background: #e3eff0 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(12,19,23,.14);
+  }
+  .desk-success { background: #29443c; border-color: #53816f; color: #d6efdc; }
+  .desk-error { background: #483239; border-color: #98656d; color: #ffdcdd; }
+  .desk-bell, .desk-suggestions {
+    background: #2b3840; border-color: #60737d;
+    box-shadow: 0 16px 40px rgba(4,9,13,.3);
+  }
+  .desk-bell-top, .desk-notice, .desk-suggestions button { border-color: #485e66; }
+  .desk-notice:hover, .desk-suggestions button:hover { background: #3a4c55; }
+  .desk-toast {
+    background: #30414a; color: #f0f3f1; border-color: #73929d;
+    border-radius: 12px; box-shadow: 0 18px 40px rgba(5,10,14,.3);
+    animation: aurenV5ToastIn .28s ease-out both;
+  }
+  .desk-modal-backdrop { background: rgba(7,13,17,.79); backdrop-filter: blur(3px); }
+  .desk-receipt-dialog { background: #2a363e; border-color: #6d848d; border-radius: 13px; }
+  /* Keep the actual white thermal receipt pure white; never theme it. */
+  .desk-receipt { background: #fff; color: #111; }
+  .desk-payment-panel { background: #2d3c42; border-color: #6d8790; }
+  .desk-payment-panel legend { color: #e8f0ed; }
+  .desk-payment-required { color: #e7cdad; }
+  .desk-payment-hint { color: #bfced0; }
+  .desk-payment-panel .desk-methods label {
+    background: #233039; border-color: #567078; color: #d6e1e2;
+    transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+  .desk-payment-panel .desk-methods label:hover { background: #384c56; border-color: #9abcc5; }
+  .desk-payment-panel .desk-methods label.is-selected {
+    background: #41606a; border-color: #aad0d4;
+    box-shadow: 0 0 0 2px rgba(155,206,209,.19); color: #fff;
+  }
+  .desk-payment-panel .desk-methods input { accent-color: #a9cbd4; }
+  .desk-log-summary>div, .desk-log-section { background: #2b373d; border-color: #485b62; }
+  .desk-log-summary span, .desk-log-row span, .desk-log-row small, .desk-log-row time { color: #b9c9cf; }
+  .desk-log-summary strong, .desk-log-row strong { color: #f3f2ed; }
+  .desk-log-heading { background: #33434b; border-color: #4f626a; color: #dce7e5; }
+  .desk-log-heading h3 { color: #f0f2ed; }
+  .desk-log-heading>span { background: #50656e; color: #eff5f4; }
+  .desk-log-row { border-color: #43545c; transition: background .16s ease; }
+  .desk-log-row:hover { background: #33424a; }
+  .desk-log-row-end .desk-log-amount { color: #e8dcc1; }
+  .desk-revenue-chart { background: #27333a !important; border-color: #465862 !important; }
+  .desk-bar-track {
+    border-bottom-color: #738c96;
+    background: repeating-linear-gradient(to top,rgba(189,211,220,.065) 0px,rgba(189,211,220,.065) 1px,transparent 1px,transparent 46px);
+  }
+  .desk-bar-fill {
+    background: linear-gradient(180deg,#a5c5cb,#688e9a);
+    border-radius: 6px 6px 0 0;
+    transition: filter .2s ease, transform .2s ease;
+    transform-origin: bottom;
+  }
+  .desk-bar-group:hover .desk-bar-fill { filter: brightness(1.16); transform: scaleX(1.065); }
+  .desk-bar-group:hover .desk-bar-value { color: #f2f5f2; }
+  .desk-bar-value { color: #d4e4e7; }
+  .desk-bar-label { color: #b4c8ce; }
+  .desk-brand-logo {
+    background: #263940; border: 1px solid #54717d;
+    box-shadow: 0 0 0 1px rgba(157,199,207,.08);
+    animation: aurenV5BrandBreathe 7s ease-in-out infinite;
+    transition: transform .45s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+  }
+  .desk-sidebar-brand:hover .desk-brand-logo {
+    transform: rotate(-5deg) scale(1.075);
+    filter: brightness(1.12);
+  }
+  .desk-sidebar-brand strong {
+    transition: letter-spacing .3s ease, color .3s ease;
+  }
+  .desk-sidebar-brand:hover strong { letter-spacing: .22em; color: #dcebee; }
+  .desk-settings-card, .desk-settings-action {
+    border-color: #475b63; background: #2a363d;
+  }
+  .desk-settings-action:hover { background: #34464d; border-color: #7897a1; }
+}
+@keyframes aurenV5BrandBreathe {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(157,199,207,.08); }
+  50% { box-shadow: 0 0 0 4px rgba(157,199,207,.045); }
+}
+@keyframes aurenV5ToastIn {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .auren-desk .desk-brand-logo,
+  .auren-desk .desk-toast { animation: none !important; }
+  .auren-desk .desk-sidebar .desk-nav button,
+  .auren-desk .desk-record,
+  .auren-desk .desk-stats>div,
+  .auren-desk .desk-bar-fill { transition: none !important; }
+}

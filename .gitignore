@@ -44,3 +44,13 @@ Thumbs.db
 frontend/public/images/artists/_original_backup/
 backend/app_sqlite_backup.py
 backend/bookings_backup.sqlite3
+
+# Local backend backups and experiments
+backend/app_before_billing_backup.py
+backend/app_before_reception.py
+backend/app_pre_admin_v2.py
+backend/billing.py
+
+# Local frontend backup files
+frontend/src/pages/Admin/*backup*
+frontend/src/pages/Admin/*before*

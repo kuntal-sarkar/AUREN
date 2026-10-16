@@ -1,0 +1,464 @@
+
+/* AUREN — Admin Login */
+
+.auren-admin-login {
+  --admin-bg: #0e1012;
+  --admin-text: #f2f2f0;
+  --admin-muted: #969ba1;
+  --admin-silver: #c7cbd0;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: "DM Sans", sans-serif;
+}
+
+.auren-admin-login *,
+.auren-admin-login *::before,
+.auren-admin-login *::after {
+  box-sizing: border-box;
+}
+
+.auren-admin-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at 24% 42%,
+      rgba(147, 159, 170, 0.08),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 85% 88%,
+      rgba(180, 190, 200, 0.035),
+      transparent 50%
+    );
+}
+
+.auren-admin-login-container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.04fr 0.96fr;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Left panel */
+
+.auren-admin-brand-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px clamp(36px, 5vw, 88px);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(37, 42, 47, 0.94),
+      rgba(15, 18, 21, 0.98) 65%
+    );
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.auren-admin-brand-panel::after {
+  content: "";
+  position: absolute;
+  inset: 15% 10%;
+  border: 1px solid rgba(255, 255, 255, 0.025);
+  pointer-events: none;
+}
+
+.auren-admin-brand-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.auren-admin-brand-name,
+.auren-admin-mobile-logo {
+  font-family: "Manrope", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: #f0f0ef;
+}
+
+.auren-admin-brand-divider {
+  width: 1px;
+  height: 20px;
+  background: #646a70;
+}
+
+.auren-admin-brand-caption {
+  color: #a0a5ac;
+  font-size: 9px;
+  letter-spacing: 0.24em;
+}
+
+.auren-admin-brand-content {
+  position: relative;
+  z-index: 1;
+  max-width: 590px;
+  padding: 60px 0;
+}
+
+.auren-admin-eyebrow,
+.auren-admin-form-eyebrow {
+  color: #acb3bb;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  font-weight: 600;
+}
+
+.auren-admin-brand-content h1 {
+  font-family: "Manrope", sans-serif;
+  margin: 30px 0;
+  font-weight: 500;
+  font-size: clamp(38px, 4.2vw, 70px);
+  letter-spacing: -0.055em;
+  line-height: 1.18;
+}
+
+.auren-admin-brand-content h1 em {
+  font-style: normal;
+  font-weight: 400;
+  color: #a8b0b9;
+}
+
+.auren-admin-brand-content p {
+  max-width: 390px;
+  color: #979ea7;
+  line-height: 1.9;
+  font-size: 14px;
+}
+
+.auren-admin-brand-rule {
+  width: 75px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    #b7bec6,
+    transparent
+  );
+  margin: 42px 0 22px;
+}
+
+.auren-admin-brand-footer {
+  color: #767e87;
+  font-size: 9px;
+  letter-spacing: 0.19em;
+}
+
+.auren-admin-brand-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #767d85;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+/* Right panel */
+
+.auren-admin-form-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 32px;
+}
+
+.auren-admin-form-content {
+  width: 100%;
+  max-width: 390px;
+}
+
+.auren-admin-lock-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 35px;
+  border: 1px solid rgba(205, 211, 217, 0.2);
+  border-radius: 50%;
+  color: #ccd1d6;
+  background: rgba(200, 210, 220, 0.035);
+}
+
+.auren-admin-form-content h2 {
+  margin: 15px 0 10px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(32px, 3vw, 43px);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  color: #f2f3f3;
+}
+
+.auren-admin-form-subtitle {
+  margin: 0 0 45px;
+  color: #969ba1;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.auren-admin-field {
+  margin-bottom: 23px;
+}
+
+.auren-admin-field label {
+  display: block;
+  margin-bottom: 11px;
+  color: #bfc5cb;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+.auren-admin-field input {
+  display: block;
+  width: 100%;
+  height: 54px;
+  padding: 0 17px;
+  outline: none;
+  border: 1px solid #34383d;
+  border-radius: 3px;
+  background: #191c1f;
+  color: #f3f4f5;
+  font: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.auren-admin-field input::placeholder {
+  color: #707780;
+}
+
+.auren-admin-field input:focus {
+  border-color: #abb4be;
+  background: #1d2125;
+}
+
+.auren-admin-password-field {
+  position: relative;
+}
+
+.auren-admin-password-field input {
+  padding-right: 55px;
+}
+
+.auren-admin-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #a3aab2;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 5px;
+}
+
+.auren-admin-password-toggle:hover {
+  color: #fff;
+}
+
+.auren-admin-submit {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 33px;
+  border: 1px solid #d4d8dc;
+  border-radius: 3px;
+  background: linear-gradient(
+    135deg,
+    #d8dce0,
+    #aeb6be
+  );
+  color: #111417;
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.auren-admin-submit:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+.auren-admin-submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.auren-admin-login-error {
+  padding: 12px 15px;
+  border: 1px solid rgba(235, 120, 120, 0.3);
+  background: rgba(150, 45, 45, 0.12);
+  color: #f0a0a0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.auren-admin-security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 25px;
+  color: #838b94;
+  font-size: 11px;
+}
+
+.auren-admin-form-footer {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  color: #6f767e;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+
+.auren-admin-mobile-logo {
+  display: none;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .auren-admin-login-container {
+    grid-template-columns: 1fr;
+  }
+
+  .auren-admin-brand-panel {
+    display: none;
+  }
+
+  .auren-admin-form-panel {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 100px 26px 90px;
+  }
+
+  .auren-admin-mobile-logo {
+    display: block;
+    position: absolute;
+    top: 35px;
+    left: 26px;
+    font-size: 22px;
+  }
+
+  .auren-admin-form-content {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auren-admin-form-footer {
+    left: 25px;
+    right: 25px;
+    font-size: 8px;
+  }
+
+  .auren-admin-form-content h2 {
+    font-size: 35px;
+  }
+
+  .auren-admin-form-subtitle {
+    margin-bottom: 35px;
+  }
+}
+
+
+
+/* Password visibility button — contrast fix */
+
+.auren-admin-password-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  padding: 0;
+
+  color: #e3e7eb;
+  background: #30363c;
+  border: 1px solid #515a63;
+  border-radius: 6px;
+
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.auren-admin-password-toggle:hover {
+  color: #ffffff;
+  background: #424a53;
+  border-color: #aeb7c0;
+}
+
+.auren-admin-password-toggle svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.auren-admin-password-toggle:focus-visible {
+  outline: 2px solid #d5dbe1;
+  outline-offset: 2px;
+}
+
+
+
+
+
+/* Consistent dark styling for username and password */
+
+.auren-admin-field input,
+.auren-admin-field input[type="text"],
+.auren-admin-field input[type="password"] {
+  background: #191c1f;
+  color: #f3f4f5;
+  border: 1px solid #34383d;
+  color-scheme: dark;
+}
+
+.auren-admin-field input:focus {
+  background: #1d2125;
+  border-color: #abb4be;
+}
+
+/* Prevent browser autofill from turning fields white */
+
+.auren-admin-field input:-webkit-autofill,
+.auren-admin-field input:-webkit-autofill:hover,
+.auren-admin-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f3f4f5;
+  -webkit-box-shadow: 0 0 0 1000px #191c1f inset;
+  caret-color: #f3f4f5;
+  transition: background-color 9999s ease-out;
+}
