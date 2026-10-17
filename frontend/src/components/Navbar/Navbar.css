@@ -1,131 +1,107 @@
-
-/* =============================================
-   AUREN — ORIGINAL iPHONE LIQUID GLASS NAVBAR
-   + SEPARATE FLOATING BOOK NOW PILL
-============================================= */
+/* =======================================================
+   AUREN — FLOATING LIQUID GLASS NAVIGATION
+   Full replacement for src/components/Navbar/Navbar.css
+   Existing Navbar.jsx and scrolling logic unchanged.
+   ======================================================= */
 
 .auren-navbar-wrapper {
   position: fixed;
   top: 24px;
   left: 0;
+  right: 0;
   z-index: 1000;
-
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
-
   width: 100%;
   padding: 0 24px;
-
   pointer-events: none;
 }
 
-/* MAIN FLOATING NAVBAR */
-
+/* Main frosted pill. Keep the backdrop-filter on the element itself.
+   Avoid transform animation on the same element: that can cause browser
+   compositing artifacts on some mobile Chromium versions. */
 .auren-navbar {
   position: relative;
-
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-
-  width: min(100%, 950px);
+  gap: 18px;
+  flex: 0 1 1050px;
+  min-width: 0;
+  width: min(100%, 1050px);
   height: 76px;
-
   margin: 0;
   padding: 0 25px 0 30px;
-
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 100px;
-
-  background: rgba(35, 37, 42, 0.55);
-
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-
+  border: 1px solid rgba(255, 255, 255, 0.23);
+  border-radius: 999px;
+  background-color: rgba(30, 33, 39, 0.80);
+  -webkit-backdrop-filter: blur(30px) saturate(165%);
+  backdrop-filter: blur(30px) saturate(165%);
   box-shadow:
-    0 14px 45px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-
+    0 14px 48px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.19);
   pointer-events: auto;
-
-  animation: aurenNavbarEntrance 0.9s ease both;
+  animation: aurenNavbarFadeIn 650ms ease-out both;
 }
 
 .auren-navbar::before {
   content: "";
   position: absolute;
   inset: 1px;
+  z-index: -1;
   border-radius: inherit;
-
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1),
-    transparent 45%
-  );
-
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.095), transparent 48%);
   pointer-events: none;
 }
 
-/* BRAND */
-
+/* Brand */
 .auren-navbar-logo {
   position: relative;
   z-index: 2;
-  flex-shrink: 0;
-
+  flex: 0 0 auto;
+  color: #fff;
   font-family: "Manrope", sans-serif;
   font-size: 22px;
   font-weight: 800;
   letter-spacing: 0.16em;
-
+  line-height: 1;
   white-space: nowrap;
-  color: #fff;
+  text-decoration: none;
 }
+.auren-logo-dot { color: #c4c8d0; }
 
-.auren-logo-dot {
-  color: #c4c8d0;
-}
-
-/* ORIGINAL NAVIGATION TRACK */
-
+/* Desktop navigation track */
 .auren-nav-links {
   position: relative;
   isolation: isolate;
-
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 3px;
-
+  flex: 0 1 auto;
+  min-width: 0;
   padding: 5px;
-  border-radius: 100px;
-
-  background: rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.20);
 }
 
-/* SINGLE MOVING GLASS INDICATOR */
-
+/* Sliding active pill (positioned by existing Navbar.jsx) */
 .auren-nav-indicator {
   position: absolute;
   z-index: 0;
-
   display: block;
-  pointer-events: none;
-
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
   background: rgba(255, 255, 255, 0.17);
-
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
     0 4px 15px rgba(0, 0, 0, 0.12);
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
+  pointer-events: none;
   transition:
     left 650ms cubic-bezier(0.22, 1, 0.36, 1),
     top 650ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -133,183 +109,167 @@
     height 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* NAV LINKS */
-
 .auren-nav-link {
   position: relative;
   z-index: 1;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  padding: 13px 18px;
-  border-radius: 100px;
-
-  color: rgba(255, 255, 255, 0.65);
+  flex: 0 0 auto;
+  padding: 13px 15px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
-
+  line-height: 1.3;
+  text-decoration: none;
   white-space: nowrap;
-
-  transition: color 300ms ease;
+  transition: color 260ms ease;
 }
-
 .auren-nav-link::before,
-.auren-nav-link::after {
-  content: none !important;
-}
-
+.auren-nav-link::after { content: none !important; }
 .auren-nav-link:hover,
-.auren-nav-link-active {
-  color: #fff;
-}
+.auren-nav-link-active { color: #fff; }
 
-/* =============================================
-   SEPARATE iPHONE GLASS BOOK NOW PILL
-============================================= */
-
+/* Independent Book Now pill */
 .auren-navbar-book {
   position: relative;
   z-index: 2;
-  flex-shrink: 0;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
   gap: 12px;
-
   height: 66px;
-  padding: 0 24px;
-
   margin: 0;
-
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-
-  background: rgba(35, 37, 42, 0.6);
-
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-
+  padding: 0 24px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background-color: rgba(30, 33, 39, 0.83);
+  -webkit-backdrop-filter: blur(30px) saturate(165%);
+  backdrop-filter: blur(30px) saturate(165%);
   box-shadow:
-    0 14px 45px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.23);
-
+    0 14px 45px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.20);
   color: #fff;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
+  text-decoration: none;
   white-space: nowrap;
-
   pointer-events: auto;
-
   transition:
-    transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    background 350ms ease,
-    border-color 350ms ease;
+    background-color 350ms ease,
+    border-color 350ms ease,
+    box-shadow 350ms ease;
 }
-
 .auren-navbar-book:hover {
-  transform: translateY(-3px);
-  background: rgba(78, 81, 90, 0.68);
-  border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(65, 69, 78, 0.88);
+  border-color: rgba(255, 255, 255, 0.48);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.23);
 }
-
 .auren-book-dot {
+  flex: 0 0 auto;
   width: 7px;
   height: 7px;
-
-  flex-shrink: 0;
   border-radius: 50%;
-
   background: #e6e8ed;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.45);
 }
-
 .auren-book-arrow {
+  display: inline-block;
   font-size: 18px;
+  line-height: 1;
   transition: transform 300ms ease;
 }
+.auren-navbar-book:hover .auren-book-arrow { transform: translate(3px, -3px); }
 
-.auren-navbar-book:hover .auren-book-arrow {
-  transform: translate(3px, -3px);
-}
-
-/* MOBILE MENU BUTTON */
-
+/* Hamburger appears only on true narrow viewports */
 .auren-menu-toggle {
-  display: none;
   position: relative;
   z-index: 3;
-
-  width: 44px;
-  height: 44px;
-  padding: 0;
-
+  display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  flex: 0 0 auto;
   gap: 5px;
-
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.19);
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-
   background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+  cursor: pointer;
 }
-
 .auren-menu-toggle span {
   width: 18px;
   height: 2px;
-
   border-radius: 10px;
-  background: #fff;
-
+  background: currentColor;
   transition: transform 300ms ease;
 }
+.auren-menu-toggle-open span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.auren-menu-toggle-open span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
 
-.auren-menu-toggle-open span:first-child {
-  transform: translateY(3.5px) rotate(45deg);
+@keyframes aurenNavbarFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.auren-menu-toggle-open span:last-child {
-  transform: translateY(-3.5px) rotate(-45deg);
-}
-
-/* ENTRANCE */
-
-@keyframes aurenNavbarEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* TABLET */
-
-@media (max-width: 1150px) {
+/* Small desktop / landscape tablet: keep all six tabs visible */
+@media (min-width: 801px) and (max-width: 1150px) {
+  .auren-navbar-wrapper { gap: 9px; padding-inline: 12px; }
   .auren-navbar {
-    width: min(100%, 850px);
-    gap: 12px;
-    padding-left: 22px;
+    flex: 1 1 auto;
+    width: auto;
+    height: 68px;
+    gap: 8px;
+    padding: 0 13px 0 17px;
   }
-
-  .auren-nav-link {
-    padding: 12px 11px;
-    font-size: 11px;
+  .auren-navbar-logo { font-size: 17px; letter-spacing: 0.10em; }
+  .auren-nav-links {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    padding: 4px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    box-shadow: none;
   }
-
-  .auren-navbar-book {
-    padding: 0 18px;
-  }
+  .auren-nav-link { padding: 11px 9px; font-size: 10.5px; }
+  .auren-nav-indicator { border-radius: 999px; }
+  .auren-menu-toggle { display: none; }
+  .auren-navbar-book { height: 58px; gap: 7px; padding: 0 15px; font-size: 11px; }
 }
 
-/* MOBILE */
+/* Desktop-site viewports around 801–900px: tighter, still all six tabs */
+@media (min-width: 801px) and (max-width: 900px) {
+  .auren-navbar-wrapper { gap: 7px; padding-inline: 8px; }
+  .auren-navbar { height: 64px; padding: 0 9px 0 12px; gap: 5px; }
+  .auren-navbar-logo { font-size: 15px; letter-spacing: 0.07em; }
+  .auren-nav-links { padding: 3px; }
+  .auren-nav-link { padding: 10px 6px; font-size: 9.5px; }
+  .auren-navbar-book { height: 54px; padding: 0 11px; font-size: 10px; }
+  .auren-book-dot { display: none; }
+  .auren-book-arrow { font-size: 16px; }
+}
 
+/* Normal mobile mode */
 @media (max-width: 800px) {
   .auren-navbar-wrapper {
     top: 16px;
@@ -317,103 +277,76 @@
     gap: 10px;
     padding: 0 16px;
   }
-
   .auren-navbar {
     flex: 1 1 auto;
     min-width: 0;
     width: auto;
     height: 66px;
+    gap: 8px;
     padding: 0 11px 0 22px;
+    background-color: rgba(29, 32, 38, 0.88);
   }
-
-  .auren-navbar-logo {
-    font-size: 19px;
-  }
-
-  .auren-menu-toggle {
-    display: flex;
-  }
-
+  .auren-navbar-logo { font-size: 19px; }
+  .auren-menu-toggle { display: flex; }
   .auren-nav-links {
     position: absolute;
     top: calc(100% + 12px);
     left: 0;
     right: 0;
-
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 5px;
-
+    max-height: calc(100dvh - 110px);
+    overflow-y: auto;
     padding: 12px;
-
-    border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.19);
-
-    background: rgba(27, 29, 34, 0.92);
-
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-
+    border-radius: 24px;
+    background: rgba(25, 28, 34, 0.96);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    backdrop-filter: blur(30px) saturate(150%);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.33);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-
     transform: translateY(-10px);
-
     transition:
-      opacity 300ms ease,
-      visibility 300ms ease,
-      transform 300ms ease;
+      opacity 280ms ease,
+      visibility 280ms ease,
+      transform 280ms ease;
   }
-
   .auren-nav-links-open {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transform: translateY(0);
   }
-
-  .auren-nav-link {
-    padding: 15px 18px;
-    font-size: 13px;
-  }
-
-  .auren-nav-indicator {
-    border-radius: 16px;
-  }
-
+  .auren-nav-link { padding: 15px 18px; font-size: 13px; }
+  .auren-nav-indicator { border-radius: 16px; }
   .auren-navbar-book {
     height: 58px;
     padding: 0 15px;
     font-size: 11px;
+    background-color: rgba(29, 32, 38, 0.88);
   }
-
-  .auren-book-dot {
-    display: none;
-  }
+  .auren-book-dot { display: none; }
 }
 
 @media (max-width: 430px) {
-  .auren-navbar-book {
-    height: 52px;
-    gap: 6px;
-    padding: 0 11px;
-    font-size: 10px;
-  }
-
-  .auren-book-arrow {
-    font-size: 15px;
-  }
-
-  .auren-navbar-logo {
-    font-size: 17px;
-  }
+  .auren-navbar-wrapper { gap: 7px; padding-inline: 10px; }
+  .auren-navbar { height: 60px; padding: 0 9px 0 16px; }
+  .auren-navbar-logo { font-size: 17px; }
+  .auren-navbar-book { height: 52px; gap: 6px; padding: 0 11px; font-size: 10px; }
+  .auren-book-arrow { font-size: 15px; }
+  .auren-nav-links { top: calc(100% + 10px); }
 }
 
-/* ACCESSIBILITY */
+/* If backdrop-filter is unavailable, retain a clearly readable dark pill. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .auren-navbar,
+  .auren-navbar-book { background-color: rgba(24, 26, 32, 0.97); }
+  .auren-nav-links { background-color: rgba(20, 22, 28, 0.96); }
+}
 
 .auren-navbar a:focus-visible,
 .auren-navbar-book:focus-visible,
@@ -428,121 +361,9 @@
   .auren-nav-link,
   .auren-navbar-book,
   .auren-book-arrow,
-  .auren-nav-links {
+  .auren-nav-links,
+  .auren-menu-toggle span {
     animation: none !important;
     transition: none !important;
-  }
-}
-
-
-
-
-/* ============================================
-   AUREN — 6-TAB NAVBAR OPTIMIZATION
-   PRESERVES ORIGINAL LIQUID GLASS DESIGN
-============================================ */
-
-/* Give all six navigation tabs enough space */
-
-@media (min-width: 1151px) {
-  .auren-navbar {
-    width: min(100%, 1050px);
-  }
-
-  .auren-nav-link {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
-/* Intermediate screen widths */
-
-@media (min-width: 801px) and (max-width: 1150px) {
-  .auren-navbar {
-    min-width: 0;
-    flex: 0 1 auto;
-  }
-
-  .auren-navbar-logo {
-    font-size: 19px;
-  }
-
-  .auren-nav-link {
-    padding: 12px 10px;
-    font-size: 11px;
-  }
-}
-
-/* Switch to mobile menu before tabs get cramped */
-
-@media (min-width: 801px) and (max-width: 980px) {
-  .auren-navbar {
-    flex: 1 1 auto;
-    width: auto;
-  }
-
-  .auren-menu-toggle {
-    display: flex;
-  }
-
-  .auren-nav-links {
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 0;
-    right: 0;
-
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 5px;
-    padding: 12px;
-
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.19);
-
-    background: rgba(27, 29, 34, 0.92);
-
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(-10px);
-
-    transition:
-      opacity 300ms ease,
-      visibility 300ms ease,
-      transform 300ms ease;
-  }
-
-  .auren-nav-links-open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-
-  .auren-nav-link {
-    padding: 15px 18px;
-    font-size: 13px;
-  }
-
-  .auren-nav-indicator {
-    border-radius: 16px;
-  }
-}
-
-/* Keep the same continuous pill animation */
-
-.auren-nav-indicator {
-  will-change: left, top, width, height;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .auren-nav-indicator {
-    will-change: auto;
   }
 }
