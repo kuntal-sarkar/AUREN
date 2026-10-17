@@ -1,995 +1,1669 @@
 
+
 /* ==========================================
+
    AUREN — LUXURY BOOKING EXPERIENCE
+
    Charcoal / Silver / Liquid Glass
+
 ========================================== */
 
 .auren-booking-page {
+
   min-height: 100vh;
+
   background:
+
     radial-gradient(
+
       ellipse at 80% 5%,
+
       rgba(117, 123, 140, 0.09),
+
       transparent 36%
+
     ),
+
     #0d0e11;
+
   color: #f4f4f5;
+
   font-family: "DM Sans", sans-serif;
+
 }
 
 .auren-booking-page * {
+
   box-sizing: border-box;
+
 }
 
 /* TOP NAVIGATION */
 
 .auren-booking-nav {
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   gap: 20px;
+
   max-width: 1550px;
+
   margin: 0 auto;
+
   padding: 30px 6%;
+
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
 }
 
 .auren-booking-logo {
+
   color: #f1f1f3;
+
   font: 400 32px/1 Georgia, serif;
+
   letter-spacing: -0.07em;
+
 }
 
 .auren-booking-logo span {
+
   color: #a6a9b2;
+
 }
 
 .auren-booking-return {
+
   display: inline-flex;
+
   align-items: center;
+
   gap: 12px;
+
   padding: 12px 19px;
+
   border: 1px solid rgba(255, 255, 255, 0.16);
+
   border-radius: 100px;
+
   background: rgba(255, 255, 255, 0.045);
+
   color: #d9dbe0;
+
   font-size: 10px;
+
   letter-spacing: 0.12em;
+
   transition: background 0.2s ease;
+
 }
 
 .auren-booking-return:hover {
+
   background: rgba(255, 255, 255, 0.13);
+
 }
 
 /* MAIN */
 
 .auren-booking-main {
+
   width: min(100% - 12%, 1350px);
+
   margin: 0 auto;
+
   padding: 90px 0 110px;
+
 }
 
 /* INTRO */
 
 .auren-booking-intro {
+
   max-width: 850px;
+
   margin-bottom: 65px;
+
 }
 
 .auren-booking-eyebrow {
+
   display: inline-flex;
+
   align-items: center;
+
   gap: 12px;
+
   color: #a9acb5;
+
   font-size: 10px;
+
   font-weight: 600;
+
   letter-spacing: 0.22em;
+
 }
 
 .auren-booking-status-dot {
+
   width: 7px;
+
   height: 7px;
+
   border-radius: 50%;
+
   background: #e4e5e9;
+
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+
 }
 
 .auren-booking-intro h1 {
+
   margin: 28px 0 20px;
+
   font: 400 clamp(3.5rem, 6.8vw, 7.5rem)/1.02
+
     Georgia, serif;
+
   letter-spacing: -0.07em;
+
 }
 
 .auren-booking-intro h1 em,
+
 .auren-booking-section-head h2 em,
+
 .auren-booking-summary h3 em {
+
   color: #a6a9b3;
+
   font-weight: 400;
+
 }
 
 .auren-booking-intro > p {
+
   max-width: 460px;
+
   color: #a1a4ad;
+
   font-size: 14px;
+
   line-height: 1.9;
+
 }
 
 .auren-booking-preview-notice {
+
   display: flex;
+
   align-items: flex-start;
+
   gap: 12px;
+
   width: fit-content;
+
   max-width: 640px;
+
   margin-top: 34px;
+
   padding: 15px 19px;
+
   border: 1px solid rgba(255, 255, 255, 0.11);
+
   border-radius: 12px;
+
   background: rgba(255, 255, 255, 0.035);
+
   color: #aeb0b9;
+
   font-size: 11px;
+
   line-height: 1.7;
+
 }
 
 .auren-booking-preview-notice > span {
+
   font-size: 16px;
+
   line-height: 1.2;
+
 }
 
 /* PROGRESS */
 
 .auren-booking-progress {
+
   display: grid;
+
   grid-template-columns: repeat(4, minmax(0, 1fr));
+
   gap: 15px;
+
   margin-bottom: 45px;
+
 }
 
 .auren-booking-progress-item {
+
   position: relative;
+
   display: flex;
+
   align-items: center;
+
   gap: 12px;
+
   padding-bottom: 20px;
+
   color: #737680;
+
   transition: color 0.25s ease;
+
 }
 
 .auren-booking-progress-number {
+
   display: grid;
+
   place-items: center;
+
   width: 30px;
+
   height: 30px;
+
   flex-shrink: 0;
+
   border: 1px solid rgba(255, 255, 255, 0.14);
+
   border-radius: 50%;
+
   font-size: 10px;
+
 }
 
 .auren-booking-progress-label {
+
   font-size: 10px;
+
   font-weight: 600;
+
   letter-spacing: 0.12em;
+
 }
 
 .auren-booking-progress-line {
+
   position: absolute;
+
   left: 0;
+
   right: 0;
+
   bottom: 0;
+
   height: 2px;
+
   background: rgba(255, 255, 255, 0.1);
+
 }
 
 .auren-booking-progress-item.is-active,
+
 .auren-booking-progress-item.is-complete {
+
   color: #f5f5f7;
+
 }
 
 .auren-booking-progress-item.is-active
+
 .auren-booking-progress-number {
+
   border-color: #e9eaed;
+
   background: #e9eaed;
+
   color: #141519;
+
 }
 
 .auren-booking-progress-item.is-active
+
 .auren-booking-progress-line,
+
 .auren-booking-progress-item.is-complete
+
 .auren-booking-progress-line {
+
   background: #e0e1e5;
+
 }
 
 /* MAIN GRID */
 
 .auren-booking-layout {
+
   display: grid;
+
   grid-template-columns:
+
     minmax(0, 1.65fr)
+
     minmax(290px, 0.85fr);
+
   align-items: start;
+
   gap: 25px;
+
 }
 
 .auren-booking-content {
+
   min-width: 0;
+
 }
 
 .auren-booking-panel {
+
   min-width: 0;
+
   padding: clamp(25px, 3vw, 45px);
+
   border: 1px solid rgba(255, 255, 255, 0.12);
+
   border-radius: 24px;
+
   background: linear-gradient(
+
     145deg,
+
     rgba(34, 36, 43, 0.85),
+
     rgba(19, 20, 25, 0.9)
+
   );
+
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+
   animation: aurenBookingAppear 0.45s
+
     cubic-bezier(0.16, 1, 0.3, 1) both;
+
 }
 
 .auren-booking-section-head {
+
   margin-bottom: 35px;
+
 }
 
 .auren-booking-section-head > span {
+
   color: #a1a4af;
+
   font-size: 10px;
+
   letter-spacing: 0.17em;
+
 }
 
 .auren-booking-section-head h2 {
+
   margin: 18px 0 15px;
+
   font: 400 clamp(2.5rem, 4vw, 4.3rem)/1.1
+
     Georgia, serif;
+
   letter-spacing: -0.06em;
+
 }
 
 .auren-booking-section-head > p {
+
   max-width: 450px;
+
   color: #a1a4ad;
+
   font-size: 13px;
+
   line-height: 1.85;
+
 }
 
 /* SERVICE CARDS */
 
 .auren-booking-service-grid {
+
   display: grid;
+
   grid-template-columns: repeat(2, minmax(0, 1fr));
+
   gap: 14px;
+
 }
 
 .auren-booking-service-card {
+
   display: flex;
+
   flex-direction: column;
+
   align-items: stretch;
+
   min-width: 0;
+
   min-height: 235px;
+
   padding: 23px;
+
   border: 1px solid rgba(255, 255, 255, 0.11);
+
   border-radius: 17px;
+
   background: rgba(255, 255, 255, 0.025);
+
   color: #f2f3f5;
+
   font-family: inherit;
+
   text-align: left;
+
   cursor: pointer;
+
   transition:
+
     border-color 0.25s ease,
+
     background 0.25s ease,
+
     transform 0.25s ease,
+
     box-shadow 0.25s ease;
+
 }
 
 .auren-booking-service-card:hover {
+
   transform: translateY(-3px);
+
   border-color: rgba(255, 255, 255, 0.38);
+
   background: rgba(255, 255, 255, 0.065);
+
 }
 
 .auren-booking-service-card.is-selected {
+
   border-color: rgba(242, 243, 246, 0.85);
+
   background: rgba(230, 232, 239, 0.085);
+
   box-shadow:
+
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
+
     0 12px 35px rgba(0, 0, 0, 0.13);
+
 }
 
 .auren-booking-card-top {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: flex-start;
+
   margin-bottom: 25px;
+
 }
 
 .auren-booking-service-icon {
+
   color: #e0e1e5;
+
   font-family: Georgia, serif;
+
   font-size: 27px;
+
   line-height: 1;
+
 }
 
 .auren-booking-select-dot {
+
   display: grid;
+
   place-items: center;
+
   width: 23px;
+
   height: 23px;
+
   flex-shrink: 0;
+
   border: 1px solid rgba(255, 255, 255, 0.25);
+
   border-radius: 50%;
+
   font-size: 12px;
+
   color: #131418;
+
 }
 
 .is-selected > .auren-booking-select-dot,
+
 .is-selected .auren-booking-select-dot {
+
   background: #e8e9ed;
+
   border-color: #e8e9ed;
+
 }
 
 .auren-booking-card-category {
+
   color: #a2a5af;
+
   font-size: 9px;
+
   letter-spacing: 0.17em;
+
 }
 
 .auren-booking-service-card strong {
+
   margin: 10px 0 10px;
+
   font: 400 23px/1.15 Georgia, serif;
+
   letter-spacing: -0.035em;
+
 }
 
 .auren-booking-card-description {
+
   color: #989ba5;
+
   font-size: 11px;
+
   line-height: 1.75;
+
 }
 
 .auren-booking-card-bottom {
+
   display: flex;
+
   justify-content: space-between;
+
   gap: 10px;
+
   margin-top: auto;
+
   padding-top: 24px;
+
   color: #e1e2e6;
+
   font-size: 11px;
+
 }
 
 .auren-booking-card-bottom span:first-child {
+
   color: #999ca5;
+
   font-size: 9px;
+
   letter-spacing: 0.1em;
+
 }
 
 /* ARTISTS */
 
 .auren-booking-artist-grid {
+
   display: grid;
+
   gap: 14px;
+
 }
 
 .auren-booking-artist-card {
+
   display: flex;
+
   align-items: center;
+
   gap: 20px;
+
   width: 100%;
+
   padding: 20px;
+
   border: 1px solid rgba(255, 255, 255, 0.13);
+
   border-radius: 16px;
+
   background: rgba(255, 255, 255, 0.025);
+
   color: #eeeef1;
+
   text-align: left;
+
   cursor: pointer;
+
   transition:
+
     background 0.2s ease,
+
     border-color 0.2s ease;
+
 }
 
 .auren-booking-artist-card:hover,
+
 .auren-booking-artist-card.is-selected {
+
   border-color: rgba(255, 255, 255, 0.65);
+
   background: rgba(255, 255, 255, 0.075);
+
 }
 
 .auren-booking-artist-avatar {
+
   display: grid;
+
   place-items: center;
+
   width: 75px;
+
   height: 75px;
+
   flex-shrink: 0;
+
   border: 1px solid rgba(255, 255, 255, 0.15);
+
   border-radius: 14px;
+
   background: linear-gradient(145deg, #42454e, #23252b);
+
   font: 400 27px Georgia, serif;
+
 }
 
 .auren-booking-artist-info {
+
   display: flex;
+
   flex: 1;
+
   flex-direction: column;
+
   gap: 7px;
+
   min-width: 0;
+
 }
 
 .auren-booking-artist-info small {
+
   color: #a2a5b0;
+
   font-size: 9px;
+
   letter-spacing: 0.13em;
+
 }
 
 .auren-booking-artist-info strong {
+
   font: 400 23px Georgia, serif;
+
 }
 
 .auren-booking-artist-info > span {
+
   color: #9c9fa9;
+
   font-size: 11px;
+
   line-height: 1.6;
+
 }
 
 /* DATE & TIME */
 
 .auren-booking-field {
+
   display: flex;
+
   flex-direction: column;
+
   gap: 12px;
+
   min-width: 0;
+
 }
 
 .auren-booking-field > span {
+
   color: #b7bac3;
+
   font-size: 10px;
+
   letter-spacing: 0.14em;
+
 }
 
 .auren-booking-field input,
+
 .auren-booking-field textarea {
+
   display: block;
+
   width: 100%;
+
   min-width: 0;
+
   padding: 17px 19px;
+
   border: 1px solid rgba(255, 255, 255, 0.16);
+
   border-radius: 12px;
+
   outline: none;
+
   background: #111216;
+
   color: #f1f2f4;
+
   font: 400 13px "DM Sans", sans-serif;
+
   color-scheme: dark;
+
   transition:
+
     border-color 0.2s ease,
+
     background 0.2s ease;
+
 }
 
 .auren-booking-field input:focus,
+
 .auren-booking-field textarea:focus {
+
   border-color: #e0e2e7;
+
   background: #181a20;
+
 }
 
 .auren-booking-field textarea {
+
   resize: vertical;
+
   min-height: 130px;
+
 }
 
 .auren-booking-field input::placeholder,
+
 .auren-booking-field textarea::placeholder {
+
   color: #777b85;
+
 }
 
 .auren-booking-time-header {
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   gap: 15px;
+
   margin: 35px 0 20px;
+
 }
 
 .auren-booking-time-header h3 {
+
   margin: 0;
+
   font: 400 27px Georgia, serif;
+
 }
 
 .auren-booking-time-header > span {
+
   color: #9699a2;
+
   font-size: 9px;
+
   letter-spacing: 0.13em;
+
 }
 
 .auren-booking-time-grid {
+
   display: grid;
+
   grid-template-columns: repeat(3, minmax(0, 1fr));
+
   gap: 11px;
+
 }
 
 .auren-booking-time-slot {
+
   padding: 16px 8px;
+
   border: 1px solid rgba(255, 255, 255, 0.16);
+
   border-radius: 12px;
+
   background: rgba(255, 255, 255, 0.035);
+
   color: #d7d9df;
+
   font: 500 12px "DM Sans", sans-serif;
+
   cursor: pointer;
+
   transition:
+
     background 0.2s ease,
+
     color 0.2s ease,
+
     border-color 0.2s ease;
+
 }
 
 .auren-booking-time-slot:hover:not(:disabled) {
+
   border-color: rgba(255, 255, 255, 0.65);
+
   background: rgba(255, 255, 255, 0.1);
+
 }
 
 .auren-booking-time-slot.is-selected {
+
   background: #e8e9ed;
+
   border-color: #e8e9ed;
+
   color: #15161a;
+
 }
 
 .auren-booking-time-slot:disabled {
+
   opacity: 0.38;
+
   cursor: not-allowed;
+
 }
 
 .auren-booking-disclaimer {
+
   margin: 25px 0 0;
+
   color: #8e929c;
+
   font-size: 11px;
+
   line-height: 1.8;
+
 }
 
 /* CUSTOMER DETAILS */
 
 .auren-booking-form {
+
   display: flex;
+
   flex-direction: column;
+
   gap: 25px;
+
 }
 
 .auren-booking-form-grid {
+
   display: grid;
+
   grid-template-columns: repeat(2, minmax(0, 1fr));
+
   gap: 18px;
+
 }
 
 .auren-booking-error {
+
   padding: 15px;
+
   border: 1px solid rgba(255, 255, 255, 0.2);
+
   border-radius: 10px;
+
   color: #e8e9ed;
+
   font-size: 12px;
+
   line-height: 1.7;
+
 }
 
 /* FOOTER CONTROLS */
 
 .auren-booking-controls {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   flex-wrap: wrap;
+
   gap: 18px;
+
   padding-top: 28px;
+
 }
 
 .auren-booking-back {
+
   border: 0;
+
   background: none;
+
   color: #b0b3bd;
+
   font-size: 10px;
+
   font-weight: 600;
+
   letter-spacing: 0.12em;
+
   cursor: pointer;
+
 }
 
 .auren-booking-back:hover {
+
   color: white;
+
 }
 
 .auren-booking-next {
+
   display: inline-flex;
+
   justify-content: center;
+
   align-items: center;
+
   gap: 22px;
+
   min-height: 51px;
+
   padding: 16px 25px;
+
   border: 1px solid #e6e7eb;
+
   border-radius: 100px;
+
   background: #e6e7eb;
+
   color: #15161a;
+
   font: 600 10px "DM Sans", sans-serif;
+
   letter-spacing: 0.12em;
+
   cursor: pointer;
+
   transition:
+
     background 0.2s ease,
+
     transform 0.2s ease;
+
 }
 
 .auren-booking-next span {
+
   font-size: 18px;
+
 }
 
 .auren-booking-next:hover:not(:disabled) {
+
   background: white;
+
   transform: translateY(-2px);
+
 }
 
 .auren-booking-next:disabled {
+
   opacity: 0.38;
+
   cursor: not-allowed;
+
 }
 
 /* LIQUID GLASS SUMMARY */
 
 .auren-booking-summary {
+
   position: sticky;
+
   top: 25px;
+
   padding: 32px;
+
   border: 1px solid rgba(255, 255, 255, 0.16);
+
   border-radius: 24px;
+
   background: rgba(42, 44, 52, 0.56);
+
   backdrop-filter: blur(25px) saturate(145%);
+
   -webkit-backdrop-filter: blur(25px) saturate(145%);
+
   box-shadow:
+
     0 22px 65px rgba(0, 0, 0, 0.2),
+
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
 }
 
 .auren-booking-summary-top {
+
   display: flex;
+
   justify-content: space-between;
+
   gap: 10px;
+
   color: #a6a9b2;
+
   font-size: 9px;
+
   letter-spacing: 0.16em;
+
 }
 
 .auren-booking-summary h3 {
+
   margin: 28px 0 33px;
+
   font: 400 clamp(2rem, 2.6vw, 2.8rem)/1.16
+
     Georgia, serif;
+
   letter-spacing: -0.045em;
+
 }
 
 .auren-booking-summary-item {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: flex-start;
+
   gap: 20px;
+
   padding: 17px 0;
+
   border-top: 1px solid rgba(255, 255, 255, 0.11);
+
 }
 
 .auren-booking-summary-item > span {
+
   color: #a3a6af;
+
   font-size: 9px;
+
   letter-spacing: 0.12em;
+
 }
 
 .auren-booking-summary-item > strong {
+
   color: #e6e7eb;
+
   font-size: 12px;
+
   font-weight: 500;
+
   text-align: right;
+
   line-height: 1.5;
+
 }
 
 .auren-booking-summary-total {
+
   display: flex;
+
   align-items: end;
+
   justify-content: space-between;
+
   gap: 12px;
+
   margin-top: 18px;
+
   padding-top: 23px;
+
   border-top: 1px solid rgba(255, 255, 255, 0.3);
+
 }
 
 .auren-booking-summary-total > span:first-child {
+
   display: flex;
+
   flex-direction: column;
+
   gap: 9px;
+
 }
 
 .auren-booking-summary-total small {
+
   color: #a8abb4;
+
   font-size: 9px;
+
   letter-spacing: 0.12em;
+
 }
 
 .auren-booking-summary-total strong {
+
   font: 400 35px Georgia, serif;
+
 }
 
 .auren-booking-summary-total > span:last-child {
+
   color: #a4a7af;
+
   font-size: 10px;
+
   white-space: nowrap;
+
 }
 
 .auren-booking-summary > p {
+
   margin: 30px 0 0;
+
   color: #81858e;
+
   font-size: 9px;
+
   line-height: 1.9;
+
   letter-spacing: 0.12em;
+
 }
 
 /* BOTTOM */
 
 .auren-booking-footer {
+
   display: flex;
+
   justify-content: space-between;
+
   gap: 15px;
+
   padding: 25px 6%;
+
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+
   color: #858891;
+
   font-size: 9px;
+
   letter-spacing: 0.13em;
+
 }
 
 /* ANIMATION */
 
 @keyframes aurenBookingAppear {
+
   from {
+
     opacity: 0;
+
     transform: translateY(18px);
+
   }
 
   to {
+
     opacity: 1;
+
     transform: translateY(0);
+
   }
+
 }
 
 /* TABLET */
 
 @media (max-width: 1000px) {
+
   .auren-booking-layout {
+
     grid-template-columns: 1fr;
+
   }
 
   .auren-booking-summary {
+
     position: static;
+
   }
+
 }
 
 /* MOBILE */
 
 @media (max-width: 650px) {
+
   .auren-booking-nav {
+
     padding: 23px 20px;
+
   }
 
   .auren-booking-logo {
+
     font-size: 28px;
+
   }
 
   .auren-booking-return {
+
     padding: 11px 14px;
+
     font-size: 9px;
+
   }
 
   .auren-booking-main {
+
     width: calc(100% - 40px);
+
     padding: 65px 0 80px;
+
   }
 
   .auren-booking-intro {
+
     margin-bottom: 45px;
+
   }
 
   .auren-booking-intro h1 {
+
     font-size: clamp(3rem, 12vw, 5rem);
+
   }
 
   .auren-booking-progress {
+
     gap: 7px;
+
     margin-bottom: 30px;
+
   }
 
   .auren-booking-progress-item {
+
     flex-direction: column;
+
     align-items: flex-start;
+
     gap: 8px;
+
   }
 
   .auren-booking-progress-label {
+
     font-size: 8px;
+
     letter-spacing: 0.05em;
+
   }
 
   .auren-booking-progress-number {
+
     width: 27px;
+
     height: 27px;
+
   }
 
   .auren-booking-panel {
+
     padding: 25px 20px;
+
     border-radius: 19px;
+
   }
 
   .auren-booking-service-grid {
+
     grid-template-columns: 1fr;
+
   }
 
   .auren-booking-service-card {
+
     min-height: 210px;
+
   }
 
   .auren-booking-time-grid {
+
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
   }
 
   .auren-booking-form-grid {
+
     grid-template-columns: 1fr;
+
   }
 
   .auren-booking-summary {
+
     padding: 26px 22px;
+
   }
 
   .auren-booking-footer {
+
     padding: 25px 20px;
+
     flex-direction: column;
+
   }
+
 }
 
 /* SMALL PHONES */
 
 @media (max-width: 390px) {
+
   .auren-booking-artist-card {
+
     gap: 12px;
+
     padding: 14px;
+
   }
 
   .auren-booking-artist-avatar {
+
     width: 58px;
+
     height: 65px;
+
   }
 
   .auren-booking-artist-info strong {
+
     font-size: 19px;
+
   }
 
   .auren-booking-controls {
+
     align-items: stretch;
+
     flex-direction: column-reverse;
+
   }
 
   .auren-booking-next {
+
     width: 100%;
+
   }
+
 }
 
 /* ACCESSIBILITY */
 
 .auren-booking-page :is(
+
   button,
+
   a,
+
   input,
+
   textarea
+
 ):focus-visible {
+
   outline: 2px solid #e8e9ed;
+
   outline-offset: 4px;
+
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .auren-booking-panel {
+
     animation: none;
+
   }
 
   .auren-booking-page * {
+
     transition-duration: 0.01ms !important;
+
   }
+
 }
 
-
-
 /* ============================================
+
    AUREN — CINEMATIC BOOKING PAGE ENTRANCE
+
    Apple-inspired Luxury Reveal
+
 ============================================ */
 
 /* Floating navbar enters from above */
 
 .auren-booking-page .auren-appointment-nav {
+
   animation: aurenNavReveal 750ms
+
     cubic-bezier(0.16, 1, 0.3, 1) both;
+
 }
 
 /* Heading softly reveals */
 
 .auren-booking-page .auren-booking-intro {
+
   animation: aurenIntroReveal 900ms
+
     cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+
 }
 
 /* Progress bar follows */
 
 .auren-booking-page .auren-booking-progress {
+
   animation: aurenContentReveal 800ms
+
     cubic-bezier(0.16, 1, 0.3, 1) 240ms both;
+
 }
 
 /* Main booking area */
 
 .auren-booking-page .auren-booking-content {
+
   animation: aurenContentReveal 850ms
+
     cubic-bezier(0.16, 1, 0.3, 1) 300ms both;
+
 }
 
 /* Liquid Glass summary arrives last */
 
 .auren-booking-page .auren-booking-summary {
+
   animation: aurenSummaryReveal 900ms
+
     cubic-bezier(0.16, 1, 0.3, 1) 400ms both;
+
 }
 
 /* ============================================
+
    ANIMATIONS
+
 ============================================ */
 
 @keyframes aurenNavReveal {
+
   from {
+
     opacity: 0;
+
     transform: translateY(-22px);
+
   }
 
   to {
+
     opacity: 1;
+
     transform: translateY(0);
+
   }
+
 }
 
 @keyframes aurenIntroReveal {
+
   from {
+
     opacity: 0;
+
     transform: translateY(30px);
+
     filter: blur(8px);
+
   }
 
   to {
+
     opacity: 1;
+
     transform: translateY(0);
+
     filter: blur(0);
+
   }
+
 }
 
 @keyframes aurenContentReveal {
+
   from {
+
     opacity: 0;
+
     transform: translateY(25px);
+
   }
 
   to {
+
     opacity: 1;
+
     transform: translateY(0);
+
   }
+
 }
 
 @keyframes aurenSummaryReveal {
+
   from {
+
     opacity: 0;
+
     transform: translateY(22px);
+
   }
 
   to {
+
     opacity: 1;
+
     transform: translateY(0);
+
   }
+
 }
 
 /* Reduced motion accessibility */
 
 @media (prefers-reduced-motion: reduce) {
+
   .auren-booking-page .auren-appointment-nav,
+
   .auren-booking-page .auren-booking-intro,
+
   .auren-booking-page .auren-booking-progress,
+
   .auren-booking-page .auren-booking-content,
+
   .auren-booking-page .auren-booking-summary {
+
     animation: none !important;
+
   }
+
 }

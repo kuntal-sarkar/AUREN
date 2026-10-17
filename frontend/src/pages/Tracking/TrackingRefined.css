@@ -1,0 +1,66 @@
+/* AUREN Tracking refinement — only applies to tracking */
+.auren-track-refined .auren-track-card,.auren-track-refined .auren-track-info {border-radius:28px;}
+.auren-track-refined .auren-track-card{background:#202228;}
+.auren-track-refined .auren-track-info{background:rgba(31,34,42,.72);}
+.auren-track-refined .auren-track-form{gap:21px;}
+.auren-track-refined .auren-track-lookup-switch{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:5px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(8,10,16,.48);}
+.auren-track-refined .auren-track-lookup-switch button{min-width:0;min-height:48px;border:1px solid transparent;border-radius:999px;background:transparent;color:#b9bcc6;font:600 12px 'DM Sans',sans-serif;cursor:pointer;transition:background-color .25s,border-color .25s,color .25s,transform .25s;}
+.auren-track-refined .auren-track-lookup-switch button.is-active{color:#fff;background:rgba(214,221,236,.18);border-color:rgba(255,255,255,.3);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:inset 0 1px 0 rgba(255,255,255,.17),0 5px 15px rgba(0,0,0,.12);}
+.auren-track-refined .auren-track-lookup-switch button:not(.is-active):hover{background:rgba(255,255,255,.07);color:#fff;}
+.auren-track-refined .auren-track-input-wrap{position:relative;display:flex;align-items:center;min-height:60px;padding:0 18px;border-radius:17px;background:rgba(11,13,18,.78);border:1px solid rgba(255,255,255,.16);transition:border-color .22s,box-shadow .22s,background-color .22s;}
+.auren-track-refined .auren-track-input-wrap:focus-within{border-color:rgba(200,217,240,.6);background:rgba(14,17,23,.94);box-shadow:0 0 0 3px rgba(167,192,227,.12);}
+.auren-track-refined .auren-track-input-wrap>svg{width:20px;height:20px;flex:0 0 20px;pointer-events:none;}
+.auren-track-refined .auren-track-input-wrap input{display:block;flex:1;min-width:0;min-height:58px;padding:12px 0;border:0!important;border-radius:0!important;outline:0!important;background:transparent!important;box-shadow:none!important;color:#f8f8fa;font-size:14px;}
+.auren-track-refined .auren-track-input-wrap input:focus{outline:0!important;box-shadow:none!important;}
+.auren-track-refined .auren-track-input-wrap input::placeholder{color:#838997;opacity:1;}
+.auren-track-refined .auren-track-action{margin-top:4px;min-height:56px;border-radius:999px;}
+.auren-track-refined .auren-track-verified{padding:8px 12px;border-radius:999px;border:1px solid rgba(161,220,190,.27);background:rgba(72,145,112,.12);color:#bde5ce;font-size:10px;font-weight:700;letter-spacing:.09em;}
+.auren-track-refined .auren-track-status-feature{padding:25px;margin:24px 0 28px;border-radius:22px;border:1px solid rgba(138,199,170,.33);background:rgba(43,91,70,.23);}
+.auren-track-refined .auren-track-status-feature.is-cancelled,.auren-track-refined .auren-track-status-feature.is-canceled,.auren-track-refined .auren-track-status-feature.is-absent{border-color:rgba(231,142,142,.35);background:rgba(124,42,47,.22);}
+.auren-track-refined .auren-track-status-feature.is-pending,.auren-track-refined .auren-track-status-feature.is-billed{border-color:rgba(231,185,123,.35);background:rgba(118,79,33,.23);}
+.auren-track-refined .auren-track-status-feature-label{color:#c0cbd0;font-size:10px;font-weight:700;letter-spacing:.17em;}
+.auren-track-refined .auren-track-status-feature-main{display:flex;align-items:center;gap:13px;margin:14px 0 10px;}
+.auren-track-refined .auren-track-status-feature-main strong{font:400 clamp(27px,3.4vw,42px) Georgia,serif;color:#f6f6f7;letter-spacing:-.04em;}
+.auren-track-refined .auren-track-status-feature-dot{width:11px;height:11px;border-radius:50%;background:#93d9b2;box-shadow:0 0 0 6px rgba(137,213,173,.11);flex:0 0 auto;}
+.auren-track-refined .auren-track-status-feature.is-cancelled .auren-track-status-feature-dot,.auren-track-refined .auren-track-status-feature.is-absent .auren-track-status-feature-dot{background:#e7a5a5;box-shadow:0 0 0 6px rgba(231,165,165,.1);}
+.auren-track-refined .auren-track-status-feature.is-pending .auren-track-status-feature-dot,.auren-track-refined .auren-track-status-feature.is-billed .auren-track-status-feature-dot{background:#e4bb80;box-shadow:0 0 0 6px rgba(228,187,128,.12);}
+.auren-track-refined .auren-track-status-feature p{margin:0;color:#d0d7d8;font-size:12px;line-height:1.7;}
+.auren-track-refined .auren-track-result-overline{margin-top:18px;}
+.auren-track-refined .auren-track-ref-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:8px 0 23px;}
+.auren-track-refined .auren-track-ref-row h3{margin:0;font-size:clamp(23px,3vw,34px);}
+.auren-track-refined .auren-track-copy{min-height:37px;padding:8px 15px;background:rgba(255,255,255,.08);color:#edf0f4;border:1px solid rgba(255,255,255,.2);border-radius:999px;font:700 10px 'DM Sans',sans-serif;cursor:pointer;transition:background-color .2s;}
+.auren-track-refined .auren-track-copy:hover{background:rgba(255,255,255,.15);}
+.auren-track-refined .auren-track-visit-overview{margin:24px 0 8px;}
+.auren-track-refined .auren-track-visit-overview span{font-size:10px;letter-spacing:.17em;color:#c7cbd5;font-weight:700;}
+.auren-track-refined .auren-track-visit-overview p{margin:8px 0 0;color:#9ea5b0;font-size:12px;line-height:1.6;}
+.auren-track-refined .auren-track-detail-list>div{gap:12px;}
+@media(max-width:600px){.auren-track-refined .auren-track-status-feature{padding:20px;border-radius:18px}.auren-track-refined .auren-track-lookup-switch button{font-size:11px;min-height:44px}.auren-track-refined .auren-track-status-feature-main strong{font-size:30px}}
+@media(prefers-reduced-motion:reduce){.auren-track-refined .auren-track-lookup-switch button,.auren-track-refined .auren-track-input-wrap,.auren-track-refined .auren-track-copy{transition:none!important}}
+
+/* Final tracking layout — focused additions; booking page untouched */
+.auren-track-refined .auren-track-grid{align-items:start}
+.auren-track-refined .auren-track-info{min-height:0;align-self:start}
+.auren-track-refined .auren-track-empty-v3{min-height:0;justify-content:flex-start}
+.auren-track-refined .auren-track-empty-heading{display:flex;align-items:center;gap:24px;width:100%;margin-bottom:18px}
+.auren-track-refined .auren-track-empty-heading .auren-track-orbit{flex-shrink:0;width:64px;height:64px;margin:0;font-size:32px}
+.auren-track-refined .auren-track-empty-heading h3{margin:8px 0;font-size:clamp(26px,2.8vw,42px)}
+.auren-track-refined .auren-track-empty-v3>p{max-width:100%}
+.auren-track-refined .auren-track-empty-features-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;margin:14px 0}
+.auren-track-refined .auren-track-empty-features-grid>div{min-height:92px;display:flex;flex-direction:column;gap:6px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);border-radius:15px;padding:14px}
+.auren-track-refined .auren-track-empty-features-grid span{color:#afb5c3;font-size:10px;letter-spacing:.15em}
+.auren-track-refined .auren-track-empty-features-grid strong{color:#ecedf0;font-size:12px}
+.auren-track-refined .auren-track-empty-features-grid small{color:#949aa5;font-size:10px;line-height:1.5}
+.auren-track-refined .auren-track-switch-v3{position:relative;isolation:isolate;overflow:hidden}
+.auren-track-refined .auren-track-switch-v3 .auren-track-switch-glass{position:absolute;z-index:0;top:5px;bottom:5px;border-radius:999px;background:rgba(210,218,230,.16);border:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 4px 16px rgba(0,0,0,.17);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);transition:left .55s cubic-bezier(.22,1,.36,1),width .55s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.auren-track-refined .auren-track-switch-v3 button{position:relative;z-index:1;background:transparent!important;border-color:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.auren-track-refined .auren-track-customer-card{display:flex;align-items:center;gap:15px;margin:16px 0 9px;padding:16px;border-radius:16px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);min-width:0}
+.auren-track-refined .auren-track-customer-avatar{width:47px;height:47px;display:grid;place-items:center;flex:0 0 47px;border-radius:50%;background:rgba(219,224,235,.18);color:#fff;font:26px Georgia,serif}
+.auren-track-refined .auren-track-customer-card>div:last-child{display:flex;flex-direction:column;gap:5px;min-width:0}
+.auren-track-refined .auren-track-customer-card span{font-size:9px;color:#a4acb8;letter-spacing:.16em}
+.auren-track-refined .auren-track-customer-card strong{font-size:17px;color:#f4f5f6;overflow-wrap:anywhere}
+.auren-track-refined .auren-track-customer-card small{font-size:11px;color:#b5bcc6;overflow-wrap:anywhere}
+.auren-track-refined .auren-track-review-progress{height:5px;background:rgba(255,255,255,.15);border-radius:999px;overflow:hidden;margin-top:15px}
+.auren-track-refined .auren-track-review-progress span{display:block;height:100%;background:#e6bb78;border-radius:inherit;transition:width 1s linear}
+@media(max-width:760px){.auren-track-refined .auren-track-empty-heading{gap:14px}.auren-track-refined .auren-track-empty-features-grid{gap:8px}.auren-track-refined .auren-track-empty-features-grid>div{padding:11px;min-height:88px}}
+@media(max-width:370px){.auren-track-refined .auren-track-empty-heading{flex-direction:column;align-items:start}}
+@media(prefers-reduced-motion:reduce){.auren-track-refined .auren-track-switch-glass,.auren-track-refined .auren-track-review-progress span{transition:none!important}}

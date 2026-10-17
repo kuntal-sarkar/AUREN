@@ -1,486 +1,1526 @@
 /* AUREN Reception — minimal charcoal & silver dashboard.
+
    Scoped to the admin dashboard; customer website styles are untouched. */
+
 .auren-desk{--d-bg:#101214;--d-card:#191d20;--d-panel:#1b2024;--d-hair:#343b41;--d-muted:#a0a8ae;--d-text:#eef0f0;--d-silver:#cbd0d2;min-height:100dvh;background:var(--d-bg);color:var(--d-text);font-family:'Manrope','DM Sans',sans-serif;padding:30px clamp(16px,4vw,60px) 80px;overflow-x:hidden;color-scheme:dark}
+
 .auren-desk,.auren-desk *,.auren-desk *::before,.auren-desk *::after{box-sizing:border-box}
+
 .auren-desk button,.auren-desk input{font:inherit}
+
 .auren-desk button{cursor:pointer;transition:background .17s,border-color .17s,color .17s}
+
 .auren-desk button:disabled{cursor:not-allowed;opacity:.5}
+
 .auren-desk :is(button,input,a):focus-visible{outline:2px solid #d7dce0;outline-offset:3px}
+
 .desk-workspace{max-width:1480px;margin:auto;min-width:0}
+
 .desk-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:6px 0 22px;border-bottom:1px solid #2b3136;margin-bottom:20px}
+
 .desk-heading-group{display:flex;align-items:center;gap:32px;min-width:0}
+
 .desk-brand-simple{display:flex;flex-direction:column;gap:5px;border-right:1px solid #3c454b;padding-right:30px;flex-shrink:0}
+
 .desk-brand-simple strong{font-size:21px;letter-spacing:.24em;font-weight:700;line-height:1}
+
 .desk-brand-simple span{font-size:8px;letter-spacing:.13em;color:#a3adb6;white-space:nowrap}
+
 .desk-heading-copy .desk-eyebrow,.desk-eyebrow{font-size:10px;font-weight:600;letter-spacing:.17em;color:#a4aeb8}
+
 .desk-header h1{font-size:clamp(25px,2.7vw,34px);font-weight:600;letter-spacing:-.04em;margin:5px 0}
+
 .desk-header p{font-size:12px;color:var(--d-muted);margin:0}
+
 .desk-header-actions{display:flex;align-items:center;gap:9px}
+
 .desk-iconbtn,.desk-smallbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;border-radius:7px;background:#23282c;border:1px solid #434b51;color:#e1e6e8;padding:9px 13px;font-size:12px;text-decoration:none}
+
 .desk-iconbtn{position:relative;width:40px;padding:8px;font-size:18px}
+
 .desk-iconbtn:hover,.desk-smallbtn:hover{background:#30373c;border-color:#77828b}
+
 .desk-iconbtn.is-active{background:#454f56}
+
 .desk-count{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;border-radius:18px;background:#b16969;color:white;font-size:10px;display:grid;place-items:center;padding:0 4px}
+
 .desk-bell-wrap{position:relative}
+
 .desk-bell{position:absolute;right:0;top:49px;z-index:45;width:min(340px,calc(100vw - 32px));max-height:330px;overflow:auto;background:#23282d;border:1px solid #48525b;border-radius:9px;box-shadow:0 16px 45px #0007;padding:8px}
+
 .desk-bell-top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px 12px;border-bottom:1px solid #444e55;font-size:13px}
+
 .desk-bell-top button{font-size:11px;color:#cbd3d8;background:none;border:0}
+
 .desk-notice{display:flex;flex-direction:column;gap:4px;color:#e7ecef;text-align:left;background:transparent;border:0;border-bottom:1px solid #3d4449;padding:13px 10px;width:100%;font-size:12px}
+
 .desk-notice:hover{background:#30383e}
+
 .desk-notice small{color:#aab4bb}
+
 /* Single navigation bar only; no duplicated sidebar. */
+
 .desk-nav{display:flex;gap:4px;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:thin;margin:0 0 23px;padding:5px;border:1px solid #323940;background:#1b2024;border-radius:10px}
+
 .desk-nav button{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;font-size:12px;font-weight:600;color:#b4bdc5;padding:11px 18px;border:1px solid transparent;background:transparent;border-radius:7px;min-width:0}
+
 .desk-nav button:hover{background:#2b3339;color:#fff}
+
 .desk-nav button.selected{color:#121619;background:#cbd0d2;border-color:#dfe2e3}
+
 .desk-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:0 0 22px}
+
 .desk-stats>div{padding:21px 20px;background:#1a1e21;border:1px solid #343b40;border-radius:10px;display:flex;flex-direction:column;gap:12px;min-width:0}
+
 .desk-stats span{font-size:11px;color:#b1bbc1;line-height:1.5}
+
 .desk-stats strong{font-size:clamp(21px,2.2vw,29px);font-weight:600;letter-spacing:-.035em;overflow-wrap:anywhere}
+
 .desk-panel{background:#191d20;border:1px solid #333a40;border-radius:11px;padding:clamp(18px,2.4vw,29px);min-width:0}
+
 .desk-panel-heading{display:flex;justify-content:space-between;align-items:start;gap:15px;flex-wrap:wrap;margin-bottom:22px}
+
 .desk-panel h2{font-size:23px;font-weight:600;letter-spacing:-.035em;margin:8px 0 0}
+
 .desk-panel h3,.desk-inner h3{font-size:15px;font-weight:600;margin:0 0 15px}
+
 .desk-muted,.desk-empty{font-size:12px;color:var(--d-muted);line-height:1.65}
+
 .desk-empty{padding:12px 2px}
+
 .desk-small{font-size:11px;color:#b0bac1}
+
 .desk-error{margin:10px 0 18px;border:1px solid #8a5555;color:#f0b9b9;background:#3c2425;border-radius:7px;padding:12px 16px;font-size:12px}
+
 .desk-subnav{display:inline-flex;gap:4px;padding:4px;border:1px solid #41484f;background:#23292e;border-radius:8px;margin-bottom:19px}
+
 .desk-subnav button{border:0;background:transparent;color:#a9b4bc;padding:10px 16px;font-size:12px;border-radius:6px}
+
 .desk-subnav button.selected{background:#444e56;color:white}
+
 .desk-search{display:flex;align-items:center;gap:10px;background:#1e2327;border:1px solid #3d454b;border-radius:7px;padding:0 13px;max-width:550px;margin:0 0 19px;color:#adb8c0}
+
 .desk-search input{background:transparent;border:0!important;color:#eef0f2;width:100%;padding:13px 0;outline:0!important;font-size:12px}
+
 .desk-search input::placeholder,.auren-desk input::placeholder{color:#848f98}
+
 .desk-records{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr));gap:13px}
+
 .desk-record,.desk-inner{background:#21262a;border:1px solid #3a4248;border-radius:9px;padding:20px;min-width:0}
+
 .desk-record-head{display:flex;justify-content:space-between;align-items:start;gap:12px}
+
 .desk-record-head h3{font-size:17px;margin:5px 0}
+
 .desk-record-head p{font-size:12px;color:#a9b3bc;margin:4px 0 13px;line-height:1.6}
+
 .desk-detail{color:#b9c2c8;font-size:12px;overflow-wrap:anywhere}
+
 .desk-pill{font-size:10px;font-weight:600;white-space:normal;text-align:center;line-height:1.5;padding:6px 9px;color:#cad4dd;background:#36414a;border:1px solid #52616a;border-radius:6px;max-width:165px}
+
 .desk-pill-arrived{color:#bbdccb;background:#273b32;border-color:#476858}
+
 .desk-pill-absent,.desk-pill-cancelled{color:#e3b1b1;background:#432e31;border-color:#70464a}
+
 .desk-pill-completed{color:#cbdfcc;background:#2a3c31;border-color:#4d6b52}
+
 .desk-pill-billed{color:#e4d4b6;background:#453a2c;border-color:#70604a}
+
 .desk-lines{display:flex;flex-direction:column;gap:7px;padding:11px 0;margin:10px 0;border-top:1px solid #374047;border-bottom:1px solid #374047}
+
 .desk-lines>div{display:flex;justify-content:space-between;gap:15px;font-size:12px;color:#c9d0d5}
+
 .desk-lines .desk-line-total{font-weight:700;color:#fff;padding-top:8px;margin-top:3px;border-top:1px dashed #485159}
+
 .desk-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;align-items:center}
+
 .desk-smallbtn{min-height:34px;padding:8px 12px}
+
 .desk-accent,.desk-primary{background:#c8cdcf!important;color:#16191b!important;border:1px solid #d7dddf!important;font-weight:700}
+
 .desk-accent:hover,.desk-primary:hover{background:#e1e4e5!important}
+
 .desk-lock{color:#a2b9a7;font-size:11px}
+
 .desk-walkgrid,.desk-loggrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;align-items:start}
+
 .desk-walkgrid input:not([type=checkbox]),.desk-billform input:not([type=radio]){display:block;width:100%;background:#171c20;border:1px solid #465058;border-radius:7px;color:#f2f4f5;padding:13px 14px;margin:7px 0 16px;outline:none;font-size:13px}
+
 .desk-walkgrid label,.desk-billform label{font-size:12px;color:#c0c9d0}
+
 .desk-checks{display:grid;gap:8px;margin:10px 0}
+
 .desk-checks label{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border:1px solid #3e4850;border-radius:6px;background:#242b30}
+
 .desk-checks label span{display:flex;gap:9px;align-items:center}
+
 .desk-checks input{accent-color:#b8c4cd}
+
 .desk-primary{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:7px;min-height:40px;padding:11px 16px;cursor:pointer;font-size:12px}
+
 .desk-success{padding:12px;border-radius:7px;border:1px solid #47654f;background:#25372c;color:#c8e6cc;font-size:12px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px}
+
 .desk-walkitem{padding:14px 0;border-bottom:1px solid #3a4248}
+
 .desk-walkitem small{display:block;color:#aeb8c0;line-height:1.8}
+
 .desk-logitem{display:flex;flex-direction:column;gap:7px;padding:12px 0;border-bottom:1px solid #3b444b;font-size:12px}
+
 .desk-logitem>span{font-size:11px;color:#aeb9c0;overflow-wrap:anywhere}
+
 .desk-logitem>strong{font-size:13px;font-weight:600;overflow-wrap:anywhere}
+
 .desk-billform{max-width:680px;position:relative;margin-bottom:16px}
+
 .desk-suggestions{z-index:15;background:#262d32;border:1px solid #525d65;border-radius:7px;margin:-10px 0 15px;max-height:225px;overflow-y:auto;box-shadow:0 10px 30px #0007}
+
 .desk-suggestions button{display:flex;flex-direction:column;gap:5px;width:100%;padding:12px;text-align:left;background:transparent;color:white;border:0;border-bottom:1px solid #414b52;font-size:12px}
+
 .desk-suggestions button:hover{background:#364049}
+
 .desk-suggestions button span{font-size:11px;color:#aab5c0}
+
 .desk-methods{display:flex;gap:9px;margin:16px 0}
+
 .desk-methods label{padding:10px 18px;border:1px solid #4a555e;border-radius:6px;background:#242b30;display:flex;gap:9px;align-items:center}
+
 .desk-methods input{accent-color:#c5ced4}
+
 .desk-billing-help{margin:15px 0 23px}
+
 .desk-settings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+
 .desk-settings-card{min-height:220px;display:flex;flex-direction:column;align-items:start;gap:10px}
+
 .desk-settings-card h3{margin:0}
+
 .desk-setting-icon,.desk-settings-symbol{font-size:21px;color:#cad2d7}
+
 .desk-settings-symbol{font-size:26px}
+
 .desk-setting-detail{display:flex;justify-content:space-between;width:100%;gap:10px;border-bottom:1px solid #434a50;padding:9px 0;color:#aab6bc;font-size:12px}
+
 .desk-setting-detail strong{color:#e6ecee}
+
 .desk-settings-action,.desk-logout-action{margin-top:auto}
+
 .desk-settings-action:disabled{opacity:.48}
+
 .desk-setting-hint{font-size:11px;color:#a4aeb6;line-height:1.6}
+
 .desk-toast{position:fixed;bottom:20px;right:20px;z-index:70;display:flex;gap:10px;align-items:center;background:#2a3136;color:#eaf0f2;border:1px solid #536069;box-shadow:0 14px 32px #0009;border-radius:8px;padding:13px 16px;font-size:12px;max-width:min(400px,calc(100vw - 40px))}
+
 .desk-toast button{color:white;background:transparent;border:0;padding:5px}
+
 /* Revenue chart: genuine invoice data from existing backend, no chart dependency. */
+
 .desk-revenue-chart{margin:15px 0 17px}
+
 .desk-chart-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+
 .desk-chart-heading h3{margin:0 0 18px}
+
 .desk-bars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:clamp(5px,2vw,24px);height:240px;align-items:end;padding:15px 8px 0}
+
 .desk-bar-group{display:flex;flex-direction:column;align-items:center;height:100%;min-width:0;gap:7px}
+
 .desk-bar-value{font-size:10px;color:#cbd3d8;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+
 .desk-bar-track{width:min(100%,58px);flex:1;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid #59636b;background:linear-gradient(0deg,rgba(255,255,255,.04),transparent);min-height:0}
+
 .desk-bar-fill{background:linear-gradient(180deg,#cbd2d5,#79878f);border-radius:4px 4px 0 0;min-height:0}
+
 .desk-bar-label{font-size:11px;color:#aeb8bf;white-space:nowrap}
+
 /* Compact invoice dialog. The receipt is intentionally plain for thermal printers. */
+
 .desk-modal-backdrop{position:fixed;inset:0;z-index:100;background:#07090bd9;display:flex;justify-content:center;align-items:center;padding:18px;overflow-y:auto}
+
 .desk-receipt-dialog{background:#242a2f;border:1px solid #525c64;border-radius:10px;width:min(410px,100%);max-height:calc(100dvh - 36px);overflow-y:auto;box-shadow:0 25px 70px #000c;padding:19px;color:#f2f3f4}
+
 .desk-receipt-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
+
 .desk-receipt-toolbar strong{font-size:15px}
+
 .desk-receipt-toolbar p{font-size:11px;color:#afbbc3;margin:5px 0}
+
 .desk-receipt{width:100%;max-width:302px;margin:auto;background:#fff;color:#111;padding:16px 10px;font-family:Arial,Helvetica,sans-serif;font-size:11px;border-radius:1px;overflow-wrap:anywhere}
+
 .desk-receipt-brand{text-align:center}
+
 .desk-receipt-brand h2{font-size:22px;letter-spacing:3px;font-weight:700;margin:0 0 4px}
+
 .desk-receipt-brand p{font-size:9px;letter-spacing:1px;margin:0 0 5px}
+
 .desk-receipt-brand span{font-size:10px;font-weight:600}
+
 .desk-receipt-rule{border-top:1px dashed #111;margin:12px 0}
+
 .desk-receipt-metadata{margin:0}
+
 .desk-receipt-metadata>div{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+
 .desk-receipt-metadata dt{color:#333;flex-shrink:0}
+
 .desk-receipt-metadata dd{margin:0;text-align:right;overflow-wrap:anywhere}
+
 .desk-receipt-items{display:grid;gap:8px}
+
 .desk-receipt-items>div{display:flex;justify-content:space-between;gap:8px}
+
 .desk-receipt-items-head{font-weight:700;border-bottom:1px solid #aaa;padding-bottom:6px}
+
 .desk-receipt-items strong{white-space:nowrap}
+
 .desk-receipt-total{display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:15px}
+
 .desk-receipt-foot{text-align:center;font-size:10px;line-height:1.5;margin:8px 0 0}
+
 .desk-receipt-actions{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap}
+
 .desk-receipt-note{color:#adb7bf;font-size:11px;line-height:1.6;margin:13px 0 0}
+
 @media(max-width:1050px){.desk-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.desk-heading-group{gap:17px}.desk-brand-simple{padding-right:17px}}
+
 @media(max-width:700px){.auren-desk{padding:17px 12px 60px}.desk-header{align-items:start}.desk-heading-group{flex-direction:column;align-items:start;gap:14px}.desk-brand-simple{border:0;padding-right:0}.desk-brand-simple strong{font-size:17px}.desk-brand-simple span{font-size:7px}.desk-header h1{font-size:24px}.desk-header-actions{gap:5px}.desk-refresh-button{font-size:0;min-width:38px;padding:7px}.desk-refresh-button svg{font-size:16px}.desk-nav{width:100%}.desk-nav button{padding:10px 13px}.desk-panel{padding:16px}.desk-records,.desk-walkgrid,.desk-loggrid{grid-template-columns:1fr}.desk-panel-heading h2{font-size:21px}.desk-stats>div{padding:15px}.desk-stats strong{font-size:21px}.desk-receipt-dialog{padding:14px}}
+
 @media(max-width:380px){.desk-nav button{padding:9px 11px;font-size:11px}.desk-header-actions{align-self:start}.desk-stats{gap:8px}.desk-stats strong{font-size:18px}}
+
 /* Browser's native Print dialog; select your installed 80mm roll printer.
+
    The printable content is 72mm wide (4mm safe margin on each side). */
+
 @media print{
+
   @page{size:80mm auto;margin:0}
+
   html,body,#root{background:#fff!important;color:#000!important;margin:0!important;padding:0!important;width:80mm!important;min-width:0!important}
+
   body *{visibility:hidden!important}
+
   .desk-receipt,.desk-receipt *{visibility:visible!important}
+
   .desk-modal-backdrop,.desk-receipt-dialog{display:block!important;position:static!important;overflow:visible!important;max-height:none!important;width:80mm!important;max-width:80mm!important;min-width:0!important;margin:0!important;padding:0!important;background:#fff!important;box-shadow:none!important;border:0!important;transform:none!important}
+
   .desk-receipt{display:block!important;position:absolute!important;top:0!important;left:4mm!important;width:72mm!important;max-width:72mm!important;min-width:72mm!important;padding:3mm 0!important;border-radius:0!important;color:#000!important;background:white!important;font-size:10px!important;box-shadow:none!important;overflow:visible!important;break-inside:avoid}
+
   .desk-receipt-toolbar,.desk-receipt-actions,.desk-receipt-note,.desk-toast{display:none!important}
+
 }
+
+
 
 /* Reception v3 — restrained sidebar + sticky top bar. Business logic unchanged. */
+
 .auren-desk{padding:0 0 72px 252px;overflow-x:clip;background:#101214}
+
 .desk-workspace{max-width:none;width:100%;margin:0;padding:0 clamp(20px,2.6vw,44px) 40px}
+
 .desk-sidebar{position:fixed;left:0;top:0;bottom:0;width:252px;z-index:85;background:#15191c;border-right:1px solid #2d3439;display:flex;flex-direction:column;padding:26px 15px 19px}
+
 .desk-sidebar-brand{display:flex;align-items:center;gap:12px;padding:5px 10px 30px;border-bottom:1px solid #2c3439;margin-bottom:27px}
+
 .desk-brand-logo{height:38px;width:38px;object-fit:contain;border-radius:9px;background:#22272a}
+
 .desk-sidebar-brand div{min-width:0;display:flex;flex-direction:column;gap:5px}
+
 .desk-sidebar-brand strong{font-size:20px;letter-spacing:.19em;font-weight:700;line-height:1}
+
 .desk-sidebar-brand small{font-size:9px;letter-spacing:.1em;color:#a0aab3;white-space:nowrap}
+
 .desk-sidebar-caption{font-size:10px;letter-spacing:.15em;color:#89949e;padding:0 14px;margin-bottom:12px}
+
 .desk-sidebar .desk-nav{display:flex;flex-direction:column;gap:5px;border:0;background:transparent;padding:0;margin:0;width:100%;max-width:none;overflow:visible}
+
 .desk-sidebar .desk-nav button{width:100%;justify-content:flex-start;border-radius:8px;padding:13px 14px;color:#aeb7bd;font-weight:500;font-size:13px;gap:13px;min-height:45px}
+
 .desk-sidebar .desk-nav button svg,.desk-sidebar-setting svg{height:17px;width:17px;flex:none}
+
 .desk-sidebar .desk-nav button.selected,.desk-sidebar-setting.selected{color:#f0f2f2;background:#30373b;border-color:#454e54}
+
 .desk-sidebar .desk-nav button:hover,.desk-sidebar-setting:hover{background:#242b2f;color:#f1f3f4}
+
 .desk-sidebar-bottom{margin-top:auto;border-top:1px solid #30373c;padding-top:17px}
+
 .desk-sidebar-setting{width:100%;display:flex;gap:13px;align-items:center;text-align:left;background:transparent;color:#afb9c2;border:1px solid transparent;border-radius:8px;padding:12px 14px;font-size:13px}
+
 .desk-sidebar-profile{display:flex;align-items:center;gap:11px;margin-top:18px;padding:17px 8px 0;border-top:1px solid #2b3237;min-width:0}
+
 .desk-profile-avatar{width:35px;height:35px;display:grid;place-items:center;background:#30373d;border:1px solid #434b50;border-radius:9px;font-size:16px}
+
 .desk-sidebar-profile div{display:flex;flex-direction:column;gap:4px;min-width:0}
+
 .desk-sidebar-profile strong{font-size:12px;color:#e8ebec;text-overflow:ellipsis;overflow:hidden}
+
 .desk-sidebar-profile small{font-size:10px;color:#929da5}
+
 .desk-header{position:sticky;top:0;z-index:45;background:rgba(16,18,20,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:18px 0 18px;margin:0 0 26px;border-bottom:1px solid #30363b;min-height:103px}
+
 .desk-header .desk-heading-group{gap:12px}
+
 .desk-header h1{font-size:23px;margin:3px 0 2px;letter-spacing:-.025em}
+
 .desk-header p{font-size:11px}
+
 .desk-header .desk-eyebrow{font-size:9px;letter-spacing:.12em}
+
 .desk-welcome{display:flex;flex-direction:column;text-align:right;gap:4px;margin-right:12px}
+
 .desk-welcome small{font-size:9px;letter-spacing:.12em;color:#97a2ac}
+
 .desk-welcome strong{font-size:13px;font-weight:600;color:#e7ecef;max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 .desk-sidebar-close,.desk-mobile-menu,.desk-sidebar-scrim{display:none}
+
 .desk-revenue-chart{padding:25px!important;background:#1b2024!important}
+
 .desk-bars{height:260px;gap:clamp(8px,1.6vw,25px);padding:18px 10px 0}
+
 .desk-bar-track{width:min(100%,65px);border-bottom:1px solid #53616a;background:repeating-linear-gradient(to top,rgba(186,198,207,.055) 0px,rgba(186,198,207,.055) 1px,transparent 1px,transparent 46px)}
+
 .desk-bar-fill{background:linear-gradient(180deg,#cbd2d5,#87949c);border-radius:4px 4px 0 0}
+
 .desk-bar-value{font-size:11px;color:#cad2d7}
+
 .desk-sidebar .desk-nav button:focus-visible,.desk-sidebar-setting:focus-visible{outline:2px solid #d1d8dd;outline-offset:2px}
+
 @media(max-width:1050px){.auren-desk{padding-left:218px}.desk-sidebar{width:218px;padding-left:10px;padding-right:10px}.desk-workspace{padding-left:22px;padding-right:22px}}
+
 @media(max-width:760px){
+
   .auren-desk{padding-left:0;padding-top:0}.desk-sidebar{width:min(280px,84vw);transform:translateX(-105%);transition:transform .24s ease;box-shadow:16px 0 40px transparent}.desk-sidebar.is-open{transform:translateX(0);box-shadow:16px 0 40px #0009}
+
   .desk-sidebar-scrim{display:block;position:fixed;inset:0;background:#050709b3;z-index:80;border:0}
+
   .desk-sidebar-close{display:grid;place-items:center;margin-left:auto;border:0;background:transparent;color:#c9d2d9;font-size:18px;padding:5px}
+
   .desk-workspace{padding:0 16px 45px}.desk-header{padding:15px 0;min-height:79px;gap:12px;align-items:center}
+
   .desk-mobile-menu{display:grid;place-items:center;flex:none}.desk-header h1{font-size:21px}.desk-header p{font-size:10px}
+
   .desk-header-actions{gap:6px}.desk-welcome{margin-right:3px}.desk-welcome small{display:none}.desk-welcome strong{font-size:11px;max-width:85px}
+
   .desk-refresh-button{width:39px;padding:8px;min-width:39px}.desk-refresh-button span{display:none}
+
   .desk-bars{gap:6px}.desk-bar-value{font-size:9px}.desk-bar-label{font-size:10px}
+
 }
+
 @media print{.desk-sidebar,.desk-sidebar-scrim,.desk-header{display:none!important}.auren-desk{padding:0!important}.desk-workspace{padding:0!important}}
 
+
+
 /* v4 — subtle warmth + premium clarity; no loud gradients or glass overload */
+
 .auren-desk{--d-bg:#111416;--d-card:#1b2022;--d-panel:#1d2325;--d-hair:#374043;--d-muted:#a9b2ae;--d-text:#f0f0ed;--d-silver:#d2d5cc;background:#111416}
+
 .desk-sidebar{background:#181d1e;border-color:#323a39}
+
 .desk-sidebar .desk-nav button.selected,.desk-sidebar-setting.selected{background:#343c3a;border-color:#53605b;color:#f4f2e9}
+
 .desk-header{background:rgba(17,20,22,.97);border-color:#343c3a}
+
 .desk-panel{background:#1b2022;border-color:#37413f;box-shadow:0 12px 40px rgba(0,0,0,.08)}
+
 .desk-stats>div{background:#1c2223;border-color:#37413f}
+
 .desk-stats>div:nth-child(4){border-color:#5c6154;background:#242923}
+
 .desk-stats>div:nth-child(4) strong{color:#e0d5bc}
+
 .desk-smallbtn:hover,.desk-iconbtn:hover{border-color:#8c938b}
+
 .desk-record,.desk-inner{background:#222829;border-color:#3d4744}
+
 .desk-primary,.desk-accent{background:#d6d7ce!important;border-color:#e0e1d8!important;color:#181d1c!important}
+
 .desk-primary:hover,.desk-accent:hover{background:#eeeee6!important}
+
 .desk-revenue-chart{background:#212728!important}
+
 .desk-bar-fill{background:linear-gradient(180deg,#d9d0b8,#83938e)}
 
+
+
 /* A selected payment option should be unmistakable, without a loud accent. */
+
 .desk-payment-panel{border:1px solid #58625e;background:#242c2b;border-radius:10px;padding:15px 16px 12px;margin:18px 0 17px;max-width:680px}
+
 .desk-payment-panel legend{font-size:13px;font-weight:700;color:#f2f1e9;padding:0 8px;letter-spacing:.01em}
+
 .desk-payment-required{color:#d9c6a4;font-weight:500;font-size:11px}
+
 .desk-payment-hint{color:#b6bdb8;font-size:11px;margin:3px 0 13px}
+
 .desk-payment-panel .desk-methods{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+
 .desk-payment-panel .desk-methods label{display:flex;justify-content:center;align-items:center;gap:9px;min-height:48px;padding:9px 12px;background:#192020;border:1px solid #505a55;border-radius:8px;color:#c9d0ca;font-size:13px;cursor:pointer;transition:background .18s,border-color .18s,box-shadow .18s}
+
 .desk-payment-panel .desk-methods label:hover{background:#2d3532;border-color:#879387}
+
 .desk-payment-panel .desk-methods label.is-selected{background:#39443d;border-color:#b0baa9;box-shadow:0 0 0 1px #b0baa966;color:#f7f6ec}
+
 .desk-payment-panel .desk-methods input{accent-color:#dcded0}
 
+
+
 /* Today's activity: two-column grouped activity feed with clear hierarchy. */
+
 .desk-today-log .desk-panel-heading{margin-bottom:20px}
+
 .desk-log-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 21px}
+
 .desk-log-summary>div{display:flex;flex-direction:column;gap:8px;padding:15px 17px;border:1px solid #3b4743;background:#222928;border-radius:9px}
+
 .desk-log-summary span{font-size:11px;color:#b1bdb6}
+
 .desk-log-summary strong{font-size:24px;font-weight:650;color:#f2f0e8}
+
 .desk-log-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:15px}
+
 .desk-log-section{background:#222829;border:1px solid #414a46;border-radius:11px;overflow:hidden;min-width:0}
+
 .desk-log-heading{padding:17px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #3e4844;background:#252d2c;color:#cbd1c7}
+
 .desk-log-heading h3{font-size:14px;margin:0;color:#eeeae1;flex:1}
+
 .desk-log-heading>span{font-size:11px;min-width:23px;height:23px;display:grid;place-items:center;border-radius:6px;background:#3c4742;color:#e1e8df}
+
 .desk-log-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 17px;border-bottom:1px solid #353e3a;min-width:0}
+
 .desk-log-row:last-child{border-bottom:0}
+
 .desk-log-row>div:first-child{display:flex;flex-direction:column;gap:5px;min-width:0}
+
 .desk-log-row strong{font-size:12px;color:#f0f0e9;font-weight:600;overflow-wrap:anywhere}
+
 .desk-log-row span,.desk-log-row small,.desk-log-row time{font-size:11px;color:#afb9b2;overflow-wrap:anywhere}
+
 .desk-log-row-end{display:flex;align-items:flex-end;flex-direction:column;gap:7px;text-align:right;flex-shrink:0}
+
 .desk-log-row-end .desk-pill{font-size:10px;max-width:160px}
+
 .desk-log-row-end .desk-log-amount{font-size:13px;color:#e7d8b8}
+
 .desk-log-row-end .desk-log-note{color:#acbfb1}
+
 .desk-log-section .desk-empty{padding:15px 17px}
+
 @media(max-width:1100px){.desk-log-columns{grid-template-columns:1fr}}
+
 @media(max-width:650px){.desk-log-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.desk-payment-panel .desk-methods{gap:6px}.desk-payment-panel .desk-methods label{font-size:12px;padding:9px 6px}.desk-log-row{align-items:flex-start;flex-wrap:wrap}.desk-log-row-end{align-items:flex-start;text-align:left}}
+
 @media print{.desk-payment-panel,.desk-log-summary,.desk-log-columns{display:none!important}}
 
+
+
 /* ================================================================
+
    AUREN v5 / STUDIO SLATE
+
    An eye-comfortable premium palette: midnight sidebar, slate cards,
+
    soft pearl typography and restrained mineral-blue accents.
+
    Appearance-only: no React/Flask functionality changed.
+
    ================================================================ */
+
 @media screen {
+
   .auren-desk {
+
     --d-bg: #192127;
+
     --d-card: #242e34;
+
     --d-panel: #273137;
+
     --d-hair: #405058;
+
     --d-muted: #b0bec5;
+
     --d-text: #f0f1ed;
+
     --d-silver: #d8e1e2;
+
     background: #192127;
+
     color: var(--d-text);
+
     font-synthesis: none;
+
   }
+
   .auren-desk::selection, .auren-desk *::selection { background: #7899a6; color: #fff; }
+
   .desk-sidebar {
+
     background: #121b21;
+
     border-right-color: #314148;
+
     box-shadow: 9px 0 38px rgba(7, 12, 16, .10);
+
   }
+
   .desk-sidebar-brand { border-color: #34434a; }
+
   .desk-sidebar-brand strong { color: #f1f0ea; }
+
   .desk-sidebar-caption, .desk-sidebar-brand small, .desk-sidebar-profile small { color: #a4b4bc; }
+
   .desk-sidebar-profile { border-color: #34434a; }
+
   .desk-profile-avatar { background: #2d3b44; border-color: #50616a; color: #e4eef0; }
+
   .desk-sidebar .desk-nav button, .desk-sidebar-setting {
+
     color: #bac8cf; border-color: transparent;
+
     transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
+
   }
+
   .desk-sidebar .desk-nav button:hover, .desk-sidebar-setting:hover {
+
     color: #f5f5f1; background: #26363f; transform: translateX(2px);
+
   }
+
   .desk-sidebar .desk-nav button.selected, .desk-sidebar-setting.selected {
+
     background: #344650; color: #f6f6f2;
+
     border-color: #56717d;
+
     box-shadow: inset 3px 0 0 #98bdca;
+
   }
+
   .desk-sidebar-bottom { border-color: #34434a; }
+
   .desk-header {
+
     background: rgba(25,33,39,.95);
+
     border-color: #38464d;
+
     box-shadow: 0 7px 22px rgba(10,17,21,.11);
+
   }
+
   .desk-header h1, .desk-panel h2, .desk-panel h3 { color: #f1f2ee; }
+
   .desk-eyebrow, .desk-header .desk-eyebrow { color: #a8c1ca; }
+
   .desk-welcome strong { color: #e9efed; }
+
   .desk-welcome small { color: #b4c3ca; }
+
   .desk-iconbtn, .desk-smallbtn {
+
     background: #303c43; color: #e5edee; border-color: #4b5a62;
+
     border-radius: 9px;
+
     transition: background .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+
   }
+
   .desk-iconbtn:hover, .desk-smallbtn:hover {
+
     background: #3e4d56; border-color: #87a7b6;
+
     transform: translateY(-1px);
+
     box-shadow: 0 5px 15px rgba(7,12,16,.14);
+
   }
+
   .desk-iconbtn:active, .desk-smallbtn:active, .desk-primary:active {
+
     transform: translateY(0) scale(.985);
+
   }
+
   .desk-iconbtn.is-active { background: #4b626f; }
+
   .desk-count { background: #b47768; }
+
   .desk-stats>div {
+
     background: #263138; border-color: #43525a; border-radius: 13px;
+
     box-shadow: 0 5px 17px rgba(8,13,16,.075);
+
     transition: border-color .22s ease, background .22s ease, transform .22s ease, box-shadow .22s ease;
+
   }
+
   .desk-stats>div:hover {
+
     background: #2c3941; border-color: #65808c;
+
     transform: translateY(-2px);
+
     box-shadow: 0 11px 22px rgba(8,13,16,.12);
+
   }
+
   .desk-stats>div:nth-child(4) {
+
     background: #2b3939; border-color: #60736d;
+
   }
+
   .desk-stats>div:nth-child(4):hover { background: #314440; border-color: #839a8d; }
+
   .desk-stats>div:nth-child(4) strong { color: #e1ddc5; }
+
   .desk-stats span { color: #b5c6cd; }
+
   .desk-stats strong { color: #f1f2ee; }
+
   .desk-panel {
+
     background: #232e35;
+
     border: 1px solid #41515a;
+
     border-radius: 14px;
+
     box-shadow: 0 9px 28px rgba(6,13,17,.085);
+
   }
+
   .desk-record, .desk-inner, .desk-log-section {
+
     background: #2b373e; border-color: #465761; border-radius: 12px;
+
   }
+
   .desk-record {
+
     transition: background .2s ease, border-color .2s ease, transform .2s ease;
+
   }
+
   .desk-record:hover {
+
     background: #303e46; border-color: #648390; transform: translateY(-1px);
+
   }
+
   .desk-detail, .desk-muted, .desk-empty, .desk-small, .desk-record-head p { color: #b7c6cc; }
+
   .desk-lines { border-color: #4c5c63; }
+
   .desk-lines>div { color: #e0e7e6; }
+
   .desk-lines .desk-line-total { border-color: #62747d; }
+
   .desk-pill { background: #3d5260; border-color: #5d7885; color: #e0edf1; }
+
   .desk-pill-arrived, .desk-pill-completed { background: #2c4a43; border-color: #4e826e; color: #d3eadd; }
+
   .desk-pill-absent, .desk-pill-cancelled { background: #523b41; border-color: #89626b; color: #f1ced4; }
+
   .desk-pill-billed { background: #51493d; border-color: #88765c; color: #f0dfbd; }
+
   .desk-subnav, .desk-nav { background: #2d3a42; border-color: #4c5c64; }
+
   .desk-subnav button.selected { background: #506572; color: #fff; }
+
   .desk-search, .desk-walkgrid input:not([type=checkbox]), .desk-billform input:not([type=radio]) {
+
     background: #1c262d; border-color: #52636b; color: #f2f3ef;
+
     transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+
   }
+
   .desk-search:focus-within,
+
   .desk-walkgrid input:not([type=checkbox]):focus,
+
   .desk-billform input:not([type=radio]):focus {
+
     background: #233039; border-color: #97bdc9;
+
     box-shadow: 0 0 0 3px rgba(151,189,201,.12);
+
   }
+
   .auren-desk :is(button, input, a):focus-visible {
+
     outline: 2px solid #a3cbd7; outline-offset: 3px;
+
   }
+
   .desk-checks label, .desk-methods label {
+
     background: #303e46; border-color: #53636b; color: #e3ebec;
+
   }
+
   .desk-checks label:hover { background: #374850; border-color: #829ca8; }
+
   .desk-checks input, .desk-methods input { accent-color: #9abdc9; }
+
   .desk-primary, .desk-accent {
+
     background: #ccdce0 !important;
+
     color: #1a282f !important; border-color: #dfebec !important;
+
     border-radius: 9px;
+
     transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+
   }
+
   .desk-primary:hover, .desk-accent:hover {
+
     background: #e3eff0 !important;
+
     transform: translateY(-1px);
+
     box-shadow: 0 8px 18px rgba(12,19,23,.14);
+
   }
+
   .desk-success { background: #29443c; border-color: #53816f; color: #d6efdc; }
+
   .desk-error { background: #483239; border-color: #98656d; color: #ffdcdd; }
+
   .desk-bell, .desk-suggestions {
+
     background: #2b3840; border-color: #60737d;
+
     box-shadow: 0 16px 40px rgba(4,9,13,.3);
+
   }
+
   .desk-bell-top, .desk-notice, .desk-suggestions button { border-color: #485e66; }
+
   .desk-notice:hover, .desk-suggestions button:hover { background: #3a4c55; }
+
   .desk-toast {
+
     background: #30414a; color: #f0f3f1; border-color: #73929d;
+
     border-radius: 12px; box-shadow: 0 18px 40px rgba(5,10,14,.3);
+
     animation: aurenV5ToastIn .28s ease-out both;
+
   }
+
   .desk-modal-backdrop { background: rgba(7,13,17,.79); backdrop-filter: blur(3px); }
+
   .desk-receipt-dialog { background: #2a363e; border-color: #6d848d; border-radius: 13px; }
+
   /* Keep the actual white thermal receipt pure white; never theme it. */
+
   .desk-receipt { background: #fff; color: #111; }
+
   .desk-payment-panel { background: #2d3c42; border-color: #6d8790; }
+
   .desk-payment-panel legend { color: #e8f0ed; }
+
   .desk-payment-required { color: #e7cdad; }
+
   .desk-payment-hint { color: #bfced0; }
+
   .desk-payment-panel .desk-methods label {
+
     background: #233039; border-color: #567078; color: #d6e1e2;
+
     transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+
   }
+
   .desk-payment-panel .desk-methods label:hover { background: #384c56; border-color: #9abcc5; }
+
   .desk-payment-panel .desk-methods label.is-selected {
+
     background: #41606a; border-color: #aad0d4;
+
     box-shadow: 0 0 0 2px rgba(155,206,209,.19); color: #fff;
+
   }
+
   .desk-payment-panel .desk-methods input { accent-color: #a9cbd4; }
+
   .desk-log-summary>div, .desk-log-section { background: #2b373d; border-color: #485b62; }
+
   .desk-log-summary span, .desk-log-row span, .desk-log-row small, .desk-log-row time { color: #b9c9cf; }
+
   .desk-log-summary strong, .desk-log-row strong { color: #f3f2ed; }
+
   .desk-log-heading { background: #33434b; border-color: #4f626a; color: #dce7e5; }
+
   .desk-log-heading h3 { color: #f0f2ed; }
+
   .desk-log-heading>span { background: #50656e; color: #eff5f4; }
+
   .desk-log-row { border-color: #43545c; transition: background .16s ease; }
+
   .desk-log-row:hover { background: #33424a; }
+
   .desk-log-row-end .desk-log-amount { color: #e8dcc1; }
+
   .desk-revenue-chart { background: #27333a !important; border-color: #465862 !important; }
+
   .desk-bar-track {
+
     border-bottom-color: #738c96;
+
     background: repeating-linear-gradient(to top,rgba(189,211,220,.065) 0px,rgba(189,211,220,.065) 1px,transparent 1px,transparent 46px);
+
   }
+
   .desk-bar-fill {
+
     background: linear-gradient(180deg,#a5c5cb,#688e9a);
+
     border-radius: 6px 6px 0 0;
+
     transition: filter .2s ease, transform .2s ease;
+
     transform-origin: bottom;
+
   }
+
   .desk-bar-group:hover .desk-bar-fill { filter: brightness(1.16); transform: scaleX(1.065); }
+
   .desk-bar-group:hover .desk-bar-value { color: #f2f5f2; }
+
   .desk-bar-value { color: #d4e4e7; }
+
   .desk-bar-label { color: #b4c8ce; }
+
   .desk-brand-logo {
+
     background: #263940; border: 1px solid #54717d;
+
     box-shadow: 0 0 0 1px rgba(157,199,207,.08);
+
     animation: aurenV5BrandBreathe 7s ease-in-out infinite;
+
     transition: transform .45s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+
   }
+
   .desk-sidebar-brand:hover .desk-brand-logo {
+
     transform: rotate(-5deg) scale(1.075);
+
     filter: brightness(1.12);
+
   }
+
   .desk-sidebar-brand strong {
+
     transition: letter-spacing .3s ease, color .3s ease;
+
   }
+
   .desk-sidebar-brand:hover strong { letter-spacing: .22em; color: #dcebee; }
+
   .desk-settings-card, .desk-settings-action {
+
     border-color: #475b63; background: #2a363d;
+
   }
+
   .desk-settings-action:hover { background: #34464d; border-color: #7897a1; }
+
 }
+
 @keyframes aurenV5BrandBreathe {
+
   0%, 100% { box-shadow: 0 0 0 1px rgba(157,199,207,.08); }
+
   50% { box-shadow: 0 0 0 4px rgba(157,199,207,.045); }
+
 }
+
 @keyframes aurenV5ToastIn {
+
   from { opacity: 0; transform: translateY(9px); }
+
   to { opacity: 1; transform: translateY(0); }
+
 }
+
 @media (prefers-reduced-motion: reduce) {
+
   .auren-desk .desk-brand-logo,
+
   .auren-desk .desk-toast { animation: none !important; }
+
   .auren-desk .desk-sidebar .desk-nav button,
+
   .auren-desk .desk-record,
+
   .auren-desk .desk-stats>div,
+
   .auren-desk .desk-bar-fill { transition: none !important; }
+
+}
+
+
+
+
+
+/* Query Inbox v2: unread sidebar badge, filters, sound toggle */
+
+.auren-desk .desk-query-unseen{display:inline-grid;place-items:center;min-width:21px;height:21px;padding:0 5px;margin-left:auto;border-radius:999px;background:#c93b45;color:#fff;font-size:10px;font-weight:800;letter-spacing:0;box-shadow:0 0 0 2px rgba(201,59,69,.13)}
+
+.auren-desk .desk-query-tabs{display:inline-flex;max-width:100%;flex-wrap:wrap;gap:5px;background:#20262a;border:1px solid #48525a;border-radius:10px;padding:5px;margin:0 0 19px}
+
+.auren-desk .desk-query-tabs button{background:transparent;color:#b5c0c8;border:1px solid transparent;border-radius:7px;padding:10px 15px;font-size:12px;font-weight:600;cursor:pointer}
+
+.auren-desk .desk-query-tabs button.selected{background:#cbd0d2;color:#171b1d;border-color:#e4e8ea}
+
+.auren-desk .desk-sound-toggle{flex-shrink:0}
+
+
+/* ====================================================
+  AUREN · ATELIER CRM 2026 — visual refresh only
+  Core behaviour/API/hooks remain in AdminDashboard.jsx
+==================================================== */
+.auren-desk {
+  --d-bg:#141a20; --d-card:#232c34; --d-panel:#222b33;
+  --d-hair:#3c4a54; --d-muted:#aebbc3; --d-text:#f4f3ec;
+  --d-silver:#e2e4dc;
+  --crm-blue:#82b6e7; --crm-saffron:#e9aa66; --crm-green:#7ac9a0;
+  --crm-red:#ed8b8d; --crm-text:#f5f5f1;
+  background:radial-gradient(ellipse at 94% 3%,rgba(75,110,138,.15),transparent 44%),#141a20;
+  color:var(--crm-text);
+  font-family:"Manrope","DM Sans",sans-serif;
+}
+.auren-desk .desk-sidebar {
+  background:linear-gradient(170deg,#1d2730 0%,#141b22 72%);
+  border-right:1px solid #33424d;
+}
+.auren-desk .desk-sidebar-brand{border-color:#34434f;margin-bottom:25px;}
+.auren-desk .desk-brand-logo{border-radius:17px;background:#303d48;box-shadow:0 7px 25px #0004;}
+.auren-desk .desk-sidebar-brand strong{color:#f8f4e9;}
+.auren-desk .desk-sidebar-caption{color:#8da5b9;}
+.auren-desk .desk-sidebar .desk-nav{gap:7px;}
+.auren-desk .desk-sidebar .desk-nav button,
+.auren-desk .desk-sidebar-setting {
+  border-radius:999px;padding:13px 16px;min-height:47px;
+  transition:background .2s ease,transform .2s ease,color .2s ease;
+}
+.auren-desk .desk-sidebar .desk-nav button:hover,.auren-desk .desk-sidebar-setting:hover {background:#2a3946;transform:translateX(2px)}
+.auren-desk .desk-sidebar .desk-nav button.selected,.auren-desk .desk-sidebar-setting.selected {
+  background:#d9e4e8;color:#1a2933;border-color:#d9e4e8;
+  box-shadow:0 8px 22px #0003;
+}
+.auren-desk .desk-sidebar .desk-nav button.selected svg{color:#2f6d8a;}
+.auren-desk .desk-query-unseen{border-radius:999px!important;background:#de5559!important;color:#fff!important;box-shadow:0 0 0 3px #e06a6a22;}
+.auren-desk .desk-sidebar-profile{border-color:#34424c;}
+.auren-desk .desk-profile-avatar{border-radius:50%;background:#314453;color:#d9e7f1;}
+.auren-desk .desk-header {
+  background:rgba(20,27,34,.92);border-color:#34424a;
+  border-radius:0 0 22px 22px;
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  margin-bottom:27px;padding:19px 20px;
+}
+.auren-desk .desk-heading-copy h1{color:#f7f6f1;font-size:clamp(22px,2.6vw,31px);letter-spacing:-.055em;}
+.auren-desk .desk-eyebrow{color:#8bb5d1;letter-spacing:.16em;}
+.auren-desk .desk-welcome strong{color:#f2f3ef;}
+.auren-desk :is(.desk-iconbtn,.desk-smallbtn,.desk-primary,.desk-settings-action,.desk-logout-action){border-radius:999px;}
+.auren-desk :is(.desk-iconbtn,.desk-smallbtn){background:#2c3842;color:#e6ebed;border:1px solid #53616b;}
+.auren-desk :is(.desk-iconbtn,.desk-smallbtn):hover{background:#3b4c59;border-color:#91aebf;}
+.auren-desk .desk-iconbtn{width:41px;height:41px;}
+.auren-desk .desk-primary,.auren-desk .desk-accent{
+  border-radius:999px!important;background:#d6e7ec!important;color:#1c303d!important;
+  border:1px solid #d6e7ec!important;box-shadow:0 4px 14px #0002;
+}
+.auren-desk .desk-primary:hover,.auren-desk .desk-accent:hover{background:#f0f2ed!important;}
+.auren-desk .desk-stats>div,.auren-desk .desk-log-summary>div{
+  border:1px solid #495862;background:linear-gradient(145deg,#293640,#202a32);
+  border-radius:22px;padding:24px;min-width:0;box-shadow:0 12px 30px #0002;
+}
+.auren-desk .desk-stats>div:nth-child(1){border-top:3px solid #83b9ee;}
+.auren-desk .desk-stats>div:nth-child(2){border-top:3px solid #eaaa6b;}
+.auren-desk .desk-stats>div:nth-child(3){border-top:3px solid #82cda6;}
+.auren-desk .desk-stats>div:nth-child(4){border-top:3px solid #d5ad82;background:linear-gradient(140deg,#36372f,#293235);}
+.auren-desk .desk-stats>div strong,.auren-desk .desk-log-summary>div strong{font-size:clamp(23px,2.9vw,35px);letter-spacing:-.06em;color:#f7f5ed;}
+.auren-desk .desk-stats>div:nth-child(4) strong{color:#eac597;}
+.auren-desk .desk-stats>div span{color:#b5c7d0;}
+.auren-desk .desk-panel{background:#222c34;border:1px solid #43515c;border-radius:25px;padding:clamp(18px,2.7vw,34px);box-shadow:0 20px 46px #0002;}
+.auren-desk .desk-panel h2{color:#f7f5ee;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.05em;}
+.auren-desk .desk-inner,.auren-desk .desk-record{
+  background:linear-gradient(145deg,#2c3943,#25303a);border:1px solid #465761;
+  border-radius:20px;padding:clamp(17px,2vw,24px);
+  box-shadow:0 8px 25px #0001;transition:border-color .2s,transform .2s;
+}
+.auren-desk .desk-record:hover,.auren-desk .desk-inner:hover{border-color:#647985;}
+.auren-desk .desk-record-head h3{color:#f5f3ed;}
+.auren-desk .desk-pill{border-radius:999px;padding:7px 13px;max-width:190px;}
+.auren-desk .desk-pill-confirmed{background:#243e58;color:#9fd0fb;border-color:#537fa1;}
+.auren-desk .desk-pill-arrived,.auren-desk .desk-pill-completed{background:#234a3d;color:#a6e2be;border-color:#50856c;}
+.auren-desk .desk-pill-absent,.auren-desk .desk-pill-cancelled{background:#543037;color:#ffc1c2;border-color:#99626b;}
+.auren-desk .desk-pill-billed{background:#52412e;color:#f3c891;border-color:#927451;}
+.auren-desk :is(.desk-subnav,.desk-methods,.desk-payment-panel .desk-methods){border-radius:999px;}
+.auren-desk .desk-subnav{background:#1e2932;border:1px solid #4c606a;padding:5px;gap:5px;max-width:100%;flex-wrap:wrap;}
+.auren-desk .desk-subnav button,.auren-desk .desk-methods label,.auren-desk .desk-payment-panel .desk-methods label{border-radius:999px;}
+.auren-desk .desk-subnav button.selected{background:#dce8ec;color:#1c303a;}
+.auren-desk .desk-search{background:#19242c;border:1px solid #4e616d;border-radius:999px;padding:0 19px;max-width:620px;min-height:48px;}
+.auren-desk .desk-search input{color:#f4f3ef;}
+.auren-desk input:not([type="checkbox"]):not([type="radio"]),.auren-desk textarea{border-radius:15px;}
+.auren-desk .desk-search input{border:0!important;background:transparent!important;}
+.auren-desk .desk-walkgrid input:not([type=checkbox]),.auren-desk .desk-billform input:not([type=radio]){background:#19242c;border-color:#51616b;}
+.auren-desk .desk-checks label{border-radius:16px;}
+.auren-desk .desk-log-row,.auren-desk .desk-log-section{border-radius:16px;}
+.auren-desk .desk-revenue-chart{background:#29353f!important;border-radius:20px;}
+.auren-desk .desk-bar-fill{background:linear-gradient(180deg,#8cc5ec,#4c829e);border-radius:11px 11px 0 0;}
+.auren-desk .desk-bell{border-radius:19px;background:#283743;border-color:#526775;}
+.auren-desk .desk-bell-top button{border-radius:999px;}
+.auren-desk .desk-toast{border-radius:18px;background:#293c48;border-color:#668395;}
+.auren-desk .desk-settings-card{border-radius:22px;}
+.auren-desk .desk-setting-icon{color:#e9aa66;}
+.auren-desk .desk-success{border-radius:16px;}
+.auren-desk .desk-error{border-radius:15px;}
+/* Selected conversation CRM, responsive 2-panel mailbox */
+.auren-desk .desk-query-inbox{padding:clamp(20px,2.8vw,36px);}
+.auren-desk .crm-inbox-heading{display:flex;align-items:center;justify-content:space-between;gap:25px;flex-wrap:wrap;margin-bottom:25px;}
+.auren-desk .crm-inbox-heading h2{font-size:clamp(27px,3.5vw,42px);margin:8px 0 10px;}
+.auren-desk .crm-title-dot{color:#e9aa66;}
+.auren-desk .crm-query-overview{display:flex;gap:9px;flex-wrap:wrap;}
+.auren-desk .crm-overview-stat{display:flex;flex-direction:column;gap:5px;min-width:92px;padding:12px 18px;border-radius:20px;border:1px solid #52616b;background:#2c3943;}
+.auren-desk .crm-overview-stat strong{font-size:22px;line-height:1.2;color:#e8f1f3;}
+.auren-desk .crm-overview-stat small{font-size:9px;letter-spacing:.12em;color:#a8bdc6;}
+.auren-desk .crm-overview-new{background:#293d50;border-color:#4a6d8a;}.auren-desk .crm-overview-new strong{color:#a8d7ff;}
+.auren-desk .crm-overview-done{background:#2b4039;border-color:#557b6b;}.auren-desk .crm-overview-done strong{color:#a6e3bf;}
+.auren-desk .crm-inbox-toolbar{display:flex;align-items:center;gap:15px;justify-content:space-between;flex-wrap:wrap;margin-bottom:17px;}
+.auren-desk .desk-query-tabs{display:inline-flex;gap:4px;margin:0;padding:5px;background:#19252e;border:1px solid #4b606d;border-radius:999px;}
+.auren-desk .desk-query-tabs button{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:11px 18px;background:transparent;border:0;color:#b7c8d0;white-space:nowrap;}
+.auren-desk .desk-query-tabs button.selected{background:#d9e8eb;color:#20313a;box-shadow:0 5px 13px #0003;}
+.auren-desk .desk-query-tabs button span{border-radius:999px;padding:3px 7px;background:#45535d;color:#e9eef0;font-size:11px;}
+.auren-desk .desk-query-tabs button.selected span{background:#bbcfd7;color:#253640;}
+.auren-desk .crm-query-search{display:flex;align-items:center;gap:11px;flex:1 1 255px;max-width:385px;min-height:46px;padding:0 16px;border:1px solid #516674;background:#19252e;border-radius:999px;color:#95b3c5;}
+.auren-desk .crm-query-search input{flex:1;min-width:0;border:0;outline:none;background:transparent!important;color:#f4f4ef;font-size:12px;padding:11px 0;}
+.auren-desk .crm-query-search input::placeholder{color:#849ba9;}
+.auren-desk .crm-mailbox{display:grid;grid-template-columns:minmax(290px,.88fr) minmax(0,1.25fr);min-height:560px;overflow:hidden;border:1px solid #4b606c;border-radius:24px;background:#202b34;}
+.auren-desk .crm-message-list{min-width:0;border-right:1px solid #435663;background:#1d2933;overflow-y:auto;max-height:650px;}
+.auren-desk .crm-list-top{display:flex;justify-content:space-between;padding:20px 21px 15px;color:#8eb6cd;font-size:9px;font-weight:700;letter-spacing:.16em;}
+.auren-desk .crm-mail-item{width:100%;display:flex;position:relative;gap:13px;align-items:flex-start;padding:18px 19px;background:transparent;border:0;border-top:1px solid #334552;text-align:left;color:#f4f4f0;cursor:pointer;transition:background .18s;}
+.auren-desk .crm-mail-item:hover{background:#2a3a47;}
+.auren-desk .crm-mail-item.is-selected{background:#324a5b;box-shadow:inset 4px 0 #8cc9ef;}
+.auren-desk .crm-mail-avatar,.auren-desk .crm-sender-avatar{display:grid;place-items:center;flex:none;border-radius:50%;background:#3e5b6e;color:#e4f4fa;font-weight:800;}
+.auren-desk .crm-mail-avatar{width:39px;height:39px;font-size:15px;}
+.auren-desk .crm-mail-item-copy{display:flex;flex:1;flex-direction:column;gap:5px;min-width:0;}
+.auren-desk .crm-mail-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;}
+.auren-desk .crm-mail-row strong{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.auren-desk .crm-mail-row small{color:#9fb2be;font-size:10px;white-space:nowrap;flex:none;}
+.auren-desk .crm-mail-subject{font-size:12px;color:#cbdce4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.auren-desk .crm-mail-preview{font-size:11px;color:#91a5b2;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-height:1.5;overflow-wrap:anywhere;}
+.auren-desk .crm-unread-dot{position:absolute;top:12px;right:10px;width:7px;height:7px;border-radius:50%;background:#ed9296;box-shadow:0 0 0 3px #ed929621;}
+.auren-desk .crm-mail-empty{display:grid;place-items:center;text-align:center;gap:10px;padding:55px 16px;color:#cad7dc;}
+.auren-desk .crm-mail-empty svg{font-size:29px;color:#95bacc;}.auren-desk .crm-mail-empty p{color:#a3b8c4;font-size:12px;}
+.auren-desk .crm-message-detail{min-width:0;padding:clamp(22px,3vw,37px);background:radial-gradient(circle at 100% 0%,#34445170,transparent 50%),#27333d;}
+.auren-desk .crm-detail-top{display:flex;justify-content:space-between;gap:12px;align-items:center;}
+.auren-desk .crm-message-detail h3{font-size:clamp(23px,2.8vw,34px);line-height:1.2;letter-spacing:-.05em;margin:18px 0 9px;color:#f7f6f1;overflow-wrap:anywhere;}
+.auren-desk .crm-detail-timestamp{font-size:11px;display:flex;align-items:center;gap:9px;color:#aabec8;margin:0 0 23px;}
+.auren-desk .crm-sender{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:17px 0;border-top:1px solid #495a65;border-bottom:1px solid #495a65;}
+.auren-desk .crm-sender-avatar{width:47px;height:47px;font-size:19px;background:#b5cddd;color:#223541;}
+.auren-desk .crm-sender-copy{display:flex;flex:1;flex-direction:column;gap:4px;min-width:0;}
+.auren-desk .crm-sender-copy span,.auren-desk .crm-message-body>span{color:#94b8c9;font-size:9px;font-weight:800;letter-spacing:.17em;}
+.auren-desk .crm-sender-copy strong{font-size:14px;color:#faf8f1;overflow-wrap:anywhere;}
+.auren-desk .crm-sender-copy a{color:#a9d3f5;font-size:12px;overflow-wrap:anywhere;}
+.auren-desk .crm-sender-phone{display:flex;align-items:center;gap:7px;color:#dce7eb;text-decoration:none;font-size:12px;border:1px solid #596a76;border-radius:999px;padding:10px 13px;}
+.auren-desk .crm-message-body{margin:24px 0;padding:24px;border:1px solid #506370;border-radius:19px;background:#1d2a34;}
+.auren-desk .crm-message-body p{color:#e0e9eb;font-size:14px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;margin:16px 0 0;}
+.auren-desk .crm-detail-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;}
+.auren-desk .crm-detail-actions .desk-primary,.auren-desk .crm-detail-actions .desk-smallbtn{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:10px 17px;font-size:12px;text-decoration:none;}
+.auren-desk .crm-detail-actions .crm-resolve-btn{background:#2c4c3d;color:#b9efcc;border-color:#568069;}
+.auren-desk .crm-detail-actions .crm-resolve-btn:hover{background:#3a674e;border-color:#84c49e;}
+.auren-desk .desk-query-badge{border-radius:999px;font-size:10px;padding:7px 12px;}
+.auren-desk .desk-query-badge.is-new{background:#4f343b;color:#f7b0b4;border-color:#9a626d;}
+.auren-desk .desk-query-badge.is-read{background:#4b412f;color:#f7d49d;border-color:#9b784e;}
+.auren-desk .desk-query-badge.is-resolved{background:#294d3e;color:#b3e5c7;border-color:#598872;}
+.auren-desk .crm-no-selection{display:flex;min-height:350px;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;}
+.auren-desk .crm-no-selection svg{font-size:42px;color:#91bbd0;}.auren-desk .crm-no-selection h3{margin:0;}.auren-desk .crm-no-selection p{color:#adc2cd;font-size:13px;}
+@media(max-width:1180px){.auren-desk .crm-mailbox{grid-template-columns:minmax(250px,.85fr) minmax(0,1.2fr)}.auren-desk .crm-mail-row{flex-wrap:wrap;}.auren-desk .crm-mail-row small{white-space:normal;}}
+@media(max-width:950px){.auren-desk .crm-mailbox{grid-template-columns:1fr;}.auren-desk .crm-message-list{max-height:290px;border-right:0;border-bottom:1px solid #4b606c;}.auren-desk .crm-message-detail{min-height:330px;}.auren-desk .desk-panel{border-radius:20px;}}
+@media(max-width:760px){.auren-desk .desk-header{padding:14px 8px;border-radius:0 0 15px 15px;}.auren-desk .desk-sidebar{border-radius:0 22px 22px 0;}.auren-desk .desk-stats>div{padding:17px;border-radius:17px;}.auren-desk .crm-query-overview{width:100%;}.auren-desk .crm-overview-stat{flex:1;min-width:80px;}.auren-desk .crm-inbox-toolbar{align-items:stretch;flex-direction:column;}.auren-desk .crm-query-search{max-width:none;flex:0 0 auto;}.auren-desk .desk-query-tabs{width:fit-content;max-width:100%;}.auren-desk .crm-message-detail{padding:20px;}}
+@media(max-width:440px){.auren-desk .desk-stats{gap:10px;}.auren-desk .crm-overview-stat{padding:11px;min-width:0;}.auren-desk .crm-overview-stat strong{font-size:19px;}.auren-desk .desk-query-tabs button{padding:10px 11px;font-size:11px;}.auren-desk .crm-detail-actions>*{flex:1 1 auto;justify-content:center;}.auren-desk .crm-mail-item{padding:13px 12px;}}
+@media(prefers-reduced-motion:reduce){.auren-desk .crm-mail-item,.auren-desk .desk-sidebar .desk-nav button,.auren-desk .desk-record{transition:none!important;}}
+/* Printer output must remain exactly as before. */
+@media print{
+ .auren-desk{background:#fff!important;color:#000!important;}
+ .auren-desk .desk-receipt{background:#fff!important;color:#111!important;border-radius:0!important;}
+ .auren-desk .desk-receipt-dialog{border-radius:0!important;}
+}
+
+
+/* =======================================================
+   AUREN CRM — Liquid Glass & Reception Intelligence v2
+   UI-only enhancement: existing billing / notification logic retained
+======================================================= */
+.auren-desk{background:radial-gradient(ellipse 40% 32% at 92% 7%,rgba(96,169,216,.115),transparent 85%),radial-gradient(ellipse 38% 28% at 36% 78%,rgba(226,160,92,.085),transparent 78%),linear-gradient(145deg,#18232c,#202b35 43%,#1d2931 100%);background-attachment:fixed;}
+.auren-desk .desk-header{border:1px solid rgba(215,235,245,.19);border-radius:30px;margin:15px 0 25px;padding:14px 20px;background:linear-gradient(135deg,rgba(126,169,193,.19),rgba(29,43,53,.8) 52%,rgba(218,158,100,.09));backdrop-filter:blur(30px) saturate(170%);-webkit-backdrop-filter:blur(30px) saturate(170%);box-shadow:0 14px 38px #0b141e52,inset 0 1px #ffffff30;gap:12px;}
+.auren-desk .crm-top-tabs{flex:1;max-width:775px;min-width:0;justify-content:center;}
+.auren-desk .crm-glass-tabs{display:flex;position:relative;align-items:center;gap:3px;padding:5px;border:1px solid #d7e8ef36;border-radius:999px;background:rgba(17,29,40,.46);backdrop-filter:blur(22px) saturate(175%);-webkit-backdrop-filter:blur(22px) saturate(175%);isolation:isolate;box-shadow:inset 0 1px #ffffff20;}
+.auren-desk .crm-glass-indicator{position:absolute;z-index:0;border:1px solid #ffffff65;border-radius:999px;background:linear-gradient(145deg,rgba(234,245,250,.35),rgba(130,182,217,.21));box-shadow:0 5px 18px #080f1760,inset 0 1px #ffffff73;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:left 550ms cubic-bezier(.22,1,.36,1),top 550ms cubic-bezier(.22,1,.36,1),width 550ms cubic-bezier(.22,1,.36,1),height 550ms cubic-bezier(.22,1,.36,1);pointer-events:none;}
+.auren-desk .crm-glass-tabs button{display:inline-flex;gap:7px;align-items:center;justify-content:center;flex:1;z-index:1;position:relative;min-width:0;border:0!important;border-radius:999px;padding:11px 10px;background:transparent!important;color:#bacbd3;white-space:nowrap;font-size:11px;font-weight:650;transition:color .28s ease;}
+.auren-desk .crm-glass-tabs button.selected{color:#fff!important;box-shadow:none!important;}
+.auren-desk .crm-glass-tabs button svg{font-size:14px;flex:none;}
+.auren-desk .crm-tab-count{padding:3px 7px;border-radius:999px;background:#91b7cd33;color:#e8f3fa;font-size:10px;}
+.auren-desk .crm-section-tabs{width:fit-content;max-width:100%;margin:0 0 20px;}
+.auren-desk .crm-section-tabs button{flex:0 1 auto;padding:13px 20px;}
+.auren-desk .crm-section-tabs button .crm-tab-count{background:#e3ecf036;color:#eaf2f5;}
+.auren-desk .desk-sidebar .desk-nav button{border-radius:999px;}
+.auren-desk .desk-sidebar .desk-nav button.selected{background:linear-gradient(110deg,#d4e4ef,#b5c9d6);color:#1d3442;border-color:#c8dce8;box-shadow:0 8px 22px #080f194d;}
+.auren-desk .crm-upcoming-badge{margin-left:auto;background:#e3ac67;color:#2f2317;font-size:10px;font-weight:800;border-radius:999px;padding:3px 8px;}
+.auren-desk .crm-next-up{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin:0 0 17px;padding:16px 20px;background:linear-gradient(115deg,#243e50,#304454);border:1px solid #6b9ab45e;border-radius:22px;}
+.auren-desk .crm-next-up>svg{font-size:20px;color:#a3d5f4;}
+.auren-desk .crm-next-up>div{display:grid;gap:4px;flex:1;min-width:200px;}
+.auren-desk .crm-next-up small{font-size:9px;letter-spacing:.16em;color:#9dc2d8;}
+.auren-desk .crm-next-up strong{color:#f4f1e9;font-size:14px;}
+.auren-desk .crm-next-up>span{border-radius:999px;padding:7px 13px;background:#69b88b24;color:#aee8c2;border:1px solid #71be975e;font-size:11px;}
+.auren-desk .desk-log-section{display:flex;flex-direction:column;max-height:440px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#607a8a #24333e;border-radius:22px!important;border:1px solid #4f6472!important;background:#222f39!important;}
+.auren-desk .desk-log-heading{position:sticky;top:0;z-index:2;background:#293b48!important;padding:16px!important;border-bottom:1px solid #526e80;backdrop-filter:blur(14px);}
+.auren-desk .desk-log-row{margin:5px 10px!important;padding:15px!important;border:1px solid #5766725e!important;border-radius:16px!important;background:#2c3c4785!important;gap:11px!important;overflow-wrap:anywhere;}
+.auren-desk .crm-log-appointments{border-top:3px solid #82b6e7!important;}.auren-desk .crm-log-walkins{border-top:3px solid #e9aa66!important;}.auren-desk .crm-log-invoices{border-top:3px solid #77c69a!important;}.auren-desk .crm-log-events{border-top:3px solid #df858e!important;}
+.auren-desk .crm-log-appointments .desk-log-heading svg{color:#82b6e7}.auren-desk .crm-log-walkins .desk-log-heading svg{color:#e9aa66}.auren-desk .crm-log-invoices .desk-log-heading svg{color:#77c69a}.auren-desk .crm-log-events .desk-log-heading svg{color:#df858e}
+.auren-desk .crm-invoice-ledger{border-radius:24px;}.auren-desk .crm-ledger-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:15px;}.auren-desk .crm-ledger-head h3{font-size:19px;margin:6px 0;}.auren-desk .crm-ledger-total{background:#87b7d021;color:#c8e6fa;border-radius:999px;padding:8px 13px;font-size:11px;}.auren-desk .crm-invoice-scroll{display:grid;gap:10px;max-height:570px;overflow-y:auto;padding-right:5px;scrollbar-width:thin;}
+.auren-desk .crm-invoice-item{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(130px,1fr) auto;align-items:center;gap:15px;border:1px solid #61717c5c;background:#23323d;border-radius:19px;padding:15px;}
+.auren-desk .crm-invoice-identity{display:flex;gap:12px;align-items:center;min-width:0;}.auren-desk .crm-invoice-identity>div,.auren-desk .crm-invoice-metadata{display:grid;gap:5px;min-width:0;}.auren-desk .crm-invoice-icon{display:grid;place-items:center;flex:none;width:39px;height:39px;background:#84b8e526;color:#acdaf5;border-radius:14px;}.auren-desk .crm-invoice-identity strong{font-size:13px;overflow-wrap:anywhere;}.auren-desk .crm-invoice-item small{font-size:10px;color:#a6bcca;overflow-wrap:anywhere;}.auren-desk .crm-method-chip{width:fit-content;padding:5px 11px;border-radius:999px;background:#e9aa6630;color:#ffcf99;font-size:10px;font-weight:700;}.auren-desk .crm-invoice-amount{display:grid;justify-items:end;gap:9px;}.auren-desk .crm-invoice-amount>strong{font-size:16px;color:#ddf0ef;}
+.auren-desk .crm-revenue-sources{display:grid;grid-template-columns:1.15fr 1fr;gap:15px;margin:15px 0 20px;}.auren-desk .crm-revenue-sources>.desk-inner{border-radius:24px;}.auren-desk .crm-revenue-sources h3{font-size:18px;margin:9px 0 17px;}.auren-desk .crm-mix-content{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}.auren-desk .crm-donut{width:190px;height:190px;flex:none;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#e9aa66 var(--walkin-pct),#82b6e7 var(--walkin-pct) 100%);box-shadow:0 10px 25px #08162170;}.auren-desk .crm-donut>div{width:136px;height:136px;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;background:#263540;}.auren-desk .crm-donut strong{font-size:34px;color:#f0f4f5;}.auren-desk .crm-donut small{font-size:10px;color:#a5bbca;}.auren-desk .crm-mix-legend{display:grid;gap:12px;flex:1;}.auren-desk .crm-mix-legend>div{display:grid;grid-template-columns:12px 1fr auto auto;gap:10px;align-items:center;padding:10px 12px;background:#1c2a34;border-radius:999px;font-size:12px;}.auren-desk .crm-mix-legend small{color:#9eb5c3;}.auren-desk .crm-mix-dot{width:10px;height:10px;border-radius:50%;}.auren-desk .crm-mix-dot.walkin{background:#e9aa66;}.auren-desk .crm-mix-dot.appointment{background:#82b6e7;}.auren-desk .crm-channel-revenue{display:flex;flex-direction:column;}.auren-desk .crm-channel-card{display:grid;gap:9px;border:1px solid #5f71804f;border-radius:18px;padding:17px;margin:0 0 10px;}.auren-desk .crm-channel-card span{font-size:12px;}.auren-desk .crm-channel-card strong{font-size:25px;}.auren-desk .crm-channel-card small{font-size:10px;}.auren-desk .crm-channel-card.walkin{background:#5b412e55;color:#f2c394}.auren-desk .crm-channel-card.appointment{background:#30506866;color:#b9ddf5;}
+.auren-desk .crm-mailbox{gap:13px;border:0;background:transparent;overflow:visible;}.auren-desk .crm-message-list{border:1px solid #4f6675;border-radius:22px;max-height:650px;background:#1e2b36;}.auren-desk .crm-message-detail{border:1px solid #536c7c;border-radius:22px;background:radial-gradient(circle at 90% 0%,#658eaf30,transparent 55%),#2b3a45;}.auren-desk .crm-mail-item{margin:5px 7px;width:calc(100% - 14px);border:1px solid transparent;border-radius:15px;}.auren-desk .crm-mail-item.is-selected{border-color:#91bed080;box-shadow:inset 4px 0 #e9aa66;background:#334a58;}.auren-desk .crm-query-detail-grid{display:grid;grid-template-columns:1fr;gap:14px;}.auren-desk .crm-sender{border:1px solid #61748480;border-radius:18px;padding:16px;background:#1e2e3a;}.auren-desk .crm-message-body{margin:0;border-radius:18px;border-color:#607b8d;}.auren-desk .crm-detail-actions{margin-top:18px;}.auren-desk .crm-sms-btn{background:#304657;color:#b8dcf2;border-color:#6d97b7;}
+@media(max-width:1450px){.auren-desk .crm-top-tabs button{padding:10px 7px;font-size:10px;}.auren-desk .crm-top-tabs button svg{display:none;}}
+@media(max-width:1230px){.auren-desk .crm-top-tabs{display:none;}}
+@media(max-width:950px){.auren-desk .crm-revenue-sources{grid-template-columns:1fr;}.auren-desk .crm-mailbox{gap:12px;}.auren-desk .crm-message-list{border-right:1px solid #4f6675;max-height:310px;}}
+@media(max-width:700px){.auren-desk .desk-header{border-radius:20px;padding:13px;margin-top:10px;}.auren-desk .crm-invoice-item{grid-template-columns:1fr;}.auren-desk .crm-invoice-amount{justify-items:start;}.auren-desk .crm-donut{width:150px;height:150px;}.auren-desk .crm-donut>div{width:108px;height:108px;}.auren-desk .crm-section-tabs button{padding:11px 13px;font-size:11px;}.auren-desk .crm-glass-tabs{max-width:100%;}}
+@media(prefers-reduced-motion:reduce){.auren-desk .crm-glass-indicator{transition:none!important;}}
+@media print{.auren-desk{background:#fff!important;}.auren-desk .crm-top-tabs{display:none!important;}}
+
+
+/* =========================================================
+   AUREN CRM v3 — Calm liquid glass / refined reception
+   Visual-only overrides. Preserve 80 mm print receipt.
+   ========================================================= */
+@media screen {
+  .auren-desk .desk-header {
+    min-height: 66px;
+    margin: 13px 0 23px;
+    padding: 9px 19px;
+    border-radius: 999px;
+    border: 1px solid rgba(236,245,250,.24);
+    background: rgba(28, 39, 49, .63);
+    -webkit-backdrop-filter: blur(34px) saturate(155%);
+    backdrop-filter: blur(34px) saturate(155%);
+    box-shadow: 0 12px 30px rgba(5,13,23,.17), inset 0 1px rgba(255,255,255,.13);
+  }
+  .auren-desk .desk-header .desk-heading-group {gap: 12px;}
+  .auren-desk .desk-heading-copy h1 {font-size: 18px; margin: 1px 0; line-height: 1.22;}
+  .auren-desk .desk-heading-copy p {font-size: 10px; color: #c2d2dc; letter-spacing:.015em;}
+  .auren-desk .desk-header .desk-eyebrow {font-size: 8px;letter-spacing: .16em;}
+  .auren-desk .desk-welcome {margin-right:5px;}
+  .auren-desk .desk-header-actions {gap:7px;}
+  .auren-desk .desk-header .desk-iconbtn,
+  .auren-desk .desk-header .desk-smallbtn {
+    height:38px; min-height:38px; border-radius:999px;
+    background:rgba(245,250,255,.075); border-color:rgba(235,245,252,.17);
+    box-shadow:none; color:#e5eef5;
+  }
+  .auren-desk .desk-header .desk-iconbtn:hover,
+  .auren-desk .desk-header .desk-smallbtn:hover {background:rgba(245,250,255,.15);}
+  /* All sliding section selectors: single neutral glass indicator, no gradient. */
+  .auren-desk .crm-glass-tabs,
+  .auren-desk .desk-query-tabs {
+    background:rgba(18,30,40,.50);
+    border-color:rgba(220,237,248,.18);
+    -webkit-backdrop-filter: blur(20px);backdrop-filter:blur(20px);
+    box-shadow:none;
+  }
+  .auren-desk .crm-glass-indicator {
+    background:rgba(214,229,239,.22);
+    border-color:rgba(238,246,250,.36);
+    box-shadow:0 5px 15px rgba(0,0,0,.14),inset 0 1px rgba(255,255,255,.20);
+  }
+  .auren-desk .crm-glass-tabs button.selected {color:#fafbfc!important;}
+  .auren-desk .desk-subnav button.selected {background:rgba(215,229,240,.2);box-shadow:none;}
+  /* Quietly animated, unified sidebar navigation. */
+  .auren-desk .desk-sidebar {
+    background:#19252e;
+    border-right:1px solid rgba(207,228,242,.13);
+    box-shadow:inset -1px 0 rgba(255,255,255,.025);
+  }
+  .auren-desk .desk-sidebar .desk-nav {gap:8px;}
+  .auren-desk .desk-sidebar .desk-nav button,
+  .auren-desk .desk-sidebar-setting {
+    border-radius:999px;
+    transition: background .26s ease,border-color .26s ease,color .26s ease,
+                box-shadow .26s ease,transform .32s cubic-bezier(.22,1,.36,1);
+  }
+  .auren-desk .desk-sidebar .desk-nav button:hover,
+  .auren-desk .desk-sidebar-setting:hover {
+    transform:translateX(4px);
+    background:rgba(214,234,247,.11);
+    color:#f4f8fb;
+    box-shadow:inset 0 0 0 1px rgba(218,235,250,.10);
+  }
+  .auren-desk .desk-sidebar .desk-nav button.selected,
+  .auren-desk .desk-sidebar-setting.selected {
+    background:rgba(215,232,243,.19);
+    color:#f5f9fb; border-color:rgba(231,243,249,.27);
+    box-shadow:inset 0 1px rgba(255,255,255,.17);
+    transform:none;
+  }
+  .auren-desk .desk-sidebar .desk-nav button.selected svg {color:#afd8f3;}
+  .auren-desk .desk-sidebar-caption {color:#91aebf;}
+  .auren-desk .desk-brand-logo {border-radius:14px;}
+  /* Two balanced walk-in columns; tidy search control and clear customer rows. */
+  .auren-desk .crm-walkins-workspace {grid-template-columns:minmax(310px,.95fr) minmax(0,1.05fr); gap:20px;align-items:start;}
+  .auren-desk .crm-walkin-register,
+  .auren-desk .crm-walkin-list {min-width:0;border-radius:23px;padding:25px;}
+  .auren-desk .crm-walkin-register>h3,
+  .auren-desk .crm-walkin-title h3 {font-size:17px;margin:0;}
+  .auren-desk .crm-walkin-register>h3 {margin-bottom:24px;display:flex;align-items:center;gap:9px;}
+  .auren-desk .crm-walkin-title {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:19px;}
+  .auren-desk .crm-walkin-count {border:1px solid rgba(225,237,246,.19);border-radius:999px;padding:7px 12px;font-size:11px;color:#bdd5e5;white-space:nowrap;}
+  .auren-desk .crm-walkin-search {
+    width:100%;max-width:100%;min-height:43px;height:43px;
+    margin:0 0 17px;padding:0 15px;display:flex;flex:0 0 auto;
+    background:#1b2a35;border:1px solid #4a6170;border-radius:999px;
+  }
+  .auren-desk .crm-walkin-search svg {width:16px;height:16px;flex-shrink:0;}
+  .auren-desk .crm-walkin-search input {
+    width:100%;min-width:0;min-height:0;height:41px;padding:0;
+    font-size:12px;line-height:normal;flex:1;
+  }
+  .auren-desk .crm-walkin-list .desk-walkitem {padding:16px 12px;margin:0 0 10px;border:1px solid rgba(181,207,223,.14);border-radius:16px;background:rgba(225,236,245,.035);}
+  .auren-desk .crm-walkin-list .desk-walkitem:hover {border-color:rgba(177,214,236,.34);background:rgba(225,236,245,.055);}
+  .auren-desk .crm-walkin-list .desk-record-head small {display:block;overflow-wrap:anywhere;}
+  .auren-desk .crm-walkin-list .desk-walkitem .desk-smallbtn {border-radius:999px;}
+}
+@media screen and (max-width:1150px){
+ .auren-desk .crm-walkins-workspace {grid-template-columns:1fr;}
+}
+@media screen and (max-width:760px){
+  .auren-desk .desk-header {border-radius:27px;padding:11px 13px;min-height:64px;}
+  .auren-desk .desk-welcome {display:none;}
+  .auren-desk .desk-header-actions {gap:5px;}
+  .auren-desk .crm-walkin-register,.auren-desk .crm-walkin-list {padding:19px 16px;}
+  .auren-desk .desk-heading-copy h1 {font-size:16px;}
+  .auren-desk .desk-heading-copy p {font-size:9px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .auren-desk .desk-sidebar .desk-nav button,
+  .auren-desk .desk-sidebar-setting {transition:none!important;}
+}
+
+
+/* ==============================================================
+   AUREN CRM v4 — minimal transparent glass header and toast
+   Only presentation changes. Keeps tabs, API, sound, and printing.
+   ============================================================== */
+@media screen {
+  /* Frosted but deliberately see-through; no gradient fills. */
+  .auren-desk .desk-header {
+    position:sticky;
+    min-height:72px;
+    padding:11px 18px;
+    border-radius:999px;
+    border:1px solid rgba(232,245,251,.25);
+    background:rgba(27,39,50,.34);
+    -webkit-backdrop-filter:blur(23px) saturate(155%);
+    backdrop-filter:blur(23px) saturate(155%);
+    box-shadow:0 14px 38px rgba(7,17,29,.15),inset 0 1px 0 rgba(255,255,255,.15);
+    isolation:isolate;
+  }
+  .auren-desk .desk-header .desk-heading-group {position:relative;z-index:1;min-width:0;max-width:calc(50% - 95px);}
+  .auren-desk .desk-heading-copy.crm-header-greeting {min-width:0;}
+  .auren-desk .crm-header-greeting .desk-eyebrow {font-size:9px;letter-spacing:.17em;color:#c7dce7;}
+  .auren-desk .crm-header-greeting p {
+    margin:6px 0 0;
+    color:#e8f2f7;
+    font-size:clamp(12px,1.03vw,15px);
+    line-height:1.4;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    letter-spacing:.01em;
+  }
+  .auren-desk .crm-header-greeting p strong {font-weight:650;}
+  .auren-desk .crm-greeting-date {font-weight:450;color:#d0dfe8;}
+  /* Center title stays in the middle regardless of left/right widths. */
+  .auren-desk .crm-centered-section {
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    max-width:30%;min-width:126px;min-height:39px;
+    padding:8px 18px;
+    border-radius:999px;
+    border:1px solid rgba(235,248,255,.25);
+    background:rgba(215,234,246,.10);
+    -webkit-backdrop-filter:blur(18px) saturate(145%);
+    backdrop-filter:blur(18px) saturate(145%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 4px 14px rgba(0,0,0,.09);
+    pointer-events:none;
+    z-index:0;
+  }
+  .auren-desk .crm-section-spark {width:6px;height:6px;flex:none;border-radius:50%;background:#b9dff4;box-shadow:0 0 10px rgba(171,222,247,.55);}
+  .auren-desk .crm-section-title {font-size:13px;font-weight:680;color:#f5fafd;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;animation:crmSectionAppear .38s cubic-bezier(.22,1,.36,1) both;}
+  .auren-desk .desk-header-actions {position:relative;z-index:1;margin-left:auto;}
+  .auren-desk .desk-header .desk-iconbtn,
+  .auren-desk .desk-header .desk-smallbtn {background:rgba(228,243,253,.09);border-color:rgba(236,248,255,.22);}
+  .auren-desk .desk-header .desk-iconbtn:hover,
+  .auren-desk .desk-header .desk-smallbtn:hover {background:rgba(228,243,253,.18);}
+  /* Floating notification toast as a dark frosted capsule. */
+  .auren-desk .desk-toast {
+    position:fixed;right:22px;bottom:22px;z-index:140;
+    display:flex;align-items:center;gap:11px;
+    min-width:0;max-width:min(460px,calc(100vw - 32px));
+    padding:10px 13px 10px 11px;
+    border:1px solid rgba(225,240,251,.30);
+    border-radius:999px;
+    background:rgba(25,38,50,.66);
+    -webkit-backdrop-filter:blur(30px) saturate(175%);
+    backdrop-filter:blur(30px) saturate(175%);
+    box-shadow:0 15px 45px rgba(7,15,24,.28),inset 0 1px 0 rgba(255,255,255,.18);
+    color:#f1f8fc;
+    font-size:12px;font-weight:550;line-height:1.45;
+    animation:crmToastFloatIn .42s cubic-bezier(.22,1,.36,1) both;
+  }
+  .auren-desk .desk-toast > span:nth-child(2) {min-width:0;overflow-wrap:anywhere;}
+  .auren-desk .desk-toast-icon {
+    width:32px;height:32px;min-width:32px;
+    display:grid;place-items:center;
+    border-radius:50%;border:1px solid rgba(225,241,250,.20);
+    background:rgba(216,238,251,.14);color:#c8eaff;
+  }
+  .auren-desk .desk-toast button {
+    display:grid;place-items:center;flex:none;
+    width:28px;height:28px;padding:4px;margin-left:2px;
+    border:1px solid rgba(241,250,255,.14);border-radius:50%;
+    color:#eaf3f9;background:rgba(234,245,251,.07);
+  }
+  .auren-desk .desk-toast button:hover {background:rgba(234,245,251,.20);}
+}
+@keyframes crmSectionAppear {from{opacity:0;transform:translateY(6px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes crmToastFloatIn {from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media screen and (max-width:1180px) {
+  .auren-desk .desk-header .desk-heading-group {max-width:calc(57% - 80px);}
+  .auren-desk .crm-centered-section {max-width:27%;min-width:108px;padding:7px 12px;}
+  .auren-desk .crm-header-greeting p {font-size:12px;}
+  .auren-desk .crm-greeting-date {display:none;}
+  .auren-desk .desk-header .desk-welcome {display:none;}
+}
+@media screen and (max-width:760px) {
+  .auren-desk .desk-header {min-height:68px;padding:10px 12px;border-radius:26px;gap:8px;}
+  .auren-desk .desk-header .desk-heading-group {max-width:none;flex:1 1 auto;gap:8px;}
+  .auren-desk .crm-header-greeting .desk-eyebrow {font-size:7px;}
+  .auren-desk .crm-header-greeting p {font-size:11px;margin-top:4px;}
+  .auren-desk .crm-centered-section {position:static;transform:none;min-width:0;max-width:unset;padding:7px 10px;min-height:32px;flex:0 0 auto;}
+  .auren-desk .crm-section-title {font-size:10px;max-width:95px;}
+  .auren-desk .crm-section-spark {width:5px;height:5px;}
+  .auren-desk .desk-header-actions {flex:0 0 auto;gap:4px;}
+  .auren-desk .desk-toast {right:12px;bottom:12px;max-width:calc(100vw - 24px);padding:8px 9px;}
+}
+@media screen and (max-width:560px) {
+  .auren-desk .desk-header {flex-wrap:wrap;border-radius:23px;}
+  .auren-desk .desk-header .desk-heading-group {flex-basis:calc(100% - 130px);}
+  .auren-desk .crm-centered-section {order:3;flex:1 1 100%;justify-content:center;max-width:100%;min-height:26px;padding:3px 9px;}
+  .auren-desk .crm-section-title {max-width:unset;font-size:11px;}
+  .auren-desk .desk-header-actions {margin-left:auto;}
+}
+@media (prefers-reduced-motion:reduce) {
+  .auren-desk .crm-section-title,.auren-desk .desk-toast {animation:none!important;}
+}
+
+
+
+
+/* =============================================
+   AUREN CRM — PREMIUM WALK-IN PAGINATION
+   Clean pill controls · No gradients
+============================================= */
+
+.crm-walkin-list .crm-walkin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 20px;
+  padding: 18px 0 4px;
+  border-top: 1px solid rgba(205, 221, 230, 0.12);
+}
+
+/* Previous / Next buttons */
+
+.crm-walkin-list .crm-walkin-pagination button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 15px;
+  border: 1px solid rgba(205, 224, 238, 0.22);
+  border-radius: 999px;
+  background: rgba(190, 210, 225, 0.08);
+  color: #e4edf3;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.crm-walkin-list .crm-walkin-pagination button:hover:not(:disabled) {
+  background: rgba(190, 210, 225, 0.17);
+  border-color: rgba(225, 237, 246, 0.42);
+  transform: translateY(-2px);
+}
+
+.crm-walkin-list .crm-walkin-pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Page indicator */
+
+.crm-walkin-list .crm-walkin-pagination > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 15px;
+  border-radius: 999px;
+  background: rgba(12, 18, 24, 0.35);
+  border: 1px solid rgba(205, 224, 238, 0.12);
+  color: #b9cbd6;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .crm-walkin-list .crm-walkin-pagination {
+    gap: 8px;
+  }
+
+  .crm-walkin-list .crm-walkin-pagination button {
+    min-width: 38px;
+    height: 38px;
+    padding: 0 11px;
+  }
+
+  .crm-walkin-list .crm-walkin-pagination > span {
+    padding: 0 10px;
+    font-size: 10px;
+  }
 }

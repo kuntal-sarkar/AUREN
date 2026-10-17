@@ -1,7 +1,8 @@
-
 import { useEffect, useRef, useState } from "react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa6";
 import "./Contact.css";
+
+const ENQUIRY_API = import.meta.env.VITE_BOOKING_API_URL || "http://127.0.0.1:5001";
 import "./ContactMapPrivacy.css";
 import { readConsent } from "../PrivacyManager/PrivacyManager";
 
@@ -115,6 +116,10 @@ function EnquiryDropdown({ value, onChange }) {
 
 function Contact() {
     const [form, setForm] = useState(initialForm);
+    const [showThankYou, setShowThankYou] = useState(false);
+    const [sending, setSending] = useState(false);
+    const [submitError, setSubmitError] = useState("");
+    const thankYouCloseRef = useRef(null);
     const [mapsAllowed, setMapsAllowed] = useState(
         () => readConsent()?.functional === true
     );
@@ -145,14 +150,47 @@ function Contact() {
         }));
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // The enquiry form remains independent for now.
-        // Later: POST form data to the backend enquiry API.
-        // Do not show a success confirmation until a server
-        // has actually received and stored the enquiry.
+        if (sending) return;
+        setSubmitError("");
+        if (!form.subject) {
+            document.getElementById("auren-enquiry-subject-error")?.scrollIntoView({
+                behavior: "smooth", block: "center",
+            });
+            return;
+        }
+        setSending(true);
+        try {
+            const response = await fetch(`${ENQUIRY_API}/api/enquiries`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: form.name.trim(), email: form.email.trim(),
+                    phone: form.phone.trim(), subject: form.subject,
+                    message: form.message.trim(),
+                }),
+            });
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || "Enquiry could not be sent.");
+            setForm({ ...initialForm });
+            setShowThankYou(true);
+        } catch (error) {
+            setSubmitError(error instanceof Error ? error.message : "Connection failed. Please try again.");
+        } finally {
+            setSending(false);
+        }
     };
+
+    useEffect(() => {
+        if (!showThankYou) return;
+        const onEscape = (event) => {
+            if (event.key === "Escape") setShowThankYou(false);
+        };
+        window.addEventListener("keydown", onEscape);
+        thankYouCloseRef.current?.focus();
+        return () => window.removeEventListener("keydown", onEscape);
+    }, [showThankYou]);
 
     const whatsappUrl =
         `https://wa.me/${salon.whatsapp}` +
@@ -376,12 +414,14 @@ function Contact() {
                                 />
                             </label>
 
-                            <EnquiryDropdown
-                                value={form.subject}
-                                onChange={(subject) =>
-                                    setForm((previous) => ({ ...previous, subject }))
-                                }
-                            />
+                            <div id="auren-enquiry-subject-error">
+                                <EnquiryDropdown
+                                    value={form.subject}
+                                    onChange={(subject) =>
+                                        setForm((previous) => ({ ...previous, subject }))
+                                    }
+                                />
+                            </div>
                         </div>
 
                         <label className="auren-contact-message-field">
@@ -399,22 +439,68 @@ function Contact() {
 
                         <div className="auren-contact-form-bottom">
                             <p>
-                                Enquiry submission will be available
-                                when our backend is connected.
+                                Your enquiry will be sent securely to our reception team.
                             </p>
 
                             <button
                                 type="submit"
                                 className="auren-contact-submit"
-                                disabled
-                                title="Backend integration pending"
+                                disabled={sending}
                             >
-                                SEND ENQUIRY
+                                {sending ? "SENDING…" : "SEND ENQUIRY"}
                                 <span aria-hidden="true">↗</span>
                             </button>
                         </div>
+                        {submitError && <p className="auren-enquiry-submit-error" role="alert">{submitError}</p>}
                     </form>
                 </div>
+
+                {showThankYou && (
+                    <div
+                        className="auren-thankyou-overlay"
+                        role="presentation"
+                        onMouseDown={(event) => {
+                            if (event.target === event.currentTarget) setShowThankYou(false);
+                        }}
+                    >
+                        <div
+                            className="auren-thankyou-modal"
+                            role="dialog"
+                            aria-modal="true"
+                            aria-labelledby="auren-thankyou-title"
+                            aria-describedby="auren-thankyou-description"
+                        >
+                            <p className="auren-thankyou-brand">AUREN.</p>
+                            <div className="auren-thankyou-mark" aria-hidden="true">
+                                <svg className="auren-thankyou-check" viewBox="0 0 108 108" focusable="false">
+                                    <circle className="auren-thankyou-check-ring" cx="54" cy="54" r="46" />
+                                    <path className="auren-thankyou-check-tick" d="M31 54 L47 70 L78 38" />
+                                </svg>
+                            </div>
+                            <p className="auren-thankyou-eyebrow">A MOMENT OF APPRECIATION</p>
+                            <h3 id="auren-thankyou-title">
+                                Thank you for <em>reaching out.</em>
+                            </h3>
+                            <p id="auren-thankyou-description" className="auren-thankyou-description">
+                                We appreciate you taking the time to connect with AUREN.
+                            </p>
+                            <p className="auren-thankyou-demo-note">
+                                Your enquiry has been received by AUREN.
+                            </p>
+                            <div className="auren-thankyou-actions">
+                                <button
+                                    ref={thankYouCloseRef}
+                                    type="button"
+                                    className="auren-thankyou-close"
+                                    onClick={() => setShowThankYou(false)}
+                                >
+                                    BACK TO AUREN
+                                    <span className="auren-thankyou-close-arrow" aria-hidden="true">↗</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* FOOTER */}
 

@@ -78,6 +78,20 @@ CORS(app, resources={
 
     },
 
+    r"/api/enquiries": {
+
+        "origins": [
+
+            "http://localhost:5173",
+
+            "http://127.0.0.1:5173",
+
+            "https://auren-50q.pages.dev",
+
+        ]
+
+    },
+
     r"/api/admin/*": {
 
         "origins": [
@@ -143,46 +157,112 @@ def initialize():
         db.execute("CREATE INDEX IF NOT EXISTS idx_reservations_artist_day ON reservations(artist_id, date, status)")
 
         # Walk-in customers are recorded separately from scheduled reservations.
+
         # CREATE TABLE IF NOT EXISTS preserves all existing bookings and walk-ins.
+
         db.execute("""
+
             CREATE TABLE IF NOT EXISTS walkins (
+
                 customer_id TEXT PRIMARY KEY,
+
                 customer_name TEXT NOT NULL,
+
                 customer_phone TEXT NOT NULL,
+
                 service_ids TEXT NOT NULL,
+
                 total_price INTEGER NOT NULL,
+
                 created_at TEXT NOT NULL,
+
                 status TEXT NOT NULL DEFAULT 'registered'
+
             )
+
         """)
+
         db.execute("""CREATE TABLE IF NOT EXISTS invoices (
+
             invoice_id TEXT PRIMARY KEY,
+
             source_id TEXT NOT NULL UNIQUE,
+
             source_type TEXT NOT NULL,
+
             customer_name TEXT NOT NULL,
+
             customer_phone TEXT NOT NULL,
+
             service_ids TEXT NOT NULL,
+
             total_price INTEGER NOT NULL,
+
             created_at TEXT NOT NULL,
+
             payment_method TEXT NOT NULL DEFAULT 'unspecified',
+
             printed_at TEXT
+
         )""")
+
         # Safe migration for existing demo invoices.
+
         columns = {r[1] for r in db.execute("PRAGMA table_info(invoices)").fetchall()}
+
         if "payment_method" not in columns:
+
             db.execute("ALTER TABLE invoices ADD COLUMN payment_method TEXT NOT NULL DEFAULT 'unspecified'")
+
         if "printed_at" not in columns:
+
             db.execute("ALTER TABLE invoices ADD COLUMN printed_at TEXT")
+
         db.execute("""CREATE TABLE IF NOT EXISTS admin_events (
+
             event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+
             source_id TEXT NOT NULL,
+
             source_type TEXT NOT NULL,
+
             event_type TEXT NOT NULL,
+
             details TEXT NOT NULL DEFAULT '',
+
             created_at TEXT NOT NULL
+
         )""")
+
         db.execute("CREATE INDEX IF NOT EXISTS idx_admin_events_day ON admin_events(created_at)")
 
+def initialize_enquiries():
+
+    # Customer enquiries (kept in the same demo SQLite database).
+
+    with connection() as db:
+
+        db.execute("""CREATE TABLE IF NOT EXISTS enquiries (
+
+            id TEXT PRIMARY KEY,
+
+            name TEXT NOT NULL,
+
+            email TEXT NOT NULL,
+
+            phone TEXT NOT NULL DEFAULT '',
+
+            subject TEXT NOT NULL,
+
+            message TEXT NOT NULL,
+
+            status TEXT NOT NULL DEFAULT 'new',
+
+            created_at TEXT NOT NULL
+
+        )""")
+
+        db.execute("CREATE INDEX IF NOT EXISTS idx_enquiries_created ON enquiries(created_at)")
 
 def bad(message, code=400):
 
@@ -457,64 +537,65 @@ def reserve():
         return bad(str(exc))
 
 @app.post("/api/booking/track")
-
 def track_reservation():
-
-    # Both booking reference and matching booking phone are required.
-
-    # Return the same generic result for unknown reference / wrong phone.
-
+    # Demo lookup: booking ID, or phone PLUS registered email. Phone alone must
+    # never disclose private visit details. Real production needs OTP verification.
     remote = request.remote_addr or "unknown"
-
     if not allow_lookup(remote):
-
         return bad("Too many lookups. Please try again later.", 429)
 
     body = request.get_json(silent=True)
-
     if not isinstance(body, dict):
-
-        return bad("Booking ID and phone number are required.")
+        return bad("Enter a Booking ID or registered mobile and email.")
 
     reference = str(body.get("reference", "")).strip().upper()
-
     phone = normalize_phone(body.get("phone", ""))
-
-    if not re.fullmatch(r"AUR-[0-9A-F]{12}", reference) or len(phone) != 10:
-
-        return bad("Enter a valid booking ID and 10-digit phone number.")
+    email = str(body.get("email", "")).strip().lower()
+    if reference:
+        if not re.fullmatch(r"AUR-[0-9A-F]{12}", reference):
+            return bad("Enter a valid Booking ID.")
+    else:
+        if len(phone) != 10 or not (3 <= len(email) <= 120) or not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
+            return bad("Enter your registered 10-digit mobile and booking email.")
 
     with closing(connection()) as db:
+        if reference:
+            row = db.execute("""SELECT reference, artist_id, date, start_min, end_min,
+                          service_ids, total_price, customer_name, customer_phone, customer_email, notes, created_at, status
+                          FROM reservations WHERE reference=?""", (reference,)).fetchone()
+            if not row or (phone and not hmac.compare_digest(normalize_phone(row["customer_phone"]), phone)):
+                return bad("No matching appointment found. Check your details.", 404)
+        else:
+            # Match both pieces of data and return only the most recent matching visit.
+            # Limiting the output avoids revealing contact details via the response.
+            candidates = db.execute("""SELECT reference, artist_id, date, start_min, end_min,
+                            service_ids, total_price, customer_name, customer_phone, customer_email, notes, created_at, status
+                            FROM reservations ORDER BY date DESC, start_min DESC LIMIT 500""").fetchall()
+            row = next((r for r in candidates if
+                        hmac.compare_digest(normalize_phone(r["customer_phone"]), phone) and
+                        hmac.compare_digest(str(r["customer_email"]).strip().lower(), email)), None)
+            if row is None:
+                return bad("No matching appointment found. Check your details.", 404)
 
-        row = db.execute(
-
-            """SELECT reference, artist_id, date, start_min, end_min,
-
-                      service_ids, total_price, customer_phone, status
-
-               FROM reservations WHERE reference = ?""", (reference,)
-
-        ).fetchone()
-
-    if not row or not hmac.compare_digest(normalize_phone(row["customer_phone"]), phone):
-
-        return bad("No matching appointment found. Check your Booking ID and phone number.", 404)
-
-    return jsonify(
-
-        reference=row["reference"], status=row["status"],
-
-        date=row["date"], time=clock_label(row["start_min"]),
-
-        duration=row["end_min"]-row["start_min"],
-
-        artist_name=ARTISTS.get(row["artist_id"], {}).get("name", "Assigned specialist"),
-
-        service_ids=row["service_ids"].split(","), total_price=row["total_price"],
-
-        timezone="Asia/Kolkata",
-
-    )
+        # Reference-only lookup shows customer name and masked contact;
+        # registered phone+email verification unlocks full contact and notes.
+        verified_contact = not bool(reference)
+        raw_phone = normalize_phone(row["customer_phone"])
+        masked_phone = ("••••••" + raw_phone[-4:]) if raw_phone else "—"
+        raw_email = str(row["customer_email"] or "")
+        mailbox, separator, domain = raw_email.partition("@")
+        masked_email = (mailbox[:1] + "•••@" + domain) if separator else "—"
+        return jsonify(reference=row["reference"], status=row["status"],
+                       customer_name=row["customer_name"],
+                       customer_phone=row["customer_phone"] if verified_contact else masked_phone,
+                       customer_email=row["customer_email"] if verified_contact else masked_email,
+                       notes=row["notes"] if verified_contact else "",
+                       created_at=row["created_at"],
+                       date=row["date"], time=clock_label(row["start_min"]),
+                       duration=row["end_min"] - row["start_min"],
+                       artist_name=ARTISTS.get(row["artist_id"], {}).get("name", "Assigned specialist"),
+                       service_ids=row["service_ids"].split(","),
+                       total_price=row["total_price"], timezone="Asia/Kolkata", limited=False)
 
 # Admin demo credentials and signing key are configured through environment variables.
 
@@ -732,280 +813,636 @@ def admin_bookings():
 
     )
 
+# ----------------------------------------------------
+
+# Demo walk-in registration (admin only)
 
 # ----------------------------------------------------
-# Demo walk-in registration (admin only)
-# ----------------------------------------------------
+
 @app.post("/api/admin/walkins")
+
 @require_admin
+
 def register_walkin():
+
     body = request.get_json(silent=True)
+
     if not isinstance(body, dict):
+
         return bad("Customer details are required.")
+
     name = body.get("name", "")
+
     phone = body.get("phone", "")
+
     if not isinstance(name, str) or not 1 <= len(name.strip()) <= 80:
+
         return bad("Enter a valid customer name.")
+
     if not isinstance(phone, str) or not re.fullmatch(r"[+0-9 ()-]{7,20}", phone.strip()):
+
         return bad("Enter a valid phone number.")
+
     try:
+
         service_ids = parse_services(body.get("service_ids", []))
+
     except ValueError as exc:
+
         return bad(str(exc))
+
     customer_id = "AUR-W-" + uuid.uuid4().hex[:12].upper()
+
     created_at = datetime.now(TZ).isoformat()
+
     total_price = sum(SERVICES[s][1] for s in service_ids)
+
     with closing(connection()) as db:
+
         db.execute("""INSERT INTO walkins
+
             (customer_id,customer_name,customer_phone,service_ids,total_price,created_at,status)
+
             VALUES (?,?,?,?,?,?,'registered')""",
+
             (customer_id,name.strip(),phone.strip(),",".join(service_ids),total_price,created_at))
+
         log_event(db, customer_id, "walkin", "registered", "Walk-in registration")
+
     return jsonify(customer_id=customer_id,name=name.strip(),phone=phone.strip(),
+
                    service_ids=service_ids,total_price=total_price,
+
                    created_at=created_at,status="registered"), 201
 
-
 @app.get("/api/admin/walkins")
+
 @require_admin
+
 def list_walkins():
+
     with closing(connection()) as db:
+
         rows = db.execute("""SELECT customer_id,customer_name,customer_phone,
+
             service_ids,total_price,created_at,status FROM walkins
+
             ORDER BY created_at DESC LIMIT 200""").fetchall()
+
     walkins = [{"customer_id":r["customer_id"],"name":r["customer_name"],
+
                 "phone":r["customer_phone"],"service_ids":r["service_ids"].split(","),
+
                 "total_price":r["total_price"],"created_at":r["created_at"],
+
                 "status":r["status"]} for r in rows]
+
     return jsonify(walkins=walkins,total=len(walkins))
 
+# ----------------------------------------------------
+
+# Demo billing. Invoices are generated once per source ID.
+
+# Revenue is the sum of generated invoices, not reservations.
 
 # ----------------------------------------------------
-# Demo billing. Invoices are generated once per source ID.
-# Revenue is the sum of generated invoices, not reservations.
-# ----------------------------------------------------
+
 def invoice_payload(row):
+
     return {
+
         "invoice_id": row["invoice_id"], "source_id": row["source_id"],
+
         "source_type": row["source_type"], "name": row["customer_name"],
+
         "phone": row["customer_phone"],
+
         "service_ids": row["service_ids"].split(","),
+
         "items": [{"id":sid,"name":sid.replace("_", " ").title(),"price":SERVICES[sid][1]}
+
                   for sid in row["service_ids"].split(",") if sid in SERVICES],
+
         "total_price": row["total_price"], "created_at": row["created_at"],
+
         "payment_method": row["payment_method"],
+
         "printed_at": row["printed_at"],
+
         "status": "completed" if row["printed_at"] else "billed",
+
     }
 
-
 @app.post("/api/admin/invoices")
+
 @require_admin
+
 def generate_invoice():
+
     body = request.get_json(silent=True)
+
     if not isinstance(body, dict) or not isinstance(body.get("customer_id"), str):
+
         return bad("Enter a valid booking or walk-in ID.")
+
     source_id = body["customer_id"].strip().upper()
+
     payment_method = str(body.get("payment_method", "")).strip().lower()
+
     if payment_method not in ("cash", "upi", "card"):
+
         return bad("Choose Cash, UPI or Card payment method.")
+
     if not re.fullmatch(r"AUR-(?:W-)?[0-9A-F]{12}", source_id):
+
         return bad("Invalid booking or walk-in ID.")
 
     with closing(connection()) as db:
+
         try:
+
             db.execute("BEGIN IMMEDIATE")
+
             existing = db.execute("SELECT * FROM invoices WHERE source_id=?", (source_id,)).fetchone()
+
             if existing:
+
                 db.rollback()
+
                 return jsonify(error="Invoice already generated for this ID.",
+
                                invoice=invoice_payload(existing)), 409
+
             if source_id.startswith("AUR-W-"):
+
                 source_type = "walkin"
+
                 customer = db.execute("""SELECT customer_name,customer_phone,service_ids,total_price
+
                     FROM walkins WHERE customer_id=?""", (source_id,)).fetchone()
+
             else:
+
                 source_type = "booking"
+
                 customer = db.execute("""SELECT customer_name,customer_phone,service_ids,total_price
+
                     FROM reservations WHERE reference=?""", (source_id,)).fetchone()
+
             if customer is None:
+
                 db.rollback()
+
                 return bad("No customer record matches this ID.", 404)
+
             if not customer["service_ids"]:
+
                 db.rollback()
+
                 return bad("No services found for this record.")
+
             invoice_id = "INV-" + uuid.uuid4().hex[:12].upper()
+
             created_at = datetime.now(TZ).isoformat()
+
             db.execute("""INSERT INTO invoices
+
                 (invoice_id,source_id,source_type,customer_name,customer_phone,
+
                  service_ids,total_price,created_at,payment_method)
+
                  VALUES(?,?,?,?,?,?,?,?,?)""",
+
                  (invoice_id,source_id,source_type,customer["customer_name"],
+
                   customer["customer_phone"],customer["service_ids"],
+
                   customer["total_price"],created_at,payment_method))
+
             if source_type == "booking":
+
                 state = db.execute("SELECT status FROM reservations WHERE reference=?", (source_id,)).fetchone()
+
                 if state and state["status"] not in ("arrived", "billed"):
+
                     db.rollback()
+
                     return bad("Mark the appointment Arrived before billing.", 409)
+
                 db.execute("UPDATE reservations SET status='billed' WHERE reference=?", (source_id,))
+
             else:
+
                 db.execute("UPDATE walkins SET status='billed' WHERE customer_id=?", (source_id,))
+
             log_event(db, source_id, source_type, "billed", f"{payment_method.upper()} • ₹{customer['total_price']} • {invoice_id}")
+
             db.commit()
+
             row = db.execute("SELECT * FROM invoices WHERE invoice_id=?", (invoice_id,)).fetchone()
+
         except Exception:
+
             db.rollback()
+
             raise
+
     return jsonify(invoice=invoice_payload(row)), 201
 
-
 @app.post("/api/admin/invoices/<invoice_id>/complete")
+
 @require_admin
+
 def complete_invoice(invoice_id):
+
     if not re.fullmatch(r"INV-[0-9A-F]{12}", invoice_id):
+
         return bad("Invalid invoice ID.")
+
     with closing(connection()) as db:
+
         db.execute("BEGIN IMMEDIATE")
+
         row = db.execute("SELECT * FROM invoices WHERE invoice_id=?", (invoice_id,)).fetchone()
+
         if not row:
+
             db.rollback()
+
             return bad("Invoice not found.", 404)
+
         if not row["printed_at"]:
+
             db.execute("UPDATE invoices SET printed_at=? WHERE invoice_id=?",
+
                        (datetime.now(TZ).isoformat(), invoice_id))
+
             if row["source_type"] == "booking":
+
                 db.execute("UPDATE reservations SET status='completed' WHERE reference=?", (row["source_id"],))
+
             else:
+
                 db.execute("UPDATE walkins SET status='completed' WHERE customer_id=?", (row["source_id"],))
+
             log_event(db, row["source_id"], row["source_type"], "completed", f"Bill printed • {invoice_id}")
+
         db.commit()
+
         updated = db.execute("SELECT * FROM invoices WHERE invoice_id=?", (invoice_id,)).fetchone()
+
     return jsonify(invoice=invoice_payload(updated))
 
-
 @app.get("/api/admin/customers/search")
+
 @require_admin
+
 def search_customers():
+
     query = str(request.args.get("q", "")).strip()
+
     if not query or len(query) > 80:
+
         return jsonify(customers=[])
+
     pattern = "%" + query + "%"
+
     with closing(connection()) as db:
+
         rows = db.execute("""
+
             SELECT source_id, name, phone, source_type, service_ids, total_price, status, date
+
             FROM (
+
               SELECT reference AS source_id, customer_name AS name, customer_phone AS phone,
+
                      'booking' AS source_type, service_ids, total_price, status, date
+
               FROM reservations
+
               UNION ALL
+
               SELECT customer_id, customer_name, customer_phone,
+
                      'walkin', service_ids, total_price, status, substr(created_at,1,10)
+
               FROM walkins
+
             )
+
             WHERE source_id LIKE ? COLLATE NOCASE
+
                OR name LIKE ? COLLATE NOCASE
+
                OR phone LIKE ?
+
             ORDER BY date DESC LIMIT 12
+
         """, (pattern, pattern, pattern)).fetchall()
+
         billed = {r[0] for r in db.execute("SELECT source_id FROM invoices WHERE source_id IN (" +
+
                    ",".join("?" for _ in rows) + ")", [r["source_id"] for r in rows]).fetchall()} if rows else set()
+
     return jsonify(customers=[{
+
         "source_id": r["source_id"], "name": r["name"], "phone": r["phone"],
+
         "source_type": r["source_type"], "service_ids": r["service_ids"].split(","),
+
         "total_price": r["total_price"], "status": r["status"], "date": r["date"],
+
         "already_billed": r["source_id"] in billed,
+
     } for r in rows])
 
-
 @app.get("/api/admin/invoices")
+
 @require_admin
+
 def list_invoices():
+
     with closing(connection()) as db:
+
         rows = db.execute("SELECT * FROM invoices ORDER BY created_at DESC LIMIT 200").fetchall()
+
     return jsonify(invoices=[invoice_payload(row) for row in rows], total=len(rows))
 
-
 @app.get("/api/admin/stats")
+
 @require_admin
+
 def admin_stats():
+
     today = datetime.now(TZ).date().isoformat()
+
     with closing(connection()) as db:
+
         bookings = db.execute("SELECT COUNT(*) FROM reservations").fetchone()[0]
+
         walkins = db.execute("SELECT COUNT(*) FROM walkins").fetchone()[0]
+
         today_bookings = db.execute("SELECT COUNT(*) FROM reservations WHERE date=?", (today,)).fetchone()[0]
+
         revenue = db.execute("SELECT COALESCE(SUM(total_price),0) FROM invoices").fetchone()[0]
+
         invoice_count = db.execute("SELECT COUNT(*) FROM invoices").fetchone()[0]
+
     return jsonify(total_bookings=bookings,total_walkins=walkins,
+
                    today_appointments=today_bookings,total_revenue=revenue,
+
                    total_invoices=invoice_count)
 
+# ------------------------------------------------------------------
+
+# RECEPTION DESK: attendance, today's log, and finalized status lock
 
 # ------------------------------------------------------------------
-# RECEPTION DESK: attendance, today's log, and finalized status lock
-# ------------------------------------------------------------------
+
 def log_event(db, source_id, source_type, event_type, details=""):
+
     db.execute("""INSERT INTO admin_events(source_id,source_type,event_type,details,created_at)
+
                VALUES (?,?,?,?,?)""", (source_id,source_type,event_type,details,datetime.now(TZ).isoformat()))
 
-
 @app.post("/api/admin/bookings/<reference>/attendance")
+
 @require_admin
+
 def update_attendance(reference):
+
     reference = reference.strip().upper()
+
     if not re.fullmatch(r"AUR-[0-9A-F]{12}", reference):
+
         return bad("Invalid booking reference.")
+
     payload = request.get_json(silent=True)
+
     status = payload.get("status") if isinstance(payload, dict) else None
+
     if status not in ("arrived", "absent", "confirmed"):
+
         return bad("Choose Arrived, Absent, or Confirmed.")
+
     with closing(connection()) as db:
+
         try:
+
             db.execute("BEGIN IMMEDIATE")
+
             record = db.execute("SELECT status FROM reservations WHERE reference=?",(reference,)).fetchone()
+
             if not record:
+
                 db.rollback()
+
                 return bad("Booking not found.", 404)
+
             if record["status"] in ("billed", "completed", "cancelled"):
+
                 db.rollback()
+
                 return bad("This appointment is billed, completed, or cancelled and cannot be changed.", 409)
+
             if record["status"] != status:
+
                 db.execute("UPDATE reservations SET status=? WHERE reference=?", (status,reference))
+
                 log_event(db, reference,"booking",status, "Attendance updated")
+
             db.commit()
+
         except Exception:
+
             db.rollback()
+
             raise
+
     return jsonify(reference=reference,status=status)
 
-
 @app.get("/api/admin/today-log")
+
 @require_admin
+
 def today_log():
+
     today = datetime.now(TZ).date().isoformat()
+
     with closing(connection()) as db:
+
         events = db.execute("""SELECT e.source_id,e.source_type,e.event_type,e.details,e.created_at,
+
                   COALESCE(r.customer_name,w.customer_name,'Customer') AS name,
+
                   COALESCE(r.customer_phone,w.customer_phone,'') AS phone
+
             FROM admin_events e
+
             LEFT JOIN reservations r ON e.source_type='booking' AND e.source_id=r.reference
+
             LEFT JOIN walkins w ON e.source_type='walkin' AND e.source_id=w.customer_id
+
             WHERE substr(e.created_at,1,10)=? ORDER BY e.created_at DESC, e.event_id DESC""", (today,)).fetchall()
+
         appointments = db.execute("""SELECT reference,customer_name,customer_phone,date,start_min,status
+
                            FROM reservations WHERE date=? ORDER BY start_min""",(today,)).fetchall()
+
         walkins = db.execute("""SELECT customer_id,customer_name,customer_phone,created_at,status
+
                        FROM walkins WHERE substr(created_at,1,10)=? ORDER BY created_at DESC""",(today,)).fetchall()
+
         invoices = db.execute("""SELECT invoice_id,source_id,source_type,customer_name,
+
                       payment_method,total_price,created_at,printed_at FROM invoices
+
                       WHERE substr(created_at,1,10)=? OR substr(printed_at,1,10)=?""",(today,today)).fetchall()
+
     return jsonify(date=today,
+
         events=[dict(row) for row in events],
+
         appointments=[dict(row) for row in appointments],
+
         walkins=[dict(row) for row in walkins],
+
         invoices=[dict(row) for row in invoices])
 
+# ---------------- CUSTOMER ENQUIRIES ----------------
+
+ENQUIRY_SUBJECTS = {"General Enquiry", "Services & Pricing", "Booking Assistance", "Bridal & Events", "Collaboration", "Other"}
+
+_enquiry_attempts = {}
+
+_enquiry_lock = Lock()
+
+def enquiry_allowed(remote):
+
+    now = clocktime.monotonic()
+
+    with _enquiry_lock:
+
+        recent = [t for t in _enquiry_attempts.get(remote, []) if now - t < 3600]
+
+        if len(recent) >= 8:
+
+            _enquiry_attempts[remote] = recent
+
+            return False
+
+        recent.append(now)
+
+        _enquiry_attempts[remote] = recent
+
+        return True
+
+@app.post("/api/enquiries")
+
+def submit_enquiry():
+
+    if not enquiry_allowed(request.remote_addr or "unknown"):
+
+        return bad("Too many enquiries. Please try again later.", 429)
+
+    if request.content_length and request.content_length > 8192:
+
+        return bad("Enquiry is too large.", 413)
+
+    body = request.get_json(silent=True)
+
+    if not isinstance(body, dict):
+
+        return bad("Please provide a valid enquiry.")
+
+    name = body.get("name", "")
+
+    email = body.get("email", "")
+
+    phone = body.get("phone", "")
+
+    subject = body.get("subject", "")
+
+    message = body.get("message", "")
+
+    if not all(isinstance(v, str) for v in (name, email, phone, subject, message)):
+
+        return bad("Invalid enquiry fields.")
+
+    name, email, phone, subject, message = (v.strip() for v in (name, email, phone, subject, message))
+
+    if not (1 <= len(name) <= 80 and len(email) <= 120 and
+
+            re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email) and
+
+            (not phone or (len(phone) <= 20 and re.fullmatch(r"[+0-9 ()-]{7,20}", phone))) and
+
+            subject in ENQUIRY_SUBJECTS and 1 <= len(message) <= 1500):
+
+        return bad("Please check your name, email, subject and message.")
+
+    enquiry_id = "ENQ-" + uuid.uuid4().hex[:12].upper()
+
+    with closing(connection()) as db:
+
+        db.execute("""INSERT INTO enquiries
+
+            (id, name, email, phone, subject, message, status, created_at)
+
+            VALUES (?, ?, ?, ?, ?, ?, 'new', ?)""",
+
+            (enquiry_id, name, email, phone, subject, message, datetime.now(TZ).isoformat()))
+
+    return jsonify(id=enquiry_id, message="Your enquiry has been received."), 201
+
+@app.get("/api/admin/enquiries")
+
+@require_admin
+
+def admin_enquiries():
+
+    with closing(connection()) as db:
+
+        rows = db.execute("""SELECT id, name, email, phone, subject, message, status, created_at
+
+            FROM enquiries ORDER BY created_at DESC LIMIT 200""").fetchall()
+
+    return jsonify(enquiries=[dict(row) for row in rows])
+
+@app.post("/api/admin/enquiries/<enquiry_id>/status")
+
+@require_admin
+
+def admin_enquiry_status(enquiry_id):
+
+    body = request.get_json(silent=True)
+
+    status = body.get("status") if isinstance(body, dict) else None
+
+    if status not in ("read", "resolved"):
+
+        return bad("Status must be read or resolved.")
+
+    if not re.fullmatch(r"ENQ-[0-9A-F]{12}", enquiry_id):
+
+        return bad("Invalid enquiry ID.")
+
+    with closing(connection()) as db:
+
+        cur = db.execute("UPDATE enquiries SET status=? WHERE id=?", (status, enquiry_id))
+
+        if cur.rowcount == 0:
+
+            return bad("Enquiry not found.", 404)
+
+    return jsonify(id=enquiry_id, status=status)
 
 initialize()
 
+initialize_enquiries()
+
 if __name__ == "__main__":
+
     app.run(host="127.0.0.1", port=int(os.environ.get("PORT", 5001)), debug=False)

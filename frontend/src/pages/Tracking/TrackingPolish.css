@@ -1,0 +1,16 @@
+/* AUREN private tracking — alternate lookup selector; original page preserved. */
+.auren-track-lookup-switch {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; padding:5px;
+  border-radius:999px; background:rgba(5,7,12,.45); border:1px solid rgba(255,255,255,.14);
+}
+.auren-track-lookup-switch button {
+  min-height:43px; padding:9px 12px; border-radius:999px; border:1px solid transparent;
+  background:transparent; color:#b8bac5; font:600 11px 'DM Sans',sans-serif;
+  cursor:pointer; transition:background .25s ease,color .25s ease,border-color .25s ease;
+}
+.auren-track-lookup-switch button.is-active {
+  color:#fff; background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.25);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+}
+.auren-track-lookup-switch button:hover:not(.is-active){background:rgba(255,255,255,.06);color:#fff}
+@media(prefers-reduced-motion:reduce){.auren-track-lookup-switch button{transition:none}}
